@@ -61,28 +61,39 @@
         <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>
     </symbol>
 </svg>
-
 <div class="container">
-    <header class="d-flex justify-content-center py-3">
-        <ul class="nav nav-pills">
-            <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Home</a></li>
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                <use xlink:href="#bootstrap"/>
+            </svg>
+        </a>
+<%--    <img src="C:\development\source\SomewhereUnderTheSky\src\main\webapp\resources\img\logo--koreanair-pc.png" class="col-md-3">--%>
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="#" class="nav-link px-xxl-4  link-dark"><b>예매</b></a></li>
+            <li><a href="#" class="nav-link px-xxl-4 link-dark"><b>공항</b></a></li>
+            <li><a href="#" class="nav-link px-xxl-4 link-dark"><b>기내</b></a></li>
+            <li><a href="#" class="nav-link px-xxl-4 link-dark"><b>스카이패스</b></a></li>
+        </ul>
+        <%--        <div class="col-md-3 text-end">--%>
+        <ul class="nav col-md-3">
             <c:choose>
                 <c:when test="${sessionScope.loginMemberId eq null}">
-                    <li class="nav-item"><a href="/member/login" class="nav-link">로그인</a></li>
-                    <li class="nav-item"><a href="/member/save" class="nav-link">회원가입</a></li>
+                    <li><a href="/member/login" class="nav-link px-xxl-4 link-dark"><b>로그인</b></a></li>
                 </c:when>
                 <c:when test="${sessionScope.loginMemberId eq 'admin'}">
-                    <li class="nav-item"><a href="/member/logout" class="nav-link">로그아웃</a></li>
-                    <li class="nav-item"><a class="nav-link">${sessionScope.loginMemberId}님 안녕하세요.</a></li>
-                    <li class="nav-item"><a href="/member/admin" class="nav-link">관리자 페이지</a></li>
+                    <li><a href="/member/logout" class="nav-link px-2 link-dark"><b>로그아웃</b></a></li>
+                    <li><a class="nav-link px-2 link-dark"><b>${sessionScope.loginMemberId}님 안녕하세요.</b></a></li>
+                    <li><a href="/member/admin" class="nav-link px-2 link-dark"><b>관리자 페이지</b></a></li>
                 </c:when>
                 <c:otherwise>
-                    <li class="nav-item"><a href="/member/logout" class="nav-link">로그아웃</a></li>
-                    <li class="nav-item"><a class="nav-link">${sessionScope.loginMemberId}님 안녕하세요.</a></li>
-                    <li class="nav-item"><a href="/member/main" class="nav-link">마이페이지</a></li>
+                    <li><a href="/member/logout" class="nav-link px-2 link-dark"><b>로그아웃</b></a></li>
+                    <li><a class="nav-link px-2 link-dark"><b>${sessionScope.loginMemberId}님 안녕하세요.</b></a></li>
+                    <li><a href="/member/main" class="nav-link px-2 link-dark"><b>마이페이지</b></a></li>
                 </c:otherwise>
             </c:choose>
         </ul>
+        <%--        </div>--%>
     </header>
 </div>
 </body>

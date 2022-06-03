@@ -10,6 +10,12 @@
         values (#{memberAccount}, #{memberPassword}, #{memberLastName}, #{memberFirstName}, #{memberPassportNumber},
                 #{memberBirthdate}, #{memberGender}, #{memberEmail}, #{memberNation})
     </insert>
+
+    <select id="duplicateCheck" parameterType="String" resultType="String">
+        select memberAccount
+        from member_table
+        where memberAccount = #{memberAccount}
+    </select>
 </mapper>
 
 
