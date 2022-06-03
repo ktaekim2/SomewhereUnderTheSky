@@ -63,23 +63,23 @@
 </svg>
 <div class="container">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-        <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
-                <use xlink:href="#bootstrap"/>
-            </svg>
-        </a>
-<%--    <img src="C:\development\source\SomewhereUnderTheSky\src\main\webapp\resources\img\logo--koreanair-pc.png" class="col-md-3">--%>
+        <div class="col-md-3">
+            <img src="../../../resources/img/logo--koreanair-pc.png">
+            <img src="../../../resources/img/logo--skyteam-pc.png">
+        </div>
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li><a href="#" class="nav-link px-xxl-4  link-dark"><b>예매</b></a></li>
             <li><a href="#" class="nav-link px-xxl-4 link-dark"><b>공항</b></a></li>
             <li><a href="#" class="nav-link px-xxl-4 link-dark"><b>기내</b></a></li>
             <li><a href="#" class="nav-link px-xxl-4 link-dark"><b>스카이패스</b></a></li>
         </ul>
-        <%--        <div class="col-md-3 text-end">--%>
         <ul class="nav col-md-3">
             <c:choose>
                 <c:when test="${sessionScope.loginMemberId eq null}">
                     <li><a href="/member/login" class="nav-link px-xxl-4 link-dark"><b>로그인</b></a></li>
+                    <li><img src="../../../resources/img/util__link--alram-off.svg"></li>
+                    <li><img src="../../../resources/img/util__link--cart-off.svg"></li>
+                    <li><img src="../../../resources/img/util__link--search.svg"></li>
                 </c:when>
                 <c:when test="${sessionScope.loginMemberId eq 'admin'}">
                     <li><a href="/member/logout" class="nav-link px-2 link-dark"><b>로그아웃</b></a></li>
@@ -93,7 +93,6 @@
                 </c:otherwise>
             </c:choose>
         </ul>
-        <%--        </div>--%>
     </header>
 </div>
 </body>

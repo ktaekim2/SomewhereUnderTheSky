@@ -50,7 +50,7 @@ public class MemberController {
             System.out.println("로그인 성공");
             session.setAttribute("loginMemberId", loginMember.getMemberAccount());
             session.setAttribute("loginId", loginMember.getId());
-            return "redirect:/board/paging";
+            return "index";
         } else {
             System.out.println("로그인 실패");
             return "/memberPages/login";
