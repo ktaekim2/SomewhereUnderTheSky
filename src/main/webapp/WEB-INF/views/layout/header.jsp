@@ -69,6 +69,7 @@
             <c:choose>
                 <c:when test="${sessionScope.loginMemberId eq null}">
                     <li class="nav-item"><a href="/member/login" class="nav-link">로그인</a></li>
+                    <li class="nav-item"><a href="/member/save" class="nav-link">회원가입</a></li>
                 </c:when>
                 <c:when test="${sessionScope.loginMemberId eq 'admin'}">
                     <li class="nav-item"><a href="/member/logout" class="nav-link">로그아웃</a></li>

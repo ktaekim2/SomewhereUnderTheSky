@@ -4,10 +4,12 @@
 
 
 <mapper namespace="Member">
-<!--    <insert id="save" parameterType="member">-->
-<!--        insert into mb_member_table(memberId, memberPassword, memberName, memberEmail, memberMobile, memberProfile)-->
-<!--        values (#{memberId}, #{memberPassword}, #{memberName}, #{memberEmail}, #{memberMobile}, #{memberProfile})-->
-<!--    </insert>-->
+    <insert id="save" parameterType="member">
+        insert into member_table(memberAccount, memberPassword, memberLastName, memberFirstName, memberPassportNumber,
+                                 memberBirthdate, memberGender, memberEmail, memberNation)
+        values (#{memberAccount}, #{memberPassword}, #{memberLastName}, #{memberFirstName}, #{memberPassportNumber},
+                #{memberBirthdate}, #{memberGender}, #{memberEmail}, #{memberNation})
+    </insert>
 </mapper>
 
 
