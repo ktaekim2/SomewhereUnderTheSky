@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Controller
@@ -39,5 +40,20 @@ public class MemberController {
     @GetMapping("/login")
     public String loginForm() {
         return "/memberPages/login";
+    }
+
+    @PostMapping("/login")
+    public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+        MemberDTO loginMember = memberService.login(memberDTO);
+        System.out.println("loginMember = " + loginMember);
+        if (loginMember != null) {
+            System.out.println("로그인 성공");
+            session.setAttribute("loginMemberId", loginMember.getMemberAccount());
+            session.setAttribute("loginId", loginMember.getId());
+            return "redirect:/board/paging";
+        } else {
+            System.out.println("로그인 실패");
+            return "/memberPages/login";
+        }
     }
 }

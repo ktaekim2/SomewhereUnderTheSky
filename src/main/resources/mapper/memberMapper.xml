@@ -16,6 +16,13 @@
         from member_table
         where memberAccount = #{memberAccount}
     </select>
+
+    <select id="login" parameterType="member" resultType="member">
+        select *
+        from member_table
+        where memberAccount = #{memberAccount}
+          and memberPassword = #{memberPassword}
+    </select>
 </mapper>
 
 
