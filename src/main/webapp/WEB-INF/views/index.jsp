@@ -9,8 +9,17 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 </head>
 <body>
-<h2>index.jsp</h2>
+<jsp:include page="./layout/header.jsp" flush="false"></jsp:include>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+            <h2 class="display-4 fw-normal">index.jsp</h2>
+        </div>
+    </div>
+</div>
+<jsp:include page="./layout/footer.jsp" flush="false"></jsp:include>
 </body>
 </html>
