@@ -5,6 +5,8 @@ import com.its.somewhereUnderTheSky.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MemberService {
     @Autowired
@@ -32,5 +34,9 @@ public class MemberService {
         System.out.println("memberDTO = " + memberDTO);
 
         return memberRepository.login(memberDTO);
+    }
+
+    public List<MemberDTO> findAll() {
+        return memberRepository.findAll();
     }
 }

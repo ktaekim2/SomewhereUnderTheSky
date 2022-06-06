@@ -4,10 +4,12 @@ import com.its.somewhereUnderTheSky.dto.MemberDTO;
 import com.its.somewhereUnderTheSky.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/member")
@@ -56,4 +58,30 @@ public class MemberController {
             return "/memberPages/login";
         }
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        System.out.println("로그아웃 성공");
+        return "index";
+    }
+
+    @GetMapping("/admin")
+    public String admin() {
+        return "/memberPages/admin";
+    }
+
+    @GetMapping("/findAll")
+    public String findAll(Model model) {
+        List<MemberDTO> memberDTOList = memberService.findAll();
+        model.addAttribute("memberList", memberDTOList);
+        return "/memberPages/memberList";
+    }
+
+    @GetMapping("/myPage")
+    public String main() {
+        return "/memberPages/myPage";
+    }
+
+
 }
