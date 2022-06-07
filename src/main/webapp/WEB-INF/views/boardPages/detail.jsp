@@ -68,7 +68,7 @@
                     <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss"
                                         value="${comment.commentCreatedDate}"></fmt:formatDate></td>
                     <c:if test="${sessionScope.loginMemberId eq comment.commentWriter}">
-                    <td><a href="/comment/delete?id=${comment.id}&BoardId=${board.id}">삭제</a></td>
+                        <td><a href="/comment/delete?id=${comment.id}&BoardId=${board.id}">삭제</a></td>
                     </c:if>
                 </tr>
             </c:forEach>
@@ -99,13 +99,15 @@
                 output += "<tr><th>댓글번호</th>";
                 output += "<th>작성자</th>";
                 output += "<th>내용</th>";
-                output += "<th>작성시간</th></tr>";
+                output += "<th>작성시간</th>";
+                output += "<th>삭제</th></tr>";
                 for (let i in result) {
                     output += "<tr>";
                     output += "<td>" + result[i].id + "</td>";
                     output += "<td>" + result[i].commentWriter + "</td>";
                     output += "<td>" + result[i].commentContents + "</td>";
                     output += "<td>" + moment(result[i].commentCreatedDate).format("YYYY-MM-DD HH:mm:ss") + "</td>";
+                    output += "<td>" + "<a href='/comment/delete?id=${comment.id}&BoardId=${board.id}'>" + "삭제" + "</a>" + "</td>";
                     output += "</tr>";
                 }
                 output += "</table>";
