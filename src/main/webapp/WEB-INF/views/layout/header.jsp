@@ -10,8 +10,7 @@
 <html>
 <head>
     <!-- Bootstrap core CSS -->
-    <link href="C:\development\source\spring_framework\Board_20220523\src\main\webapp\resources\css\bootstrap.min.css"
-          rel="stylesheet">
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 
     <style>
         .bd-placeholder-img {
@@ -31,8 +30,7 @@
 
 
     <!-- Custom styles for this template -->
-    <link href="C:\development\source\spring_framework\Board_20220523\src\main\webapp\resources\css\headers.css"
-          rel="stylesheet">
+    <link rel="stylesheet" href="/resources/css/headers.css">
 </head>
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -77,23 +75,33 @@
             <c:choose>
                 <c:when test="${sessionScope.loginMemberId eq null}">
                     <li><a href="/member/login" class="nav-link px-xxl-4 link-dark"><b>로그인</b></a></li>
-                    <li><img src="../../../resources/img/util__link--alram-off.svg"></li>
+                    <li>
+                        <img src="../../../resources/img/util__link--alram-off.svg">
+                    </li>
                     <li><img src="../../../resources/img/util__link--cart-off.svg"></li>
                     <li><img src="../../../resources/img/util__link--search.svg"></li>
                 </c:when>
                 <c:when test="${sessionScope.loginMemberId eq 'admin'}">
                     <li><a href="/member/logout" class="nav-link px-2 link-dark"><b>로그아웃</b></a></li>
-                    <li><a class="nav-link px-2 link-dark"><b>${sessionScope.loginMemberId}님 안녕하세요.</b></a></li>
-                    <li><a href="/member/admin" class="nav-link px-2 link-dark"><b>관리자 페이지</b></a></li>
+                    <li><a href="/member/admin"><img src="../../../resources/img/util__link--my.svg"></a></li>
+                    <li><img src="../../../resources/img/util__link--alram-off.svg"></li>
+                    <li><img src="../../../resources/img/util__link--cart-off.svg"></li>
+                    <li><img src="../../../resources/img/util__link--search.svg"></li>
                 </c:when>
                 <c:otherwise>
                     <li><a href="/member/logout" class="nav-link px-2 link-dark"><b>로그아웃</b></a></li>
-                    <li><a class="nav-link px-2 link-dark"><b>${sessionScope.loginMemberId}님 안녕하세요.</b></a></li>
-                    <li><a href="/member/myPage" class="nav-link px-2 link-dark"><b>마이페이지</b></a></li>
+                    <li><a href="/member/myPage"><img src="../../../resources/img/util__link--my.svg"></a></li>
+                    <li><img src="../../../resources/img/util__link--alram-off.svg"></li>
+                    <li><img src="../../../resources/img/util__link--cart-off.svg"></li>
+                    <li><img src="../../../resources/img/util__link--search.svg"></li>
                 </c:otherwise>
             </c:choose>
         </ul>
     </header>
 </div>
 </body>
+<script>
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+</script>
 </html>
