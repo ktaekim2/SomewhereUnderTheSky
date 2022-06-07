@@ -30,8 +30,7 @@
 
 
     <!-- Custom styles for this template -->
-    <link href="C:\development\source\spring_framework\Board_20220523\src\main\webapp\resources\css\headers.css"
-          rel="stylesheet">
+    <link rel="stylesheet" href="/resources/css/headers.css">
 </head>
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -63,8 +62,8 @@
 <div class="container">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
         <div class="col-md-3">
-            <img src="../../../resources/img/logo--koreanair-pc.png">
-            <img src="../../../resources/img/logo--skyteam-pc.png">
+            <a href="/"><img src="../../../resources/img/logo--koreanair-pc.png"></a>
+            <a href="https://www.skyteam.com/en" target="_blank"><img src="../../../resources/img/logo--skyteam-pc.png"></a>
         </div>
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li><a href="#" class="nav-link px-xxl-4  link-dark"><b>예매</b></a></li>
@@ -76,25 +75,21 @@
             <c:choose>
                 <c:when test="${sessionScope.loginMemberId eq null}">
                     <li><a href="/member/login" class="nav-link px-xxl-4 link-dark"><b>로그인</b></a></li>
-                    <li>
-                        <button type="button" class="btn btn-secondary" data-bs-container="body"
-                                data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover">
-                            <img src="../../../resources/img/util__link--alram-off.svg"></button>
-                    </li>
+                    <li><a href="/board/paging"><img src="../../../resources/img/util__link--alram-off.svg"></a></li>
                     <li><img src="../../../resources/img/util__link--cart-off.svg"></li>
                     <li><img src="../../../resources/img/util__link--search.svg"></li>
                 </c:when>
                 <c:when test="${sessionScope.loginMemberId eq 'admin'}">
                     <li><a href="/member/logout" class="nav-link px-2 link-dark"><b>로그아웃</b></a></li>
                     <li><a href="/member/admin"><img src="../../../resources/img/util__link--my.svg"></a></li>
-                    <li><img src="../../../resources/img/util__link--alram-off.svg"></li>
+                    <li><a href="/board/paging"><img src="../../../resources/img/util__link--alram-off.svg"></a></li>
                     <li><img src="../../../resources/img/util__link--cart-off.svg"></li>
                     <li><img src="../../../resources/img/util__link--search.svg"></li>
                 </c:when>
                 <c:otherwise>
                     <li><a href="/member/logout" class="nav-link px-2 link-dark"><b>로그아웃</b></a></li>
                     <li><a href="/member/myPage"><img src="../../../resources/img/util__link--my.svg"></a></li>
-                    <li><img src="../../../resources/img/util__link--alram-off.svg"></li>
+                    <li><a href="/board/paging"><img src="../../../resources/img/util__link--alram-off.svg"></a></li>
                     <li><img src="../../../resources/img/util__link--cart-off.svg"></li>
                     <li><img src="../../../resources/img/util__link--search.svg"></li>
                 </c:otherwise>
@@ -103,8 +98,4 @@
     </header>
 </div>
 </body>
-<script>
-    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
-</script>
 </html>
