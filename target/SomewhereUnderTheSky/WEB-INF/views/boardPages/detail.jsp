@@ -67,7 +67,7 @@
                     <td>${comment.commentContents}</td>
                     <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss"
                                         value="${comment.commentCreatedDate}"></fmt:formatDate></td>
-                    <c:if test="${sessionScope.loginMemberId eq board.boardWriter}">
+                    <c:if test="${sessionScope.loginMemberId eq comment.commentWriter}">
                     <td><a href="/comment/delete?id=${comment.id}&BoardId=${board.id}">삭제</a></td>
                     </c:if>
                 </tr>
