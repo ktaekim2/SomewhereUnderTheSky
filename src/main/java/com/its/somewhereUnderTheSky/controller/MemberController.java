@@ -78,6 +78,19 @@ public class MemberController {
         return "/memberPages/memberList";
     }
 
+    @GetMapping("/detail")
+    public String findById(@RequestParam("id") Long id, Model model) {
+        MemberDTO memberDTO = memberService.findById(id);
+        model.addAttribute("member", memberDTO);
+        return "/memberPages/detail";
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam("id") Long id) {
+        memberService.delete(id);
+        return "redirect:/member/findAll";
+    }
+
     @GetMapping("/myPage")
     public String main() {
         return "/memberPages/myPage";
