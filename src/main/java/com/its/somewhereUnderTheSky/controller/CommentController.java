@@ -4,10 +4,7 @@ import com.its.somewhereUnderTheSky.dto.CommentDTO;
 import com.its.somewhereUnderTheSky.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,4 +22,10 @@ public class CommentController {
         return commentDTOList;
     }
 
+    @GetMapping("/delete")
+    public String delete(@ModelAttribute CommentDTO commentDTO) {
+        Long id = commentDTO.getId();
+        commentService.delete(id);
+        return "redirect:/board/detail?id=" + commentDTO.getBoardId();
+    }
 }

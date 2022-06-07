@@ -94,9 +94,11 @@
             </c:otherwise>
         </c:choose>
     </ul>
-    <c:if test="${sessionScope.loginMemberId ne null}">
-        <button onclick="save()">글쓰기</button>
-    </c:if>
+    <c:choose>
+        <c:when test="${sessionScope.loginMemberId eq 'admin'}">
+            <button onclick="save()">글쓰기</button>
+        </c:when>
+    </c:choose>
 </div>
 <jsp:include page="../layout/footer.jsp" flush="false"></jsp:include>
 </body>

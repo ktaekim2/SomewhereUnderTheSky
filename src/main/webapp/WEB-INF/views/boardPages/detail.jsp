@@ -35,15 +35,10 @@
                 ${board.boardContents}</td>
         </tr>
     </table>
-    <c:choose>
-        <c:when test="${sessionScope.loginMemberId eq board.boardWriter}">
-            <button class="btn btn-primary" onclick="boardDelete()">글삭제</button>
-            <button class="btn btn-primary" onclick="boardUpdate()">글수정</button>
-        </c:when>
-        <c:when test="${sessionScope.loginMemberId eq 'admin'}">
-            <button class="btn btn-primary" onclick="boardDelete()">글삭제</button>
-        </c:when>
-    </c:choose>
+    <c:if test="${sessionScope.loginMemberId eq 'admin'}">
+        <button class="btn btn-primary" onclick="boardDelete()">글삭제</button>
+        <button class="btn btn-primary" onclick="boardUpdate()">글수정</button>
+    </c:if>
     <button class="btn btn-primary" onclick="paging()">목록</button>
 </div>
 <div class="container mt-3">
@@ -61,6 +56,9 @@
                 <th>작성자</th>
                 <th>내용</th>
                 <th>작성시간</th>
+                <c:if test="${sessionScope.loginMemberId eq board.boardWriter}">
+                    <th>삭제</th>
+                </c:if>
             </tr>
             <c:forEach items="${commentList}" var="comment">
                 <tr>
@@ -69,6 +67,9 @@
                     <td>${comment.commentContents}</td>
                     <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss"
                                         value="${comment.commentCreatedDate}"></fmt:formatDate></td>
+                    <c:if test="${sessionScope.loginMemberId eq board.boardWriter}">
+                    <td><a href="/comment/delete?id=${comment.id}&BoardId=${board.id}">삭제</a></td>
+                    </c:if>
                 </tr>
             </c:forEach>
         </table>
