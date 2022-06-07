@@ -96,5 +96,25 @@ public class MemberController {
         return "/memberPages/myPage";
     }
 
+    @GetMapping("/update")
+    public String updateForm(HttpSession session, Model model) {
+        Long updateId = (Long) session.getAttribute("loginId");
+        System.out.println("updateId = " + updateId);
+        MemberDTO memberDTO = memberService.findById(updateId);
+        model.addAttribute("updateMember", memberDTO);
+        return "/memberPages/update";
+    }
 
+    @PostMapping("/update")
+    public String update(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+        System.out.println("MemberController.update");
+        memberService.update(memberDTO);
+        return "redirect:/member/detail?id=" + session.getAttribute("loginId");
+    }
+
+    @GetMapping("/deleteMyself")
+    public String deleteMyself(@RequestParam("id") Long id) {
+        memberService.delete(id);
+        return "redirect:/member/logout";
+    }
 }

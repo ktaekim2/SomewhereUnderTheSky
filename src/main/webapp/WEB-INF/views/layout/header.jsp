@@ -89,7 +89,7 @@
                 <c:otherwise>
                     <li><a href="/member/logout" class="nav-link px-2 link-dark"><b>로그아웃</b></a></li>
                     <li><a class="nav-link px-2 link-dark"><b>${sessionScope.loginMemberId}님 안녕하세요.</b></a></li>
-                    <li><a href="/member/main" class="nav-link px-2 link-dark"><b>마이페이지</b></a></li>
+                    <li><a href="/member/myPage" class="nav-link px-2 link-dark"><b>마이페이지</b></a></li>
                 </c:otherwise>
             </c:choose>
         </ul>

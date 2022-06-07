@@ -40,6 +40,16 @@
         from member_table
         where id = #{id}
     </delete>
+
+    <update id="update" parameterType="member">
+        update member_table
+        set memberLastName       = #{memberLastName},
+            memberFirstName      = #{memberFirstName},
+            memberPassportNumber = #{memberPassportNumber},
+            memberBirthdate      = #{memberBirthdate},
+            memberEmail          = #{memberEmail}
+        where memberAccount = #{memberAccount}
+    </update>
 </mapper>
 
 
