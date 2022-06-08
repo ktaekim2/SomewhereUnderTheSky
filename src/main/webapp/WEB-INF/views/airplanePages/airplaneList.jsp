@@ -24,6 +24,9 @@
             <th>항공기 총 좌석 수</th>
             <th>항공기 상태</th>
             <th>항공기 사진</th>
+            <th>상세조회</th>
+            <th>수정</th>
+            <th>삭제</th>
         </tr>
         <c:forEach var="airplane" items="${airplaneList}">
             <tr>
@@ -34,6 +37,7 @@
                 <td><img src="${pageContext.request.contextPath}/upload/${airplane.airplaneFileName}" alt="" height="100"
                          width="100"></td>
                 <td><a href="/airplane/detail?id=${airplane.id}">상세조회</a></td>
+                <td><a href="/airplane/update?id=${airplane.id}">수정</a></td>
                 <td><a href="/airplane/delete?id=${airplane.id}">삭제</a></td>
             </tr>
         </c:forEach>

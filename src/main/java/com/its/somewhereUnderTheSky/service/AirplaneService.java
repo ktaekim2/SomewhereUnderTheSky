@@ -1,6 +1,7 @@
 package com.its.somewhereUnderTheSky.service;
 
 import com.its.somewhereUnderTheSky.dto.AirplaneDTO;
+import com.its.somewhereUnderTheSky.dto.BoardDTO;
 import com.its.somewhereUnderTheSky.repository.AirplaneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,17 @@ public class AirplaneService {
 
     public void delete(Long id) {
         airplaneRepository.delete(id);
+    }
+
+    public void update(AirplaneDTO airplaneDTO) throws IOException {
+        MultipartFile airplaneFile = airplaneDTO.getAirplaneFile();
+        String airplaneFileName = airplaneFile.getOriginalFilename();
+        airplaneFileName = System.currentTimeMillis() + "-" + airplaneFileName;
+        airplaneDTO.setAirplaneFileName(airplaneFileName);
+        String savePath = "D:\\spring_img\\" + airplaneFileName;
+        if (!airplaneFile.isEmpty()) {
+            airplaneFile.transferTo(new File(savePath));
+        }
+        airplaneRepository.update(airplaneDTO);
     }
 }

@@ -27,4 +27,8 @@ public class AirplaneRepository {
     public void delete(Long id) {
         sql.delete("Airplane.delete", id);
     }
+
+    public void update(AirplaneDTO airplaneDTO) {
+        sql.update("Airplane.update", airplaneDTO);
+    }
 }

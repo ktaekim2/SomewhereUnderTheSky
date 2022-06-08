@@ -26,6 +26,15 @@
         from airplane_table
         where id = #{id}
     </delete>
+
+    <update id="update" parameterType="airplane">
+        update airplane_table
+        set airplaneModel    = #{airplaneModel},
+            airplaneMaxSeats = #{airplaneMaxSeats},
+            airplaneStatus   = #{airplaneStatus},
+            airplaneFileName = #{airplaneFileName}
+        where id = #{id}
+    </update>
 </mapper>
 
 
