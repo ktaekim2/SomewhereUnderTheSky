@@ -18,7 +18,7 @@
 <jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
 <div class="container">
     <div class="row m-5">
-    <h2>항공권 예매</h2>
+        <h2>항공권 예매</h2>
     </div>
     <div class="row m-5">
         <div class="col-sm-8">
@@ -26,9 +26,26 @@
             <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <p id="departureAirport">ICN<br>서울/인천</p>
             </button>
+            ---------------
+            <img src="../../../resources/img/booking__swap.svg">
+            ---------------
+            <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <p id="arrivalAirport">PUS<br>부산/김해</p>
+            </button>
         </div>
         <div class="col-sm-4">
-
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
         </div>
     </div>
     <div class="row m-5">
@@ -63,9 +80,15 @@
                                 <div class="tab-pane fade show active" id="list-home" role="tabpanel"
                                      aria-labelledby="list-home-list">
                                     <div class="list-group">
-                                        <button type="button" class="list-group-item list-group-item-action" id="icn" value="ICN<br>서울/인천" onclick="selectAirport(this.id)">ICN 서울/인천</button>
-                                        <button type="button" class="list-group-item list-group-item-action" id="gmp" value="GMP<br>서울/김포" onclick="selectAirport(this.id)">GMP 서울/김포</button>
-                                        <button type="button" class="list-group-item list-group-item-action" id="pus" value="PUS<br>부산/김해" onclick="selectAirport(this.id)">PUS 부산/김해</button>
+                                        <button type="button" class="list-group-item list-group-item-action" id="icn"
+                                                value="ICN<br>서울/인천" onclick="selectAirport(this.id)">ICN 서울/인천
+                                        </button>
+                                        <button type="button" class="list-group-item list-group-item-action" id="gmp"
+                                                value="GMP<br>서울/김포" onclick="selectAirport(this.id)">GMP 서울/김포
+                                        </button>
+                                        <button type="button" class="list-group-item list-group-item-action" id="pus"
+                                                value="PUS<br>부산/김해" onclick="selectAirport(this.id)">PUS 부산/김해
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="list-profile" role="tabpanel"
@@ -90,8 +113,8 @@
 </body>
 <script>
     function selectAirport(id) {
-    const airportName = document.getElementById(id).value;
-    document.getElementById("departureAirport").innerHTML = airportName;
+        const airportName = document.getElementById(id).value;
+        document.getElementById("departureAirport").innerHTML = airportName;
     }
 </script>
 </html>

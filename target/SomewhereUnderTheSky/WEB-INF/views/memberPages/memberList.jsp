@@ -16,7 +16,7 @@
 <body>
 <jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
 <div class="container">
-    <h2>list.jsp</h2>
+    <h2>memberList.jsp</h2>
     <table class="table">
         <tr>
             <th>회원번호</th>
