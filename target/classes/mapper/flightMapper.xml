@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Flight">
+    <select id="findAll" resultType="flight">
+        select *
+        from flight_table;
+    </select>
+
+    <insert id="save" parameterType="flight">
+        insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport, departureDate, arrivalDate, gateNumber)
+        values (#{flightNumber}, #{flightAirline}, #{airplaneId},
+                #{departureAirport}, #{arrivalAirport}, #{departureDate}, #{arrivalDate}, #{gateNumber})
+    </insert>
+
+    <select id="findById" parameterType="Long" resultType="flight">
+        select *
+        from flight_table
+        where id = #{id}
+    </select>
+
+    <delete id="delete" parameterType="Long">
+        delete
+        from flight_table
+        where id = #{id}
+    </delete>
+
+    <update id="update" parameterType="flight">
+        update flight_table
+        set airplaneModel    = #{airplaneModel},
+            airplaneMaxSeats = #{airplaneMaxSeats},
+            airplaneStatus   = #{airplaneStatus},
+            airplaneFileName = #{airplaneFileName}
+        where id = #{id}
+    </update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

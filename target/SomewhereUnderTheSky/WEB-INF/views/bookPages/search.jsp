@@ -21,7 +21,7 @@
         <h2>항공권 예매</h2>
     </div>
     <div class="row m-5">
-        <div class="col-sm-8">
+        <div class="col-sm-8 text-center">
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <p id="departureAirport">ICN<br>서울/인천</p>

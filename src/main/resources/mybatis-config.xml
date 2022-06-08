@@ -7,5 +7,6 @@
         <typeAlias type="com.its.somewhereUnderTheSky.dto.BoardDTO" alias="board"></typeAlias>
         <typeAlias type="com.its.somewhereUnderTheSky.dto.CommentDTO" alias="comment"></typeAlias>
         <typeAlias type="com.its.somewhereUnderTheSky.dto.AirplaneDTO" alias="airplane"></typeAlias>
+        <typeAlias type="com.its.somewhereUnderTheSky.dto.FlightDTO" alias="flight"></typeAlias>
     </typeAliases>
 </configuration>
