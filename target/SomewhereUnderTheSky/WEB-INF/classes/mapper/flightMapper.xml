@@ -10,7 +10,8 @@
     </select>
 
     <insert id="save" parameterType="flight">
-        insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport, departureDate, arrivalDate, gateNumber)
+        insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+                                 departureDate, arrivalDate, gateNumber)
         values (#{flightNumber}, #{flightAirline}, #{airplaneId},
                 #{departureAirport}, #{arrivalAirport}, #{departureDate}, #{arrivalDate}, #{gateNumber})
     </insert>
@@ -29,11 +30,15 @@
 
     <update id="update" parameterType="flight">
         update flight_table
-        set airplaneModel    = #{airplaneModel},
-            airplaneMaxSeats = #{airplaneMaxSeats},
-            airplaneStatus   = #{airplaneStatus},
-            airplaneFileName = #{airplaneFileName}
-        where id = #{id}
+        set flightNumber     = #{flightNumber},
+            flightAirline    = #{flightAirline},
+            airplaneId       = #{airplaneId},
+            departureAirport = #{departureAirport},
+            arrivalAirport   = #{arrivalAirport},
+            departureDate    = #{departureDate},
+            arrivalDate      = #{arrivalDate},
+            gateNumber       = #{gateNumber}
+            where id = #{id}
     </update>
 </mapper>
 

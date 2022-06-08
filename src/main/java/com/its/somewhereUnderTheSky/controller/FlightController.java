@@ -19,12 +19,12 @@ public class FlightController {
     public String findAll(Model model) {
         List<FlightDTO> flightDTOList = flightService.findAll();
         model.addAttribute("flightList", flightDTOList);
-        return "/flightPlages/flightList";
+        return "/flightPages/flightList";
     }
 
     @GetMapping("/save")
     public String saveForm() {
-        return "/flightPlages/save";
+        return "/flightPages/save";
     }
 
     @PostMapping("/save")
@@ -37,7 +37,7 @@ public class FlightController {
     public String findById(@RequestParam("id") Long id, Model model) {
         FlightDTO flightDTO = flightService.findById(id);
         model.addAttribute("flight", flightDTO);
-        return "/flightPlages/detail";
+        return "/flightPages/detail";
     }
 
     @GetMapping("/delete")
@@ -50,7 +50,7 @@ public class FlightController {
     public String update(@RequestParam("id") Long id, Model model) {
         FlightDTO flightDTO = flightService.findById(id);
         model.addAttribute("flight", flightDTO);
-        return "/flightPlages/update";
+        return "/flightPages/update";
     }
 
     @PostMapping("/update")
