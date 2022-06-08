@@ -62,11 +62,11 @@
 <div class="container">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
         <div class="col-md-3">
-            <a href="/"><img src="../../../resources/img/logo--koreangair-pc.png"></a>
+            <a href="/"><img src="../../../resources/img/logo--koreaair-pc.png"></a>
             <a href="https://www.skyteam.com/en" target="_blank"><img src="../../../resources/img/logo--skyteam-pc.png"></a>
         </div>
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="#" class="nav-link px-xxl-4  link-dark"><b>예매</b></a></li>
+            <li><a href="/book/search" class="nav-link px-xxl-4  link-dark"><b>예매</b></a></li>
             <li><a href="#" class="nav-link px-xxl-4 link-dark"><b>공항</b></a></li>
             <li><a href="#" class="nav-link px-xxl-4 link-dark"><b>기내</b></a></li>
             <li><a href="#" class="nav-link px-xxl-4 link-dark"><b>스카이패스</b></a></li>
