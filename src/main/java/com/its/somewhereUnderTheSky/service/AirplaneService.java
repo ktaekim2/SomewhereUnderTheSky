@@ -34,4 +34,8 @@ public class AirplaneService {
     public AirplaneDTO findById(Long id) {
         return airplaneRepository.findById(id);
     }
+
+    public void delete(Long id) {
+        airplaneRepository.delete(id);
+    }
 }

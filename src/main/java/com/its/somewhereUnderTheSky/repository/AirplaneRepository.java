@@ -23,4 +23,8 @@ public class AirplaneRepository {
     public AirplaneDTO findById(Long id) {
         return sql.selectOne("Airplane.findById", id);
     }
+
+    public void delete(Long id) {
+        sql.delete("Airplane.delete", id);
+    }
 }

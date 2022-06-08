@@ -42,4 +42,10 @@ public class AirplaneController {
         model.addAttribute("airplane", airplaneDTO);
         return "/airplanePages/detail";
     }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam("id") Long id) {
+        airplaneService.delete(id);
+        return "redirect:/airplane/findAll";
+    }
 }
