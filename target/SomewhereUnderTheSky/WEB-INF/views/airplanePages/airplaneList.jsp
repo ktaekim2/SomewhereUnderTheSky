@@ -33,8 +33,8 @@
                 <td>${airplane.airplaneStatus}</td>
                 <td><img src="${pageContext.request.contextPath}/upload/${airplane.airplaneFileName}" alt="" height="100"
                          width="100"></td>
-                <td><a href="/member/detail?id=${airplane.id}">상세조회</a></td>
-                <td><a href="/member/delete?id=${airplane.id}">삭제</a></td>
+                <td><a href="/airplane/detail?id=${airplane.id}">상세조회</a></td>
+                <td><a href="/airplane/delete?id=${airplane.id}">삭제</a></td>
             </tr>
         </c:forEach>
     </table>

@@ -30,4 +30,8 @@ public class AirplaneService {
         }
         airplaneRepository.save(airplaneDTO);
     }
+
+    public AirplaneDTO findById(Long id) {
+        return airplaneRepository.findById(id);
+    }
 }

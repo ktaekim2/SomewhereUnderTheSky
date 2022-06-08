@@ -6,10 +6,7 @@ import com.its.somewhereUnderTheSky.service.AirplaneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -37,5 +34,12 @@ public class AirplaneController {
     public String save(@ModelAttribute AirplaneDTO airplaneDTO) throws IOException {
         airplaneService.save(airplaneDTO);
         return "redirect:/airplane/findAll";
+    }
+
+    @GetMapping("/detail")
+    public String findById(@RequestParam("id") Long id, Model model) {
+        AirplaneDTO airplaneDTO = airplaneService.findById(id);
+        model.addAttribute("airplane", airplaneDTO);
+        return "/airplanePages/detail";
     }
 }

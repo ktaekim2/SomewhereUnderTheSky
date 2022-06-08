@@ -19,4 +19,8 @@ public class AirplaneRepository {
     public void save(AirplaneDTO airplaneDTO) {
         sql.insert("Airplane.save", airplaneDTO);
     }
+
+    public AirplaneDTO findById(Long id) {
+        return sql.selectOne("Airplane.findById", id);
+    }
 }
