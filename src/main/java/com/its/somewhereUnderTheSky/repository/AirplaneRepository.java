@@ -15,4 +15,8 @@ public class AirplaneRepository {
     public List<AirplaneDTO> findAll() {
         return sql.selectList("Airplane.findAll");
     }
+
+    public void save(AirplaneDTO airplaneDTO) {
+        sql.insert("Airplane.save", airplaneDTO);
+    }
 }

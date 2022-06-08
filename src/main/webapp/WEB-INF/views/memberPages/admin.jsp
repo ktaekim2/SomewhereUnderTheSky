@@ -18,9 +18,9 @@
     <div class="row justify-content-md-center">
         <div class="col-md-auto">
             <h2 class="display-4 fw-normal">admin.jsp</h2>
-            <a href="/member/findAll">회원목록 조회</a>
-            <a href="/flight/findAll">운항정보 조회</a>
-            <a href="/airplane/findAll">항공기 조회</a>
+            <a href="/member/findAll">회원목록 조회</a><br>
+            <a href="/flight/findAll">운항정보 조회</a><br>
+            <a href="/airplane/findAll">항공기 조회</a><br>
             <a href="/book/findAll">예약 조회</a>
         </div>
     </div>

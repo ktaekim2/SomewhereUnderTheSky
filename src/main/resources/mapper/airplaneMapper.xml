@@ -8,6 +8,12 @@
         select *
         from airplane_table;
     </select>
+
+    <insert id="save" parameterType="airplane">
+        insert into airplane_table(airplaneModel, airplaneMaxSeats, airplaneStatus, airplaneFileName)
+        values (#{airplaneModel}, #{airplaneMaxSeats}, #{airplaneStatus},
+                #{airplaneFileName})
+    </insert>
 </mapper>
 
 

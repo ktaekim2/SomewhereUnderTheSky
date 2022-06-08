@@ -31,13 +31,20 @@
                 <td>${airplane.airplaneModel}</td>
                 <td>${airplane.airplaneMaxSeats}</td>
                 <td>${airplane.airplaneStatus}</td>
-                <td>${airplane.airplaneFileName}</td>
+                <td><img src="${pageContext.request.contextPath}/upload/${airplane.airplaneFileName}" alt="" height="100"
+                         width="100"></td>
                 <td><a href="/member/detail?id=${airplane.id}">상세조회</a></td>
-                <td><a href="/member/delete?id=${airplane.id}">회원삭제</a></td>
+                <td><a href="/member/delete?id=${airplane.id}">삭제</a></td>
             </tr>
         </c:forEach>
     </table>
+    <button onclick="save()">항공기 등록</button>
 </div>
 <jsp:include page="../layout/footer.jsp" flush="false"></jsp:include>
 </body>
+<script>
+    const save = () => {
+        location.href = "/airplane/save";
+    }
+</script>
 </html>

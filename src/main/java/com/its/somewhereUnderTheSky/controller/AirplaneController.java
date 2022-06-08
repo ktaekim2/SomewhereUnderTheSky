@@ -28,16 +28,14 @@ public class AirplaneController {
         return "/airplanePages/airplaneList";
     }
 
-//    @GetMapping("/save")
-//    public String saveForm() {
-//        return "/memberPages/save";
-//    }
-//
-//    @PostMapping("/save")
-//    public String save(@ModelAttribute MemberDTO memberDTO) throws IOException {
-//        System.out.println("MemberController.save");
-//        System.out.println("memberDTO = " + memberDTO);
-//        memberService.save(memberDTO);
-//        return "/memberPages/login";
-//    }
+    @GetMapping("/save")
+    public String saveForm() {
+        return "/airplanePages/save";
+    }
+
+    @PostMapping("/save")
+    public String save(@ModelAttribute AirplaneDTO airplaneDTO) throws IOException {
+        airplaneService.save(airplaneDTO);
+        return "redirect:/airplane/findAll";
+    }
 }
