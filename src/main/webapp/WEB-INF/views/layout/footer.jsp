@@ -26,6 +26,16 @@
                 font-size: 3.5rem;
             }
         }
+
+        /*li. {*/
+        /*    font-size: 13px;*/
+        /*    font-weight: bold;*/
+        /*}*/
+
+        /*h5 {*/
+        /*    font-weight: bold;*/
+        /*    font-size: 16px;*/
+        /*}*/
     </style>
 
 
