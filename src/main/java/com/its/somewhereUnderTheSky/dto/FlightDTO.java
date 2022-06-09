@@ -14,4 +14,5 @@ public class FlightDTO {
     private String departureDate;
     private String arrivalDate;
     private int gateNumber;
+    private Long flightFare;
 }

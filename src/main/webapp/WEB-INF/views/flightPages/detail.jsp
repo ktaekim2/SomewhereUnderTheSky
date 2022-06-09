@@ -20,6 +20,7 @@
             <th>departureDate</th>
             <th>arrivalDate</th>
             <th>gateNumber</th>
+            <th>flightFare</th>
         </tr>
         <tr>
             <td>${flight.id}</td>
@@ -31,6 +32,7 @@
             <td>${flight.departureDate}</td>
             <td>${flight.arrivalDate}</td>
             <td>${flight.gateNumber}</td>
+            <td>${flight.flightFare}</td>
         </tr>
     </table>
 </div>

@@ -11,9 +11,9 @@
 
     <insert id="save" parameterType="flight">
         insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
-                                 departureDate, arrivalDate, gateNumber)
+                                 departureDate, arrivalDate, gateNumber, flightFare)
         values (#{flightNumber}, #{flightAirline}, #{airplaneId},
-                #{departureAirport}, #{arrivalAirport}, #{departureDate}, #{arrivalDate}, #{gateNumber})
+                #{departureAirport}, #{arrivalAirport}, #{departureDate}, #{arrivalDate}, #{gateNumber}, #{flightFare})
     </insert>
 
     <select id="findById" parameterType="Long" resultType="flight">
@@ -37,7 +37,8 @@
             arrivalAirport   = #{arrivalAirport},
             departureDate    = #{departureDate},
             arrivalDate      = #{arrivalDate},
-            gateNumber       = #{gateNumber}
+            gateNumber       = #{gateNumber},
+            flightFare       = #{flightFare},
             where id = #{id}
     </update>
 </mapper>

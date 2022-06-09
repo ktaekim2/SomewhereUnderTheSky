@@ -21,6 +21,6 @@ public class BookController {
     public String search(@ModelAttribute FlightDTO flightDTO, BookDTO bookDTO) {
         System.out.println("BookController.search");
         System.out.println("flightDTO = " + flightDTO + ", bookDTO = " + bookDTO);
-        return null;
+        return "/bookPages/calendar-fare";
     }
 }
