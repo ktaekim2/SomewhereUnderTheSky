@@ -19,6 +19,7 @@
             <th>출발 날짜</th>
             <th>도착 날짜</th>
             <th>탑승 게이트 번호</th>
+            <th>운임 요금</th>
             <th>상세조회</th>
             <th>수정</th>
             <th>삭제</th>
@@ -32,6 +33,7 @@
                 <td>${flight.departureDate}</td>
                 <td>${flight.arrivalDate}</td>
                 <td>${flight.gateNumber}</td>
+                <td>${flight.flightFare}</td>
                 <td><a href="/flight/detail?id=${flight.id}">상세조회</a></td>
                 <td><a href="/flight/update?id=${flight.id}">수정</a></td>
                 <td><a href="/flight/delete?id=${flight.id}">삭제</a></td>

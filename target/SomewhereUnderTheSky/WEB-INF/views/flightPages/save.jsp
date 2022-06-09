@@ -25,6 +25,7 @@
                 출발 날짜<input type="text" name="departureDate">
                 도착 날짜<input type="text" name="arrivalDate">
                 탑승 게이트 번호<input type="text" name="gateNumber">
+                운임 요금<input type="text" name="flightFare">
                 <input class="btn btn-primary" type="submit" value="운항 등록">
             </form>
         </div>

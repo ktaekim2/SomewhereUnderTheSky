@@ -29,7 +29,6 @@
     <div class="row m-5">
         <div class="col-sm-8">
             <div class="text-center mb-2">
-                <!-- Button trigger modal -->
                 <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
                         data-bs-target="#departureModal">
                     <span id="departureAirport">ICN<br>서울/인천</span>
@@ -62,7 +61,7 @@
             <label style="font-size: 15px; color: gray">좌석 등급</label>
             <select class="form-select" aria-label="Default select example" id="cabinClass">
                 <option selected>일반석</option>
-                <option value="1">프레스티지석</option>
+                <option valu e="1">프레스티지석</option>
                 <option value="2">일등석</option>
             </select>
         </div>
@@ -72,6 +71,7 @@
             <button class="btn btn-primary btn-lg" type="button" onclick="searchFlight()">항공편 검색</button>
         </div>
     </div>
+
     <!-- departureModal -->
     <div class="modal fade" id="departureModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -130,6 +130,7 @@
         </div>
     </div>
 </div>
+
 <!-- arrivalModal -->
 <div class="modal fade" id="arrivalModal" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -189,6 +190,7 @@
         </div>
     </div>
 </div>
+
 <!-- passengerModal -->
 <div class="modal fade" id="passengerModal" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -223,12 +225,13 @@
         </div>
     </div>
 </div>
+
 <!-- dateModal -->
 <div class="modal fade" id="dateModal" tabindex="-1" aria-labelledby="exampleModalLabel4" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel4">승객 선택</h5>
+                <h5 class="modal-title" id="exampleModalLabel4">탑승일 선택</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -258,16 +261,19 @@
 <jsp:include page="../layout/footer.jsp" flush="false"></jsp:include>
 </body>
 <script>
+    // 출발지 선택
     function selectDeparture(id) {
         const airportName = document.getElementById(id).value;
         document.getElementById("departureAirport").innerHTML = airportName;
     }
 
+    // 도착지 선택
     function selectArrival(id) {
         const airportName = document.getElementById(id).value;
         document.getElementById("arrivalAirport").innerHTML = airportName;
     }
 
+    // 승객 선택
     function passenger() {
         const passengerAdult = document.getElementById("adultNumber").value;
         const passengerChild = document.getElementById("childNumber").value;
@@ -309,6 +315,7 @@
         $('#datepicker2').datepicker('setDate', '+1D'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
     });
 
+    // 탑승일 선택
     function selectDate() {
         const datepicker = document.getElementById("datepicker").value;
         const datepicker2 = document.getElementById("datepicker2").value;
@@ -317,6 +324,7 @@
         document.getElementById("arrivalDate").innerHTML = datepicker2;
     }
 
+    // 항공편 검색
     function searchFlight() {
         const departureAirport = document.getElementById("departureAirport").textContent;
         const arrivalAirport = document.getElementById("arrivalAirport").textContent;

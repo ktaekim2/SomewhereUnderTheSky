@@ -61,7 +61,7 @@
             <label style="font-size: 15px; color: gray">좌석 등급</label>
             <select class="form-select" aria-label="Default select example" id="cabinClass">
                 <option selected>일반석</option>
-                <option value="1">프레스티지석</option>
+                <option valu e="1">프레스티지석</option>
                 <option value="2">일등석</option>
             </select>
         </div>

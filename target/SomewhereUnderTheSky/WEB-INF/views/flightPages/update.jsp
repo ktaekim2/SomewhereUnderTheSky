@@ -33,6 +33,8 @@
                              value="${flight.arrivalDate}">
                 탑승 게이트 번호<input class="form-control mb-2" type="text" name="gateNumber"
                              value="${flight.gateNumber}">
+                운임 요금<input class="form-control mb-2" type="text" name="flightFare"
+                             value="${flight.flightFare}">
                 <input class="btn btn-primary" type="submit" value="정보수정">
             </form>
         </div>
