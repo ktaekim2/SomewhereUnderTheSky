@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>항공권 예매 | 한국항공</title>
@@ -68,7 +69,7 @@
     </div>
     <div class="row m-5">
         <div class="d-grid gap-2 col-3 mx-auto">
-            <button class="btn btn-primary btn-lg" type="button" onclick="singleFlight()">항공편 검색</button>
+            <button class="btn btn-primary btn-lg" type="button" onclick="returnFlight()" id="searchButton">항공편 검색</button>
         </div>
     </div>
 
@@ -240,13 +241,15 @@
                         <span>가는 날</span>
                         <input type="text" id="datepicker">
                     </div>
-                    <div class="col">
+                    <div class="col" id="return">
                         <span>오는 날</span>
                         <input type="text" id="datepicker2">
                     </div>
                 </div>
                 <div class="row m-5">
                     <div class="d-grid gap-2 col-3 mx-auto">
+                        <button class="btn btn-primary btn-lg" type="button" onclick="selectTrip()" id="selectTrip">편도
+                        </button>
                         <button class="btn btn-primary btn-lg" type="button" onclick="selectDate()"
                                 data-bs-dismiss="modal">선택
                         </button>
@@ -261,6 +264,20 @@
 <jsp:include page="../layout/footer.jsp" flush="false"></jsp:include>
 </body>
 <script>
+    function selectTrip() {
+        const selectTrip = document.getElementById("selectTrip").innerHTML;
+        if (selectTrip == "편도") {
+            document.getElementById("selectTrip").innerHTML = "왕복";
+            document.getElementById("return").style.display="none";
+            document.getElementById("searchButton").setAttribute("onclick", "singleFlight()")
+
+        } else {
+            document.getElementById("selectTrip").innerHTML = "편도";
+            document.getElementById("return").style.display="block";
+            document.getElementById("searchButton").setAttribute("onclick", "returnFlight()")
+        }
+    }
+
     // 출발지 선택
     function selectDeparture(id) {
         const airportName = document.getElementById(id).value;
@@ -316,15 +333,15 @@
 
         //return날짜를 depart날짜보다 앞으로 설정 못하게, depart날짜를 과거 선택 못하게
         $('#datepicker').datepicker();
-        $('#datepicker').datepicker('option', 'minDate','0');
+        $('#datepicker').datepicker('option', 'minDate', '0');
         $('#datepicker').datepicker("option", "maxDate", $("#datepicker2").val());
-        $('#datepicker').datepicker("option", "onClose", function ( selectedDate ) {
-            $("#datepicker2").datepicker( "option", "minDate", selectedDate );
+        $('#datepicker').datepicker("option", "onClose", function (selectedDate) {
+            $("#datepicker2").datepicker("option", "minDate", selectedDate);
         });
         $('#datepicker2').datepicker();
         $('#datepicker2').datepicker("option", "minDate", $("#datepicker").val());
-        $('#datepicker2').datepicker("option", "onClose", function ( selectedDate ) {
-            $("#datepicker").datepicker( "option", "maxDate", selectedDate );
+        $('#datepicker2').datepicker("option", "onClose", function (selectedDate) {
+            $("#datepicker").datepicker("option", "maxDate", selectedDate);
         });
     });
 

@@ -48,7 +48,17 @@
         where departureAirport = #{departureAirport}
           and arrivalAirport = #{arrivalAirport}
           and departureDate BETWEEN DATE_ADD(#{departureDate}, INTERVAL -3 DAY) AND DATE_ADD(#{departureDate}, INTERVAL +3 DAY)
+        order by departureDate desc
     </select>
+
+<!--    <select id="search" parameterType="flight" resultType="flight">-->
+<!--        select *-->
+<!--        from flight_table-->
+<!--        where departureAirport = #{arrivalAirport}-->
+<!--          and arrivalAirport = #{departureAirport}-->
+<!--          and departureDate BETWEEN DATE_ADD(#{arrivalDate}, INTERVAL -3 DAY) AND DATE_ADD(#{arrivalDate}, INTERVAL +3 DAY)-->
+<!--        order by arrivalDate desc-->
+<!--    </select>-->
 </mapper>
 
 
