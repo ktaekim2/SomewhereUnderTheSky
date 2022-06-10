@@ -32,14 +32,14 @@
             <div class="text-center mb-2">
                 <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
                         data-bs-target="#departureModal">
-                    <span id="departureAirport">ICN<br>서울/인천</span>
+                    <span id="departureAirport">ICN 서울/인천</span>
                 </button>
                 ---------------
                 <img src="../../../resources/img/booking__swap.svg">
                 ---------------
                 <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
                         data-bs-target="#arrivalModal">
-                    <span id="arrivalAirport">PUS<br>부산/김해</span>
+                    <span id="arrivalAirport">PUS 부산/김해</span>
                 </button>
             </div>
             <div class="d-grid gap-2 m-2">
@@ -60,10 +60,10 @@
                 </button>
             </div>
             <label style="font-size: 15px; color: gray">좌석 등급</label>
-            <select class="form-select" aria-label="Default select example" id="cabinClass">
-                <option selected>일반석</option>
-                <option valu e="1">프레스티지석</option>
-                <option value="2">일등석</option>
+            <select class="form-select" aria-label="Default select example" id="cabinClass" onclick="cabinClass()">
+                <option selected value="일반석">일반석</option>
+                <option value="프레스티지석">프레스티지석</option>
+                <option value="일등석">일등석</option>
             </select>
         </div>
     </div>
@@ -102,15 +102,15 @@
                                      aria-labelledby="list-home-list">
                                     <div class="list-group">
                                         <button type="button" class="list-group-item list-group-item-action" id="icn"
-                                                value="ICN<br>서울/인천" onclick="selectDeparture(this.id)"
+                                                value="ICN 서울/인천" onclick="selectDeparture(this.id)"
                                                 data-bs-dismiss="modal">ICN 서울/인천
                                         </button>
                                         <button type="button" class="list-group-item list-group-item-action" id="gmp"
-                                                value="GMP<br>서울/김포" onclick="selectDeparture(this.id)"
+                                                value="GMP 서울/김포" onclick="selectDeparture(this.id)"
                                                 data-bs-dismiss="modal">GMP 서울/김포
                                         </button>
                                         <button type="button" class="list-group-item list-group-item-action" id="pus"
-                                                value="PUS<br>부산/김해" onclick="selectDeparture(this.id)"
+                                                value="PUS 부산/김해" onclick="selectDeparture(this.id)"
                                                 data-bs-dismiss="modal">PUS 부산/김해
                                         </button>
                                     </div>
@@ -163,15 +163,15 @@
                                  aria-labelledby="list-home-list">
                                 <div class="list-group">
                                     <button type="button" class="list-group-item list-group-item-action" id="icn2"
-                                            value="ICN<br>서울/인천" onclick="selectArrival(this.id)"
+                                            value="ICN 서울/인천" onclick="selectArrival(this.id)"
                                             data-bs-dismiss="modal">ICN 서울/인천
                                     </button>
                                     <button type="button" class="list-group-item list-group-item-action" id="gmp2"
-                                            value="GMP<br>서울/김포" onclick="selectArrival(this.id)"
+                                            value="GMP 서울/김포" onclick="selectArrival(this.id)"
                                             data-bs-dismiss="modal">GMP 서울/김포
                                     </button>
                                     <button type="button" class="list-group-item list-group-item-action" id="pus2"
-                                            value="PUS<br>부산/김해" onclick="selectArrival(this.id)"
+                                            value="PUS 부산/김해" onclick="selectArrival(this.id)"
                                             data-bs-dismiss="modal">PUS 부산/김해
                                     </button>
                                 </div>
@@ -249,7 +249,7 @@
                 </div>
                 <div class="row m-5">
                     <div class="d-grid gap-2 col-3 mx-auto">
-                        <button class="btn btn-primary btn-lg" type="button" onclick="selectTrip()" id="selectTrip">편도
+                        <button class="btn btn-primary btn-lg" type="button" onclick="selectTrip()" id="selectTrip" value="편도">편도
                         </button>
                         <button class="btn btn-primary btn-lg" type="button" onclick="selectDate()"
                                 data-bs-dismiss="modal">선택
@@ -261,18 +261,30 @@
     </div>
 </div>
 </div>
+<form action="/book/search" method="post" name="submitForm" hidden>
+    <input name="departureAirport" id="inputDepartureAirport" value="ICN 서울/인천">
+    <input name="arrivalAirport" id="inputArrivalAirport" value="PUS 부산/김해">
+    <input name="departureDate" id="inputDepartureDate">
+    <input name="passengerAdult" id="inputPassengerAdult" value="1">
+    <input name="passengerChild" id="inputPassengerChild">
+    <input name="passengerInfant" id="inputPassengerInfant">
+    <input name="returnDate" id="inputReturnDate">
+    <input name="cabinClass" id="inputCabinClass" value="일반석">
+</form>
 <img src="../../../resources/img/booking-visual--pc.jpg">
 <jsp:include page="../layout/footer.jsp" flush="false"></jsp:include>
 </body>
 <script>
     function selectTrip() {
-        const selectTrip = document.getElementById("selectTrip").innerHTML;
+        const selectTrip = document.getElementById("selectTrip").value;
         if (selectTrip == "편도") {
             document.getElementById("selectTrip").innerHTML = "왕복";
+            document.getElementById("selectTrip").value = "왕복";
             document.getElementById("return").style.display = "none";
 
         } else {
             document.getElementById("selectTrip").innerHTML = "편도";
+            document.getElementById("selectTrip").value = "편도";
             document.getElementById("return").style.display = "block";
         }
     }
@@ -281,12 +293,14 @@
     function selectDeparture(id) {
         const airportName = document.getElementById(id).value;
         document.getElementById("departureAirport").innerHTML = airportName;
+        document.getElementById("inputDepartureAirport").value = airportName;
     }
 
     // 도착지 선택
     function selectArrival(id) {
         const airportName = document.getElementById(id).value;
         document.getElementById("arrivalAirport").innerHTML = airportName;
+        document.getElementById("inputArrivalAirport").value = airportName;
     }
 
     // 승객 선택
@@ -297,6 +311,40 @@
         document.getElementById("passengerAdult").innerHTML = passengerAdult;
         document.getElementById("passengerChild").innerHTML = passengerChild;
         document.getElementById("passengerInfant").innerHTML = passengerInfant;
+        document.getElementById("inputPassengerAdult").value = passengerAdult;
+        document.getElementById("inputPassengerChild").value = passengerChild;
+        document.getElementById("inputPassengerInfant").value = passengerInfant;
+    }
+
+    // 탑승일 선택
+    function selectDate() {
+        const selectTrip = document.getElementById("selectTrip").value;
+        const datepicker = document.getElementById("datepicker").value;
+        const datepicker2 = document.getElementById("datepicker2").value;
+        if (selectTrip == "편도") {
+            document.getElementById("departureDate").innerHTML = datepicker;
+            document.getElementById("wave").innerHTML = "~";
+            document.getElementById("returnDate").innerHTML = datepicker2;
+            document.getElementById("inputDepartureDate").value = datepicker;
+            document.getElementById("inputReturnDate").value = datepicker2;
+        }else {
+            document.getElementById("departureDate").innerHTML = datepicker;
+            document.getElementById("wave").innerHTML = "";
+            document.getElementById("returnDate").innerHTML = null;
+            document.getElementById("inputDepartureDate").value = datepicker;
+            document.getElementById("inputReturnDate").value = null;
+        }
+    }
+
+    // 좌석 등급 선택
+    function cabinClass() {
+        const cabinClass = document.getElementById("cabinClass").value;
+        document.getElementById("inputCabinClass").value = cabinClass;
+    }
+
+    // 항공편 검색
+    function searchFlight() {
+        submitForm.submit(); // 노란줄 있지만 잘됨
     }
 
     // datepicker
@@ -343,56 +391,5 @@
             $("#datepicker").datepicker("option", "maxDate", selectedDate);
         });
     });
-
-    // 탑승일 선택
-    function selectDate() {
-        const selectTrip = document.getElementById("selectTrip").innerHTML;
-        const datepicker = document.getElementById("datepicker").value;
-        const datepicker2 = document.getElementById("datepicker2").value;
-        if (selectTrip == "편도") {
-            document.getElementById("departureDate").innerHTML = datepicker;
-            document.getElementById("wave").innerHTML = "~";
-            document.getElementById("returnDate").innerHTML = datepicker2;
-        }else {
-            document.getElementById("departureDate").innerHTML = datepicker;
-            document.getElementById("wave").innerHTML = "";
-            document.getElementById("returnDate").innerHTML = null;
-        }
-    }
-
-    // 항공권 검색
-    function searchFlight() {
-        const departureAirport = document.getElementById("departureAirport").textContent;
-        const arrivalAirport = document.getElementById("arrivalAirport").textContent;
-        const departureDate = document.getElementById("departureDate").textContent;
-        const passengerAdult = document.getElementById("passengerAdult").textContent;
-        const passengerChild = document.getElementById("passengerChild").textContent;
-        const passengerInfant = document.getElementById("passengerInfant").textContent;
-        const cabinClass = document.getElementById("cabinClass").value;
-        const returnDate = document.getElementById("returnDate").textContent;
-        console.log(departureAirport, arrivalAirport, departureDate, passengerAdult, passengerChild, passengerInfant, cabinClass, returnDate);
-        $.ajax({
-            type: "post",
-            url: "/book/search",
-            data: {
-                "departureAirport": departureAirport,
-                "arrivalAirport": arrivalAirport,
-                "departureDate": departureDate,
-                "passengerAdult": passengerAdult,
-                "passengerChild": passengerChild,
-                "passengerInfant": passengerInfant,
-                "cabinClass": cabinClass,
-                "returnDate": returnDate
-            },
-            dataType: "json",
-            success: function (result) {
-                console.log(result);
-
-            },
-            error: function () {
-                alert("어디가 틀렸을까");
-            }
-        })
-    }
 </script>
 </html>
