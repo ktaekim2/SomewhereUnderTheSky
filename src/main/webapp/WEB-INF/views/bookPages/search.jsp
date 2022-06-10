@@ -45,7 +45,7 @@
                 <button class="btn btn-light" type="button" data-bs-toggle="modal"
                         data-bs-target="#dateModal"><span style="font-weight: bold" id="departureDate">탑승일</span>
                     <span style="font-weight: bold" id="wave"></span>
-                    <span style="font-weight: bold" id="arrivalDate">선택</span>
+                    <span style="font-weight: bold" id="returnDate">선택</span>
                 </button>
             </div>
         </div>
@@ -68,7 +68,7 @@
     </div>
     <div class="row m-5">
         <div class="d-grid gap-2 col-3 mx-auto">
-            <button class="btn btn-primary btn-lg" type="button" onclick="searchFlight()">항공편 검색</button>
+            <button class="btn btn-primary btn-lg" type="button" onclick="singleFlight()">항공편 검색</button>
         </div>
     </div>
 
@@ -313,6 +313,19 @@
         $('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
         //To의 초기값을 내일로 설정
         $('#datepicker2').datepicker('setDate', '+1D'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+
+        //return날짜를 depart날짜보다 앞으로 설정 못하게, depart날짜를 과거 선택 못하게
+        $('#datepicker').datepicker();
+        $('#datepicker').datepicker('option', 'minDate','0');
+        $('#datepicker').datepicker("option", "maxDate", $("#datepicker2").val());
+        $('#datepicker').datepicker("option", "onClose", function ( selectedDate ) {
+            $("#datepicker2").datepicker( "option", "minDate", selectedDate );
+        });
+        $('#datepicker2').datepicker();
+        $('#datepicker2').datepicker("option", "minDate", $("#datepicker").val());
+        $('#datepicker2').datepicker("option", "onClose", function ( selectedDate ) {
+            $("#datepicker").datepicker( "option", "maxDate", selectedDate );
+        });
     });
 
     // 탑승일 선택
@@ -321,20 +334,19 @@
         const datepicker2 = document.getElementById("datepicker2").value;
         document.getElementById("departureDate").innerHTML = datepicker;
         document.getElementById("wave").innerHTML = "~";
-        document.getElementById("arrivalDate").innerHTML = datepicker2;
+        document.getElementById("returnDate").innerHTML = datepicker2;
     }
 
-    // 항공편 검색
-    function searchFlight() {
+    // 편도 검색
+    function singleFlight() {
         const departureAirport = document.getElementById("departureAirport").textContent;
         const arrivalAirport = document.getElementById("arrivalAirport").textContent;
         const departureDate = document.getElementById("departureDate").textContent;
-        const arrivalDate = document.getElementById("arrivalDate").textContent;
         const passengerAdult = document.getElementById("passengerAdult").textContent;
         const passengerChild = document.getElementById("passengerChild").textContent;
         const passengerInfant = document.getElementById("passengerInfant").textContent;
         const cabinClass = document.getElementById("cabinClass").value;
-        console.log(departureAirport, arrivalAirport, departureDate, arrivalDate, passengerAdult, passengerChild, passengerInfant, cabinClass);
+        console.log(departureAirport, arrivalAirport, departureDate, returnDate, passengerAdult, passengerChild, passengerInfant, cabinClass);
         $.ajax({
             type: "post",
             url: "/book/search",
@@ -342,7 +354,6 @@
                 "departureAirport": departureAirport,
                 "arrivalAirport": arrivalAirport,
                 "departureDate": departureDate,
-                "arrivalDate": arrivalDate,
                 "passengerAdult": passengerAdult,
                 "passengerChild": passengerChild,
                 "passengerInfant": passengerInfant,
@@ -352,6 +363,61 @@
             success: function (result) {
                 console.log(result);
                 alert("성공");
+            },
+            error: function () {
+                alert("어디가 틀렸을까");
+            }
+        })
+    }
+
+    // 왕복 검색
+    function returnFlight() {
+        const departureAirport = document.getElementById("departureAirport").textContent;
+        const arrivalAirport = document.getElementById("arrivalAirport").textContent;
+        const departureDate = document.getElementById("departureDate").textContent;
+        const returnDate = document.getElementById("returnDate").textContent;
+        const passengerAdult = document.getElementById("passengerAdult").textContent;
+        const passengerChild = document.getElementById("passengerChild").textContent;
+        const passengerInfant = document.getElementById("passengerInfant").textContent;
+        const cabinClass = document.getElementById("cabinClass").value;
+        console.log(departureAirport, arrivalAirport, departureDate, returnDate, passengerAdult, passengerChild, passengerInfant, cabinClass);
+        $.ajax({
+            type: "post",
+            url: "/book/search",
+            data: {
+                "departureAirport": departureAirport,
+                "arrivalAirport": arrivalAirport,
+                "departureDate": departureDate,
+                "passengerAdult": passengerAdult,
+                "passengerChild": passengerChild,
+                "passengerInfant": passengerInfant,
+                "cabinClass": cabinClass
+            },
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                alert("성공");
+                // 2번째 ajax
+                $.ajax({
+                    type: "post",
+                    url: "/book/search",
+                    data: {
+                        "departureAirport": arrivalAirport,
+                        "arrivalAirport": departureAirport,
+                        "departureDate": returnDate,
+                        "passengerAdult": passengerAdult,
+                        "passengerChild": passengerChild,
+                        "passengerInfant": passengerInfant,
+                        "cabinClass": cabinClass
+                    },
+                    dataType: "json",
+                    success: function (result) {
+
+                    },
+                    error: function () {
+                        alert("어디가 틀렸을까");
+                    }
+                })
             },
             error: function () {
                 alert("어디가 틀렸을까");
