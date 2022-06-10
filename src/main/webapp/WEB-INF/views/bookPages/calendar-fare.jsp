@@ -1,13 +1,42 @@
-<!doctype html>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Title</title>
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+    <script src="/resources/js/jquery.js"></script>
 </head>
 <body>
-<h2>calendar-fare.jsp</h2>
+<jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
+<div class="container">
+    <h2>calendar-fare.jsp</h2>
+    <table class="table">
+        <tr>
+            <td></td>
+            <th colspan="7">오는 날</th>
+        </tr>
+            <tr>
+                <td>가는 날</td>
+                <td>${returnDate}</td>
+                <td>${returnDate}</td>
+                <td>${returnDate}</td>
+                <td>${returnDate}</td>
+                <td>${returnDate}</td>
+                <td>${returnDate}</td>
+                <td>${returnDate}</td>
+
+<%--                <c:forEach var="returnF" items="${departFlight}">--%>
+<%--                <td>${returnF.departureDate}</td>--%>
+<%--                </c:forEach>--%>
+            </tr>
+    </table>
+</div>
+<jsp:include page="../layout/footer.jsp" flush="false"></jsp:include>
 </body>
+<script>
+    const asd = new Date();
+    const yesterday = new Date(asd.setDate(asd.${returnDate} - 1));
+    console.log(asd)
+</script>
 </html>
+

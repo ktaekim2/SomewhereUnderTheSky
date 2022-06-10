@@ -29,15 +29,30 @@ public class BookController {
         System.out.println("BookController.search");
         System.out.println("flightDTO = " + flightDTO + ", bookDTO = " + bookDTO);
 
-        List<FlightDTO> flightDTOList1 = bookService.search(flightDTO);
-        model.addAttribute("departureFlight", flightDTOList1);
+        String departureDate = flightDTO.getDepartureDate();
+        model.addAttribute("departureDate", departureDate);
+        String returnDate = bookDTO.getReturnDate();
+        model.addAttribute("returnDate", returnDate);
 
+        List<FlightDTO> flightDTOList1 = bookService.search(flightDTO);
+        for (FlightDTO b : flightDTOList1) {
+            System.out.println("for문1 동작");
+            System.out.println(b);
+        }
+        model.addAttribute("departFlight", flightDTOList1);
+        
         flightDTO.setDepartureDate(bookDTO.getReturnDate());
         String temp = flightDTO.getDepartureAirport();
         flightDTO.setDepartureAirport(flightDTO.getArrivalAirport());
         flightDTO.setArrivalAirport(temp);
+        System.out.println("flightDTO = " + flightDTO + ", bookDTO = " + bookDTO + ", model = " + model);
         List<FlightDTO> flightDTOList2 = bookService.search(flightDTO);
+        for (FlightDTO b : flightDTOList2) {
+            System.out.println("for문2 동작");
+            System.out.println(b);
+        }
         model.addAttribute("returnFlight", flightDTOList2);
+
 
         return "/bookPages/calendar-fare";
     }

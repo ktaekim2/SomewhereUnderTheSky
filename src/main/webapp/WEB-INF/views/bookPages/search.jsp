@@ -32,14 +32,14 @@
             <div class="text-center mb-2">
                 <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
                         data-bs-target="#departureModal">
-                    <span id="departureAirport">ICN 서울/인천</span>
+                    <span id="departureAirport">ICN(서울/인천)</span>
                 </button>
                 ---------------
                 <img src="../../../resources/img/booking__swap.svg">
                 ---------------
                 <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
                         data-bs-target="#arrivalModal">
-                    <span id="arrivalAirport">PUS 부산/김해</span>
+                    <span id="arrivalAirport">PUS(부산/김해)</span>
                 </button>
             </div>
             <div class="d-grid gap-2 m-2">
@@ -102,16 +102,16 @@
                                      aria-labelledby="list-home-list">
                                     <div class="list-group">
                                         <button type="button" class="list-group-item list-group-item-action" id="icn"
-                                                value="ICN 서울/인천" onclick="selectDeparture(this.id)"
-                                                data-bs-dismiss="modal">ICN 서울/인천
+                                                value="ICN(서울/인천)" onclick="selectDeparture(this.id)"
+                                                data-bs-dismiss="modal">ICN(서울/인천)
                                         </button>
                                         <button type="button" class="list-group-item list-group-item-action" id="gmp"
-                                                value="GMP 서울/김포" onclick="selectDeparture(this.id)"
-                                                data-bs-dismiss="modal">GMP 서울/김포
+                                                value="GMP(서울/김포)" onclick="selectDeparture(this.id)"
+                                                data-bs-dismiss="modal">GMP(서울/김포)
                                         </button>
                                         <button type="button" class="list-group-item list-group-item-action" id="pus"
-                                                value="PUS 부산/김해" onclick="selectDeparture(this.id)"
-                                                data-bs-dismiss="modal">PUS 부산/김해
+                                                value="PUS(부산/김해)" onclick="selectDeparture(this.id)"
+                                                data-bs-dismiss="modal">PUS(부산/김해)
                                         </button>
                                     </div>
                                 </div>
@@ -163,16 +163,16 @@
                                  aria-labelledby="list-home-list">
                                 <div class="list-group">
                                     <button type="button" class="list-group-item list-group-item-action" id="icn2"
-                                            value="ICN 서울/인천" onclick="selectArrival(this.id)"
-                                            data-bs-dismiss="modal">ICN 서울/인천
+                                            value="ICN(서울/인천)" onclick="selectArrival(this.id)"
+                                            data-bs-dismiss="modal">ICN(서울/인천)
                                     </button>
                                     <button type="button" class="list-group-item list-group-item-action" id="gmp2"
-                                            value="GMP 서울/김포" onclick="selectArrival(this.id)"
-                                            data-bs-dismiss="modal">GMP 서울/김포
+                                            value="GMP(서울/김포)" onclick="selectArrival(this.id)"
+                                            data-bs-dismiss="modal">GMP(서울/김포)
                                     </button>
                                     <button type="button" class="list-group-item list-group-item-action" id="pus2"
-                                            value="PUS 부산/김해" onclick="selectArrival(this.id)"
-                                            data-bs-dismiss="modal">PUS 부산/김해
+                                            value="PUS(부산/김해)" onclick="selectArrival(this.id)"
+                                            data-bs-dismiss="modal">PUS(부산/김해)
                                     </button>
                                 </div>
                             </div>
@@ -262,8 +262,8 @@
 </div>
 </div>
 <form action="/book/search" method="post" name="submitForm" hidden>
-    <input name="departureAirport" id="inputDepartureAirport" value="ICN 서울/인천">
-    <input name="arrivalAirport" id="inputArrivalAirport" value="PUS 부산/김해">
+    <input name="departureAirport" id="inputDepartureAirport" value="ICN(서울/인천)">
+    <input name="arrivalAirport" id="inputArrivalAirport" value="PUS(부산/김해)">
     <input name="departureDate" id="inputDepartureDate">
     <input name="passengerAdult" id="inputPassengerAdult" value="1">
     <input name="passengerChild" id="inputPassengerChild">
