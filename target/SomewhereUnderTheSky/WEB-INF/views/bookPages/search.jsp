@@ -31,8 +31,8 @@
         <div class="col-sm-8">
             <div class="text-center mb-2">
                 <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
-                        data-bs-target="#departureModal">
-                    <span id="departureAirport">ICN<br>서울/인천</span>
+                        data-bs-target="#departureModal" value="ICN서울/인천">
+                    ICN<br>서울/인천
                 </button>
                 ---------------
                 <img src="../../../resources/img/booking__swap.svg">
@@ -370,7 +370,7 @@
         const passengerInfant = document.getElementById("passengerInfant").textContent;
         const cabinClass = document.getElementById("cabinClass").value;
         const returnDate = document.getElementById("returnDate").textContent;
-        console.log(departureAirport, arrivalAirport, departureDate, returnDate, passengerAdult, passengerChild, passengerInfant, cabinClass);
+        console.log(departureAirport, arrivalAirport, departureDate, passengerAdult, passengerChild, passengerInfant, cabinClass, returnDate);
         $.ajax({
             type: "post",
             url: "/book/search",
@@ -378,16 +378,16 @@
                 "departureAirport": departureAirport,
                 "arrivalAirport": arrivalAirport,
                 "departureDate": departureDate,
-                "returnDate": returnDate,
                 "passengerAdult": passengerAdult,
                 "passengerChild": passengerChild,
                 "passengerInfant": passengerInfant,
-                "cabinClass": cabinClass
+                "cabinClass": cabinClass,
+                "returnDate": returnDate
             },
             dataType: "json",
             success: function (result) {
                 console.log(result);
-                alert("성공");
+
             },
             error: function () {
                 alert("어디가 틀렸을까");

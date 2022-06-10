@@ -15,4 +15,5 @@ public class BookDTO {
     private int passengerInfant;
     private String cabinClass;
     private String seatNumber;
+    private String returnDate;
 }
