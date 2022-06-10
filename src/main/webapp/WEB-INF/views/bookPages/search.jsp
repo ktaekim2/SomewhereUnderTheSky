@@ -69,7 +69,8 @@
     </div>
     <div class="row m-5">
         <div class="d-grid gap-2 col-3 mx-auto">
-            <button class="btn btn-primary btn-lg" type="button" onclick="returnFlight()" id="searchButton">항공편 검색</button>
+            <button class="btn btn-primary btn-lg" type="button" onclick="searchFlight()" id="searchButton">항공편 검색
+            </button>
         </div>
     </div>
 
@@ -268,13 +269,11 @@
         const selectTrip = document.getElementById("selectTrip").innerHTML;
         if (selectTrip == "편도") {
             document.getElementById("selectTrip").innerHTML = "왕복";
-            document.getElementById("return").style.display="none";
-            document.getElementById("searchButton").setAttribute("onclick", "singleFlight()")
+            document.getElementById("return").style.display = "none";
 
         } else {
             document.getElementById("selectTrip").innerHTML = "편도";
-            document.getElementById("return").style.display="block";
-            document.getElementById("searchButton").setAttribute("onclick", "returnFlight()")
+            document.getElementById("return").style.display = "block";
         }
     }
 
@@ -347,15 +346,22 @@
 
     // 탑승일 선택
     function selectDate() {
+        const selectTrip = document.getElementById("selectTrip").innerHTML;
         const datepicker = document.getElementById("datepicker").value;
         const datepicker2 = document.getElementById("datepicker2").value;
-        document.getElementById("departureDate").innerHTML = datepicker;
-        document.getElementById("wave").innerHTML = "~";
-        document.getElementById("returnDate").innerHTML = datepicker2;
+        if (selectTrip == "편도") {
+            document.getElementById("departureDate").innerHTML = datepicker;
+            document.getElementById("wave").innerHTML = "~";
+            document.getElementById("returnDate").innerHTML = datepicker2;
+        }else {
+            document.getElementById("departureDate").innerHTML = datepicker;
+            document.getElementById("wave").innerHTML = "";
+            document.getElementById("returnDate").innerHTML = null;
+        }
     }
 
-    // 편도 검색
-    function singleFlight() {
+    // 항공권 검색
+    function searchFlight() {
         const departureAirport = document.getElementById("departureAirport").textContent;
         const arrivalAirport = document.getElementById("arrivalAirport").textContent;
         const departureDate = document.getElementById("departureDate").textContent;
@@ -363,40 +369,7 @@
         const passengerChild = document.getElementById("passengerChild").textContent;
         const passengerInfant = document.getElementById("passengerInfant").textContent;
         const cabinClass = document.getElementById("cabinClass").value;
-        console.log(departureAirport, arrivalAirport, departureDate, returnDate, passengerAdult, passengerChild, passengerInfant, cabinClass);
-        $.ajax({
-            type: "post",
-            url: "/book/search",
-            data: {
-                "departureAirport": departureAirport,
-                "arrivalAirport": arrivalAirport,
-                "departureDate": departureDate,
-                "passengerAdult": passengerAdult,
-                "passengerChild": passengerChild,
-                "passengerInfant": passengerInfant,
-                "cabinClass": cabinClass
-            },
-            dataType: "json",
-            success: function (result) {
-                console.log(result);
-                alert("성공");
-            },
-            error: function () {
-                alert("어디가 틀렸을까");
-            }
-        })
-    }
-
-    // 왕복 검색
-    function returnFlight() {
-        const departureAirport = document.getElementById("departureAirport").textContent;
-        const arrivalAirport = document.getElementById("arrivalAirport").textContent;
-        const departureDate = document.getElementById("departureDate").textContent;
         const returnDate = document.getElementById("returnDate").textContent;
-        const passengerAdult = document.getElementById("passengerAdult").textContent;
-        const passengerChild = document.getElementById("passengerChild").textContent;
-        const passengerInfant = document.getElementById("passengerInfant").textContent;
-        const cabinClass = document.getElementById("cabinClass").value;
         console.log(departureAirport, arrivalAirport, departureDate, returnDate, passengerAdult, passengerChild, passengerInfant, cabinClass);
         $.ajax({
             type: "post",
@@ -405,6 +378,7 @@
                 "departureAirport": departureAirport,
                 "arrivalAirport": arrivalAirport,
                 "departureDate": departureDate,
+                "returnDate": returnDate,
                 "passengerAdult": passengerAdult,
                 "passengerChild": passengerChild,
                 "passengerInfant": passengerInfant,
@@ -414,27 +388,6 @@
             success: function (result) {
                 console.log(result);
                 alert("성공");
-                // 2번째 ajax
-                $.ajax({
-                    type: "post",
-                    url: "/book/search",
-                    data: {
-                        "departureAirport": arrivalAirport,
-                        "arrivalAirport": departureAirport,
-                        "departureDate": returnDate,
-                        "passengerAdult": passengerAdult,
-                        "passengerChild": passengerChild,
-                        "passengerInfant": passengerInfant,
-                        "cabinClass": cabinClass
-                    },
-                    dataType: "json",
-                    success: function (result) {
-
-                    },
-                    error: function () {
-                        alert("어디가 틀렸을까");
-                    }
-                })
             },
             error: function () {
                 alert("어디가 틀렸을까");
