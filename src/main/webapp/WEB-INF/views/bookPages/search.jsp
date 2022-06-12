@@ -17,6 +17,7 @@
     <script src="/resources/js/jquery.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 </head>
 <body>
 <jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
@@ -35,7 +36,7 @@
                     <span id="departureAirport">ICN(서울/인천)</span>
                 </button>
                 ---------------
-                <img src="../../../resources/img/booking__swap.svg">
+                <a href="#"><img src="../../../resources/img/booking__swap.svg" onclick="changeDestination()"></a>
                 ---------------
                 <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
                         data-bs-target="#arrivalModal">
@@ -303,6 +304,14 @@
         document.getElementById("inputArrivalAirport").value = airportName;
     }
 
+    // 출도착지 바꾸기
+    function changeDestination() {
+        const departureAirport = document.getElementById("departureAirport").innerHTML;
+        const arrivalAirport = document.getElementById("arrivalAirport").innerHTML;
+        document.getElementById("departureAirport").innerHTML = arrivalAirport;
+        document.getElementById("arrivalAirport").innerHTML = departureAirport;
+
+    }
     // 승객 선택
     function passenger() {
         const passengerAdult = document.getElementById("adultNumber").value;
