@@ -16,16 +16,16 @@
             <td></td>
             <th colspan="7">오는 날</th>
         </tr>
-<%--        <tr>--%>
-<%--            <td>가는 날</td>--%>
-<%--            <td id="threeDaysAgo"></td>--%>
-<%--            <td id="twoDaysAgo"></td>--%>
-<%--            <td id="aDayAgo"></td>--%>
-<%--            <td id="today"></td>--%>
-<%--            <td id="aDayLater"></td>--%>
-<%--            <td id="twoDaysLater"></td>--%>
-<%--            <td id="threeDaysLater"></td>--%>
-<%--        </tr>--%>
+        <tr>
+            <td>가는 날</td>
+            <td id="threeDaysAgo"></td>
+            <td id="twoDaysAgo"></td>
+            <td id="aDayAgo"></td>
+            <td id="today"></td>
+            <td id="aDayLater"></td>
+            <td id="twoDaysLater"></td>
+            <td id="threeDaysLater"></td>
+        </tr>
         <tr>
             <td>가는 날</td>
             <c:forEach var="returnF" items="${returnFlight}">
