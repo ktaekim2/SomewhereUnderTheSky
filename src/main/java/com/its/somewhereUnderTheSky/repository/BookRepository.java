@@ -15,4 +15,8 @@ public class BookRepository {
     public List<FlightDTO> search(FlightDTO flightDTO) {
         return sql.selectList("Flight.search", flightDTO);
     }
+
+    public List<FlightDTO> findByDate(FlightDTO flightDTO) {
+        return sql.selectList("Flight.findByDate", flightDTO);
+    }
 }

@@ -36,79 +36,38 @@
             </ul>
         </div>
     </div>
-
-    <%--<div class="btn-group btn-group-lg" role="group" aria-label="Basic outlined example">--%>
-    <%--    <button type="button" class="btn btn-outline-" href="#list-home">--%>
-    <%--        <span id="threeDaysAgo"></span>--%>
-    <%--    </button>--%>
-    <%--    <button type="button" class="btn btn-outline-dark" href="#list-profile">--%>
-    <%--        <span id="twoDaysAgo"></span>--%>
-    <%--    </button>--%>
-    <%--    <button type="button" class="btn btn-outline-dark" onclick="" href="#list-messages">--%>
-    <%--        <span id="aDayAgo"></span>--%>
-    <%--    </button>--%>
-    <%--    <button type="button" class="btn btn-outline-dark" onclick="" href="#list-settings">--%>
-    <%--        <span id="today"></span>--%>
-    <%--    </button>--%>
-    <%--    <button type="button" class="btn btn-outline-dark" onclick="">--%>
-    <%--        <span id="aDayLater"></span>--%>
-    <%--    </button>--%>
-    <%--    <button type="button" class="btn btn-outline-dark" onclick="">--%>
-    <%--        <span id="twoDaysLater"></span>--%>
-    <%--    </button>--%>
-    <%--    <button type="button" class="btn btn-outline-dark" onclick="">--%>
-    <%--        <span id="threeDaysLater"></span>--%>
-    <%--    </button>--%>
-    <%--</div>--%>
-            <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade" id="list-threeDaysAgo" role="tabpanel"
-                     aria-labelledby="list-threeDaysAgo-list">
-                    ...1
-                </div>
-                <div class="tab-pane fade" id="list-twoDaysAgo" role="tabpanel" aria-labelledby="list-twoDaysAgo-list">
-                    aDayAgo
-                </div>
-                <div class="tab-pane fade" id="list-aDayAgo" role="tabpanel" aria-labelledby="list-aDayAgo-list">...
-                </div>
-                <div class="tab-pane fade show active" id="list-today" role="tabpanel"
-                     aria-labelledby="list-today-list">
-                    <table class="table">
-                        <tr>
-                            <th>운항시간</th>
-                            <th>항공사</th>
-                            <th>편명</th>
-                            <th>가격</th>
-                        </tr>
-                        <tr>
-                            <c:forEach var="departF" items="${departFlight}" begin="2" end="2">
-                            <td>${departF.departureDate} ~ ${departF.arrivalDate}</td>
-                            <td>${departF.flightAirline}</td>
-                            <td>${departF.flightNumber}</td>
-                            <td>${departF.flightFare}</td>
-                        </tr>
-                        </c:forEach>
-                    </table>
-                </div>
-                <div class="tab-pane fade" id="list-aDayLater" role="tabpanel" aria-labelledby="list-aDayLater-list">...
-                </div>
-                <div class="tab-pane fade" id="list-twoDaysLater" role="tabpanel"
-                     aria-labelledby="list-twoDaysLater-list">...
-                </div>
-                <div class="tab-pane fade" id="list-threeDaysLater" role="tabpanel"
-                     aria-labelledby="list-threeDaysLater-list">...
-                </div>
-            </div>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade" id="list-threeDaysAgo" role="tabpanel"
+             aria-labelledby="list-threeDaysAgo-list">
         </div>
+        <div class="tab-pane fade" id="list-twoDaysAgo" role="tabpanel" aria-labelledby="list-twoDaysAgo-list">
+            aDayAgo
+        </div>
+        <div class="tab-pane fade" id="list-aDayAgo" role="tabpanel" aria-labelledby="list-aDayAgo-list">
+        </div>
+        <div class="tab-pane fade show active" id="list-today" role="tabpanel"
+             aria-labelledby="list-today-list">
+        </div>
+        <div class="tab-pane fade" id="list-aDayLater" role="tabpanel" aria-labelledby="list-aDayLater-list">
+        </div>
+        <div class="tab-pane fade" id="list-twoDaysLater" role="tabpanel"
+             aria-labelledby="list-twoDaysLater-list">
+        </div>
+        <div class="tab-pane fade" id="list-threeDaysLater" role="tabpanel"
+             aria-labelledby="list-threeDaysLater-list">
+        </div>
+    </div>
+</div>
 <jsp:include page="../layout/footer.jsp" flush="false"></jsp:include>
 </body>
 <script>
-    var threeDaysAgo = moment(new Date('${returnDate}')).subtract("3", "d").format('MM월 DD일');
-    var twoDaysAgo = moment(new Date('${returnDate}')).subtract("2", "d").format('MM월 DD일');
-    var aDayAgo = moment(new Date('${returnDate}')).subtract("1", "d").format('MM월 DD일');
-    var today = moment(new Date('${returnDate}')).format('MM월 DD일');
-    var aDayLater = moment(new Date('${returnDate}')).add("1", "d").format('MM월 DD일');
-    var twoDaysLater = moment(new Date('${returnDate}')).add("2", "d").format('MM월 DD일');
-    var threeDaysLater = moment(new Date('${returnDate}')).add("3", "d").format('MM월 DD일');
+    const threeDaysAgo = moment(new Date('${departureDate}')).subtract("3", "d").format('MM월 DD일');
+    const twoDaysAgo = moment(new Date('${departureDate}')).subtract("2", "d").format('MM월 DD일');
+    const aDayAgo = moment(new Date('${departureDate}')).subtract("1", "d").format('MM월 DD일');
+    const today = moment(new Date('${departureDate}')).format('MM월 DD일');
+    const aDayLater = moment(new Date('${departureDate}')).add("1", "d").format('MM월 DD일');
+    const twoDaysLater = moment(new Date('${departureDate}')).add("2", "d").format('MM월 DD일');
+    const threeDaysLater = moment(new Date('${departureDate}')).add("3", "d").format('MM월 DD일');
     document.getElementById("threeDaysAgo").innerHTML = threeDaysAgo;
     document.getElementById("twoDaysAgo").innerHTML = twoDaysAgo;
     document.getElementById("aDayAgo").innerHTML = aDayAgo;
@@ -116,6 +75,45 @@
     document.getElementById("aDayLater").innerHTML = aDayLater;
     document.getElementById("twoDaysLater").innerHTML = twoDaysLater;
     document.getElementById("threeDaysLater").innerHTML = threeDaysLater;
+
+    $().ready(function () {
+        const departureDate = moment(new Date('${departureDate}')).format('YYYY-MM-DD HH:mm:ss');
+        const departureAirport = "${departureAirport}";
+        const arrivalAirport = "${arrivalAirport}";
+        $.ajax({
+            type: "get",
+            url: "/book/findByDate",
+            data: {
+                "departureDate": departureDate,
+                "departureAirport": departureAirport,
+                "arrivalAirport": arrivalAirport,
+            },
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                let output = "<table class='table'>";
+                output += "<tr><th>운항시간</th>";
+                output += "<th>항공사</th>";
+                output += "<th>편명</th>";
+                output += "<th>가격</th>";
+                for (let i in result) {
+                    output += "<tr>";
+                    output += "<td>" + moment(result[i].departureDate).format("HH:mm")
+                        + "~" + moment(result[i].arrivalDate).format("HH:mm") + "</td>";
+                    output += "<td>" + result[i].flightAirline + "</td>";
+                    output += "<td>" + result[i].flightNumber + "</td>";
+                    output += "<td>" + result[i].flightFare + "</td>";
+                    output += "</tr>";
+                }
+                output += "</table>";
+                document.getElementById('list-today').innerHTML = output;
+            },
+            error: function () {
+                alert("어디가 틀렸을까");
+            }
+        })
+    });
+
 </script>
 </html>
 

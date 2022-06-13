@@ -50,6 +50,14 @@
           and departureDate BETWEEN DATE_ADD(#{departureDate}, INTERVAL -3 DAY) AND DATE_ADD(#{departureDate}, INTERVAL +3 DAY)
         order by departureDate asc
     </select>
+
+    <select id="findByDate" parameterType="flight" resultType="flight">
+        select *
+        from flight_table
+        where departureAirport = #{departureAirport}
+          and arrivalAirport = #{arrivalAirport}
+          and date (departureDate) = date (#{departureDate});
+    </select>
 </mapper>
 
 

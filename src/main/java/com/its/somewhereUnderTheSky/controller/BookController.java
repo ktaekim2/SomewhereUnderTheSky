@@ -6,10 +6,7 @@ import com.its.somewhereUnderTheSky.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,15 +28,15 @@ public class BookController {
 
         String departureDate = flightDTO.getDepartureDate();
         model.addAttribute("departureDate", departureDate);
+        String departureAirport = flightDTO.getDepartureAirport();
+        model.addAttribute("departureAirport", departureAirport);
+        String arrivalAirport = flightDTO.getArrivalAirport();
+        model.addAttribute("arrivalAirport", arrivalAirport);
         String returnDate = bookDTO.getReturnDate();
-
         model.addAttribute("returnDate", returnDate);
 
         List<FlightDTO> flightDTOList1 = bookService.search(flightDTO);
-        for (FlightDTO b : flightDTOList1) {
-            System.out.println("for문1 동작");
-            System.out.println(b);
-        }
+
         model.addAttribute("departFlight", flightDTOList1);
         
         flightDTO.setDepartureDate(bookDTO.getReturnDate());
@@ -48,12 +45,21 @@ public class BookController {
         flightDTO.setArrivalAirport(temp);
         System.out.println("flightDTO = " + flightDTO + ", bookDTO = " + bookDTO + ", model = " + model);
         List<FlightDTO> flightDTOList2 = bookService.search(flightDTO);
-        for (FlightDTO b : flightDTOList2) {
-            System.out.println("for문2 동작");
-            System.out.println(b);
-        }
+
         model.addAttribute("returnFlight", flightDTOList2);
 
         return "/bookPages/departure";
+    }
+
+    @GetMapping("/findByDate")
+    public @ResponseBody List<FlightDTO> findByDate(@ModelAttribute FlightDTO flightDTO) {
+        System.out.println("BookController.findByDate");
+        System.out.println("flightDTO = " + flightDTO);
+        List<FlightDTO> flightDTOList = bookService.findByDate(flightDTO);
+        for (FlightDTO b : flightDTOList) {
+            System.out.println("for문 동작");
+            System.out.println(b);
+        }
+        return flightDTOList;
     }
 }
