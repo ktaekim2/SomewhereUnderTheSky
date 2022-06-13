@@ -32,6 +32,7 @@ public class BookController {
         String departureDate = flightDTO.getDepartureDate();
         model.addAttribute("departureDate", departureDate);
         String returnDate = bookDTO.getReturnDate();
+
         model.addAttribute("returnDate", returnDate);
 
         List<FlightDTO> flightDTOList1 = bookService.search(flightDTO);
@@ -52,7 +53,6 @@ public class BookController {
             System.out.println(b);
         }
         model.addAttribute("returnFlight", flightDTOList2);
-
 
         return "/bookPages/calendar-fare";
     }
