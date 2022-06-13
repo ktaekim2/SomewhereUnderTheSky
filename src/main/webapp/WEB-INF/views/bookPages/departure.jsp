@@ -17,67 +17,88 @@
 <div class="container">
     <h2>가는 편</h2>
     <div class="row">
-        <div class="col-4">
-            <div class="list-group" id="list-tab" role="tablist">
-                <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">Home</a>
-                <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">Profile</a>
-                <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list" href="#list-messages" role="tab" aria-controls="list-messages">Messages</a>
-                <a class="list-group-item list-group-item-action" id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">Settings</a>
-            </div>
+        <div class="col-12">
+            <ul class="list-group list-group-horizontal">
+                <a class="list-group-item list-group-item-action" id="list-threeDaysAgo-list" data-bs-toggle="list"
+                   href="#list-threeDaysAgo"><span id="threeDaysAgo"></span></a>
+                <a class="list-group-item list-group-item-action" id="list-twoDaysAgo-list" data-bs-toggle="list"
+                   href="#list-twoDaysAgo"><span id="twoDaysAgo"></span></a>
+                <a class="list-group-item list-group-item-action" id="list-aDayAgo-list" data-bs-toggle="list"
+                   href="#list-aDayAgo"><span id="aDayAgo"></span></a>
+                <a class="list-group-item list-group-item-action active" id="list-today-list" data-bs-toggle="list"
+                   href="#list-today"><span id="today"></span></a>
+                <a class="list-group-item list-group-item-action" id="list-aDayLater-list" data-bs-toggle="list"
+                   href="#list-aDayLater"><span id="aDayLater"></span></a>
+                <a class="list-group-item list-group-item-action" id="list-twoDaysLater-list" data-bs-toggle="list"
+                   href="#list-twoDaysLater"><span id="twoDaysLater"></span></a>
+                <a class="list-group-item list-group-item-action" id="list-threeDaysLater-list" data-bs-toggle="list"
+                   href="#list-threeDaysLater"><span id="threeDaysLater"></span></a>
+            </ul>
         </div>
     </div>
-    <div class="row">
-        <div class="col-8">
+
+    <%--<div class="btn-group btn-group-lg" role="group" aria-label="Basic outlined example">--%>
+    <%--    <button type="button" class="btn btn-outline-" href="#list-home">--%>
+    <%--        <span id="threeDaysAgo"></span>--%>
+    <%--    </button>--%>
+    <%--    <button type="button" class="btn btn-outline-dark" href="#list-profile">--%>
+    <%--        <span id="twoDaysAgo"></span>--%>
+    <%--    </button>--%>
+    <%--    <button type="button" class="btn btn-outline-dark" onclick="" href="#list-messages">--%>
+    <%--        <span id="aDayAgo"></span>--%>
+    <%--    </button>--%>
+    <%--    <button type="button" class="btn btn-outline-dark" onclick="" href="#list-settings">--%>
+    <%--        <span id="today"></span>--%>
+    <%--    </button>--%>
+    <%--    <button type="button" class="btn btn-outline-dark" onclick="">--%>
+    <%--        <span id="aDayLater"></span>--%>
+    <%--    </button>--%>
+    <%--    <button type="button" class="btn btn-outline-dark" onclick="">--%>
+    <%--        <span id="twoDaysLater"></span>--%>
+    <%--    </button>--%>
+    <%--    <button type="button" class="btn btn-outline-dark" onclick="">--%>
+    <%--        <span id="threeDaysLater"></span>--%>
+    <%--    </button>--%>
+    <%--</div>--%>
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">...</div>
-                <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
-                <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
-                <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
+                <div class="tab-pane fade" id="list-threeDaysAgo" role="tabpanel"
+                     aria-labelledby="list-threeDaysAgo-list">
+                    ...1
+                </div>
+                <div class="tab-pane fade" id="list-twoDaysAgo" role="tabpanel" aria-labelledby="list-twoDaysAgo-list">
+                    aDayAgo
+                </div>
+                <div class="tab-pane fade" id="list-aDayAgo" role="tabpanel" aria-labelledby="list-aDayAgo-list">...
+                </div>
+                <div class="tab-pane fade show active" id="list-today" role="tabpanel"
+                     aria-labelledby="list-today-list">
+                    <table class="table">
+                        <tr>
+                            <th>운항시간</th>
+                            <th>항공사</th>
+                            <th>편명</th>
+                            <th>가격</th>
+                        </tr>
+                        <tr>
+                            <c:forEach var="departF" items="${departFlight}" begin="2" end="2">
+                            <td>${departF.departureDate} ~ ${departF.arrivalDate}</td>
+                            <td>${departF.flightAirline}</td>
+                            <td>${departF.flightNumber}</td>
+                            <td>${departF.flightFare}</td>
+                        </tr>
+                        </c:forEach>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="list-aDayLater" role="tabpanel" aria-labelledby="list-aDayLater-list">...
+                </div>
+                <div class="tab-pane fade" id="list-twoDaysLater" role="tabpanel"
+                     aria-labelledby="list-twoDaysLater-list">...
+                </div>
+                <div class="tab-pane fade" id="list-threeDaysLater" role="tabpanel"
+                     aria-labelledby="list-threeDaysLater-list">...
+                </div>
             </div>
         </div>
-    </div>
-
-
-    <div class="btn-group btn-group-lg" role="group" aria-label="Basic outlined example">
-        <button type="button" class="btn btn-outline-" onclick="">
-            <span id="threeDaysAgo"></span>
-        </button>
-        <button type="button" class="btn btn-outline-dark" onclick="">
-            <span id="twoDaysAgo"></span>
-        </button>
-        <button type="button" class="btn btn-outline-dark" onclick="">
-            <span id="aDayAgo"></span>
-        </button>
-        <button type="button" class="btn btn-outline-dark" onclick="">
-            <span id="today"></span>
-        </button>
-        <button type="button" class="btn btn-outline-dark" onclick="">
-            <span id="aDayLater"></span>
-        </button>
-        <button type="button" class="btn btn-outline-dark" onclick="">
-            <span id="twoDaysLater"></span>
-        </button>
-        <button type="button" class="btn btn-outline-dark" onclick="">
-            <span id="threeDaysLater"></span>
-        </button>
-    </div>
-    <table class="table">
-        <tr>
-            <th>운항시간</th>
-            <th>항공사</th>
-            <th>편명</th>
-            <th>가격</th>
-        </tr>
-        <tr>
-            <c:forEach var="departF" items="${departFlight}">
-            <td>${departF.departureDate} ~ ${departF.arrivalDate}</td>
-            <td>${departF.flightAirline}</td>
-            <td>${departF.flightNumber}</td>
-            <td>${departF.flightFare}</td>
-        </tr>
-        </c:forEach>
-    </table>
-</div>
 <jsp:include page="../layout/footer.jsp" flush="false"></jsp:include>
 </body>
 <script>
