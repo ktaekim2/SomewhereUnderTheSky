@@ -54,6 +54,6 @@ public class BookController {
         }
         model.addAttribute("returnFlight", flightDTOList2);
 
-        return "/bookPages/calendar-fare";
+        return "/bookPages/departure";
     }
 }

@@ -250,7 +250,8 @@
                 </div>
                 <div class="row m-5">
                     <div class="d-grid gap-2 col-3 mx-auto">
-                        <button class="btn btn-primary btn-lg" type="button" onclick="selectTrip()" id="selectTrip" value="편도">편도
+                        <button class="btn btn-primary btn-lg" type="button" onclick="selectTrip()" id="selectTrip"
+                                value="편도">편도
                         </button>
                         <button class="btn btn-primary btn-lg" type="button" onclick="selectDate()"
                                 data-bs-dismiss="modal">선택
@@ -276,6 +277,7 @@
 <jsp:include page="../layout/footer.jsp" flush="false"></jsp:include>
 </body>
 <script>
+    // 편도/왕복
     function selectTrip() {
         const selectTrip = document.getElementById("selectTrip").value;
         if (selectTrip == "편도") {
@@ -309,9 +311,12 @@
         const departureAirport = document.getElementById("departureAirport").innerHTML;
         const arrivalAirport = document.getElementById("arrivalAirport").innerHTML;
         document.getElementById("departureAirport").innerHTML = arrivalAirport;
+        document.getElementById("inputDepartureAirport").value = arrivalAirport;
         document.getElementById("arrivalAirport").innerHTML = departureAirport;
+        document.getElementById("inputArrivalAirport").value = departureAirport;
 
     }
+
     // 승객 선택
     function passenger() {
         const passengerAdult = document.getElementById("adultNumber").value;
@@ -336,7 +341,7 @@
             document.getElementById("returnDate").innerHTML = datepicker2;
             document.getElementById("inputDepartureDate").value = datepicker;
             document.getElementById("inputReturnDate").value = datepicker2;
-        }else {
+        } else {
             document.getElementById("departureDate").innerHTML = datepicker;
             document.getElementById("wave").innerHTML = "";
             document.getElementById("returnDate").innerHTML = null;
