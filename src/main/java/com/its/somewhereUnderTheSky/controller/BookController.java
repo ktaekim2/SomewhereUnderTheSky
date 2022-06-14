@@ -23,8 +23,6 @@ public class BookController {
 
     @PostMapping("/search")
     public String search(@ModelAttribute FlightDTO flightDTO, BookDTO bookDTO, Model model) {
-        System.out.println("BookController.search");
-        System.out.println("flightDTO = " + flightDTO + ", bookDTO = " + bookDTO);
 
         String departureDate = flightDTO.getDepartureDate();
         model.addAttribute("departureDate", departureDate);
@@ -35,18 +33,15 @@ public class BookController {
         String returnDate = bookDTO.getReturnDate();
         model.addAttribute("returnDate", returnDate);
 
-        List<FlightDTO> flightDTOList1 = bookService.search(flightDTO);
-
-        model.addAttribute("departFlight", flightDTOList1);
+        List<FlightDTO> flightDTOList = bookService.findByDate(flightDTO);
+        model.addAttribute("departFlight", flightDTOList);
         
-        flightDTO.setDepartureDate(bookDTO.getReturnDate());
-        String temp = flightDTO.getDepartureAirport();
-        flightDTO.setDepartureAirport(flightDTO.getArrivalAirport());
-        flightDTO.setArrivalAirport(temp);
-        System.out.println("flightDTO = " + flightDTO + ", bookDTO = " + bookDTO + ", model = " + model);
-        List<FlightDTO> flightDTOList2 = bookService.search(flightDTO);
-
-        model.addAttribute("returnFlight", flightDTOList2);
+//        flightDTO.setDepartureDate(bookDTO.getReturnDate());
+//        String temp = flightDTO.getDepartureAirport();
+//        flightDTO.setDepartureAirport(flightDTO.getArrivalAirport());
+//        flightDTO.setArrivalAirport(temp);
+//        List<FlightDTO> flightDTOList2 = bookService.search(flightDTO);
+//        model.addAttribute("returnFlight", flightDTOList2);
 
         return "/bookPages/departure";
     }

@@ -15,7 +15,7 @@
 <body>
 <jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
 <div class="container">
-    <h2>가는 편</h2>
+    <h2><b>가는 편</b> ${departureAirport} -> ${arrivalAirport}</h2>
     <div class="row">
         <div class="col-12">
             <ul class="list-group list-group-horizontal">
@@ -41,12 +41,28 @@
              aria-labelledby="list-threeDaysAgo-list">
         </div>
         <div class="tab-pane fade" id="list-twoDaysAgo" role="tabpanel" aria-labelledby="list-twoDaysAgo-list">
-            aDayAgo
         </div>
-        <div class="tab-pane fade" id="list-aDayAgo" role="tabpanel" aria-labelledby="list-aDayAgo-list">
+        <div class="tab-pane fade" id="list-aDayAgo" role="tabpanel" aria-labelledby="list-aDayAgo-list"
+             onclick="findTable(this.id)">
         </div>
         <div class="tab-pane fade show active" id="list-today" role="tabpanel"
              aria-labelledby="list-today-list">
+            <table class="table">
+                <tr>
+                    <th>운항시간</th>
+                    <th>항공사</th>
+                    <th>편명</th>
+                    <th>가격</th>
+                </tr>
+                <tr>
+                    <c:forEach var="departF" items="${departFlight}">
+                    <td>moment(${departF.departureDate}).format("HH:mm")&nbsp;->&nbsp;moment(${departF.arrivalDate}).format("HH:mm")</td>
+                    <td>${departF.flightAirline}</td>
+                    <td>${departF.flightNumber}</td>
+                    <td>${departF.flightFare}</td>
+                </tr>
+                </c:forEach>
+            </table>
         </div>
         <div class="tab-pane fade" id="list-aDayLater" role="tabpanel" aria-labelledby="list-aDayLater-list">
         </div>
@@ -76,6 +92,7 @@
     document.getElementById("twoDaysLater").innerHTML = twoDaysLater;
     document.getElementById("threeDaysLater").innerHTML = threeDaysLater;
 
+    function findTable(id) {
     $().ready(function () {
         const departureDate = moment(new Date('${departureDate}')).format('YYYY-MM-DD HH:mm:ss');
         const departureAirport = "${departureAirport}";
@@ -99,21 +116,21 @@
                 for (let i in result) {
                     output += "<tr>";
                     output += "<td>" + moment(result[i].departureDate).format("HH:mm")
-                        + "~" + moment(result[i].arrivalDate).format("HH:mm") + "</td>";
+                        + "&nbsp;->&nbsp;" + moment(result[i].arrivalDate).format("HH:mm") + "</td>";
                     output += "<td>" + result[i].flightAirline + "</td>";
                     output += "<td>" + result[i].flightNumber + "</td>";
                     output += "<td>" + result[i].flightFare + "</td>";
                     output += "</tr>";
                 }
                 output += "</table>";
-                document.getElementById('list-today').innerHTML = output;
+                document.getElementById(id).innerHTML = output;
             },
             error: function () {
                 alert("어디가 틀렸을까");
             }
         })
     });
-
+    }
 </script>
 </html>
 
