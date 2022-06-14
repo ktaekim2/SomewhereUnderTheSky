@@ -114,7 +114,7 @@
 <%--sticky bottom--%>
 <c:choose>
     <c:when test="${sessionScope.loginMemberId eq null}">
-        <div class="sticky-xxl-bottom" style="background-color: white">
+        <div class="sticky-xxl-bottom" style="background-color: white; border-top:1px solid gray; box-shadow: 0px 5px 30px 5px">
             <div class="container">
                 <div class="row">
                     <div class="col-6 mt-2">
@@ -162,7 +162,7 @@
 <%--submit용 form태그--%>
 <form action="/book/payment" method="get" name="submitForm" hidden>
     <input name="bookId" id="inputBookId" value="${bookId}">
-    <input name="flightId" id="inputFlightId">
+    <input name="flightId" id="inputFlightId" value="null">
 </form>
 </body>
 <script>
@@ -188,27 +188,18 @@
         document.getElementById("price").innerHTML = price + " 원";
     }
 
-    // 다음 페이지 가는 함수
+    // 다음 버튼 온클릭  form태그 실행 함수
     function payment() {
-        submitForm.submit();
-        // let flightId = document.getElementById("nxtBtn").value;
-        //     let flightId = document.getElementById("nonMemNxtBtn").value;
-        // console.log(flightId);
-        <%--location.href = "/book/payment?bookId=${bookId}&flightId=" + flightId;--%>
+        if (document.getElementById("inputFlightId").value == "null") {
+            alert("항공권을 선택하십시오.")
+        } else {
+            submitForm.submit();
+        }
     }
 
-    // 항공권 온클릭시 발생
+    // 항공권 온클릭 시 발생
     function getFlightId(flightId) {
         document.getElementById("inputFlightId").value = flightId;
-
-
-        // console.log(flightId);
-        // const nxtBtn = document.getElementById("nxtBtn");
-        // const nonMemNxtBtn = document.getElementById("nonMemNxtBtn");
-        // console.log(nxtBtn);
-        // console.log(nonMemNxtBtn);
-        // document.getElementById("nxtBtn").setAttribute("value", flightId);
-        // document.getElementById("nonMemNxtBtn").setAttribute("value", flightId);
     }
 
     // list-threeDaysAgo
@@ -228,21 +219,16 @@
             dataType: "json",
             success: function (result) {
                 console.log(result);
-                let output = "<table class='table'>";
-                output += "<tr><th>운항시간</th>";
-                output += "<th>항공사</th>";
-                output += "<th>편명</th>";
-                output += "<th>가격</th>";
+                let output = "<div class='list-group list-group-checkable'>";
                 for (let i in result) {
-                    output += "<tr>";
-                    output += "<td>" + moment(result[i].departureDate).format("HH:mm")
-                        + "&nbsp;->&nbsp;" + moment(result[i].arrivalDate).format("HH:mm") + "</td>";
-                    output += "<td>" + result[i].flightAirline + "</td>";
-                    output += "<td>" + result[i].flightNumber + "</td>";
-                    output += "<td>" + result[i].flightFare + "</td>";
-                    output += "</tr>";
+                    output += "<input class='list-group-item-check' onclick='changePrice(" + result[i].flightFare + "); getFlightId(" + result[i].id + ")' type='radio' name='flightId' id='" + result[i].id + "'>" +
+                        "<label class='list-group-item py-3' for='" + result[i].id + "'>";
+                    output += moment(result[i].departureDate).format("HH:mm")
+                        + "&nbsp;->&nbsp;" + moment(result[i].arrivalDate).format("HH:mm");
+                    output += "<span class='d-block small opacity-50'>" + result[i].flightAirline + "&nbsp;&nbsp;" + result[i].flightNumber + "&nbsp;&nbsp;" + result[i].flightFare + "</span>" +
+                        "</label>";
                 }
-                output += "</table>";
+                output += "</div>";
                 document.getElementById("list-threeDaysAgo").innerHTML = output;
             },
             error: function () {
@@ -268,21 +254,16 @@
             dataType: "json",
             success: function (result) {
                 console.log(result);
-                let output = "<table class='table'>";
-                output += "<tr><th>운항시간</th>";
-                output += "<th>항공사</th>";
-                output += "<th>편명</th>";
-                output += "<th>가격</th>";
+                let output = "<div class='list-group list-group-checkable'>";
                 for (let i in result) {
-                    output += "<tr>";
-                    output += "<td>" + moment(result[i].departureDate).format("HH:mm")
-                        + "&nbsp;->&nbsp;" + moment(result[i].arrivalDate).format("HH:mm") + "</td>";
-                    output += "<td>" + result[i].flightAirline + "</td>";
-                    output += "<td>" + result[i].flightNumber + "</td>";
-                    output += "<td>" + result[i].flightFare + "</td>";
-                    output += "</tr>";
+                    output += "<input class='list-group-item-check' onclick='changePrice(" + result[i].flightFare + "); getFlightId(" + result[i].id + ")' type='radio' name='flightId' id='" + result[i].id + "'>" +
+                        "<label class='list-group-item py-3' for='" + result[i].id + "'>";
+                    output += moment(result[i].departureDate).format("HH:mm")
+                        + "&nbsp;->&nbsp;" + moment(result[i].arrivalDate).format("HH:mm");
+                    output += "<span class='d-block small opacity-50'>" + result[i].flightAirline + "&nbsp;&nbsp;" + result[i].flightNumber + "&nbsp;&nbsp;" + result[i].flightFare + "</span>" +
+                        "</label>";
                 }
-                output += "</table>";
+                output += "</div>";
                 document.getElementById("list-twoDaysAgo").innerHTML = output;
             },
             error: function () {
@@ -308,21 +289,16 @@
             dataType: "json",
             success: function (result) {
                 console.log(result);
-                let output = "<table class='table'>";
-                output += "<tr><th>운항시간</th>";
-                output += "<th>항공사</th>";
-                output += "<th>편명</th>";
-                output += "<th>가격</th>";
+                let output = "<div class='list-group list-group-checkable'>";
                 for (let i in result) {
-                    output += "<tr>";
-                    output += "<td>" + moment(result[i].departureDate).format("HH:mm")
-                        + "&nbsp;->&nbsp;" + moment(result[i].arrivalDate).format("HH:mm") + "</td>";
-                    output += "<td>" + result[i].flightAirline + "</td>";
-                    output += "<td>" + result[i].flightNumber + "</td>";
-                    output += "<td>" + result[i].flightFare + "</td>";
-                    output += "</tr>";
+                    output += "<input class='list-group-item-check' onclick='changePrice(" + result[i].flightFare + "); getFlightId(" + result[i].id + ")' type='radio' name='flightId' id='" + result[i].id + "'>" +
+                        "<label class='list-group-item py-3' for='" + result[i].id + "'>";
+                    output += moment(result[i].departureDate).format("HH:mm")
+                        + "&nbsp;->&nbsp;" + moment(result[i].arrivalDate).format("HH:mm");
+                    output += "<span class='d-block small opacity-50'>" + result[i].flightAirline + "&nbsp;&nbsp;" + result[i].flightNumber + "&nbsp;&nbsp;" + result[i].flightFare + "</span>" +
+                        "</label>";
                 }
-                output += "</table>";
+                output += "</div>";
                 document.getElementById("list-aDayAgo").innerHTML = output;
             },
             error: function () {
@@ -347,16 +323,14 @@
             success: function (result) {
                 console.log(result);
                 let output = "<div class='list-group list-group-checkable'>";
-                <%--output += "<form action='/book/payment?bookId=${bookId}' method='get' name='formSubmit'>";--%>
                 for (let i in result) {
-                    output += "<input class='list-group-item-check' onclick='changePrice(" + result[i].flightFare + "); getFlightId(" + result[i].id + ")' type='radio' name='flightId' id='" + result[i].id + "' value='" + result[i].id + "'>" +
+                    output += "<input class='list-group-item-check' onclick='changePrice(" + result[i].flightFare + "); getFlightId(" + result[i].id + ")' type='radio' name='flightId' id='" + result[i].id + "'>" +
                         "<label class='list-group-item py-3' for='" + result[i].id + "'>";
                     output += moment(result[i].departureDate).format("HH:mm")
                         + "&nbsp;->&nbsp;" + moment(result[i].arrivalDate).format("HH:mm");
-                    output += "<span class='d-block small opacity-50'>" + result[i].flightAirline + result[i].flightNumber + result[i].flightFare + "</span>" +
+                    output += "<span class='d-block small opacity-50'>" + result[i].flightAirline + "&nbsp;&nbsp;" + result[i].flightNumber + "&nbsp;&nbsp;" + result[i].flightFare + "</span>" +
                         "</label>";
                 }
-                // output += "</form>";
                 output += "</div>";
                 document.getElementById("list-today").innerHTML = output;
             },
@@ -383,21 +357,16 @@
             dataType: "json",
             success: function (result) {
                 console.log(result);
-                let output = "<table class='table'>";
-                output += "<tr><th>운항시간</th>";
-                output += "<th>항공사</th>";
-                output += "<th>편명</th>";
-                output += "<th>가격</th>";
+                let output = "<div class='list-group list-group-checkable'>";
                 for (let i in result) {
-                    output += "<tr>";
-                    output += "<td>" + moment(result[i].departureDate).format("HH:mm")
-                        + "&nbsp;->&nbsp;" + moment(result[i].arrivalDate).format("HH:mm") + "</td>";
-                    output += "<td>" + result[i].flightAirline + "</td>";
-                    output += "<td>" + result[i].flightNumber + "</td>";
-                    output += "<td>" + result[i].flightFare + "</td>";
-                    output += "</tr>";
+                    output += "<input class='list-group-item-check' onclick='changePrice(" + result[i].flightFare + "); getFlightId(" + result[i].id + ")' type='radio' name='flightId' id='" + result[i].id + "'>" +
+                        "<label class='list-group-item py-3' for='" + result[i].id + "'>";
+                    output += moment(result[i].departureDate).format("HH:mm")
+                        + "&nbsp;->&nbsp;" + moment(result[i].arrivalDate).format("HH:mm");
+                    output += "<span class='d-block small opacity-50'>" + result[i].flightAirline + "&nbsp;&nbsp;" + result[i].flightNumber + "&nbsp;&nbsp;" + result[i].flightFare + "</span>" +
+                        "</label>";
                 }
-                output += "</table>";
+                output += "</div>";
                 document.getElementById("list-aDayLater").innerHTML = output;
             },
             error: function () {
@@ -423,21 +392,16 @@
             dataType: "json",
             success: function (result) {
                 console.log(result);
-                let output = "<table class='table'>";
-                output += "<tr><th>운항시간</th>";
-                output += "<th>항공사</th>";
-                output += "<th>편명</th>";
-                output += "<th>가격</th>";
+                let output = "<div class='list-group list-group-checkable'>";
                 for (let i in result) {
-                    output += "<tr>";
-                    output += "<td>" + moment(result[i].departureDate).format("HH:mm")
-                        + "&nbsp;->&nbsp;" + moment(result[i].arrivalDate).format("HH:mm") + "</td>";
-                    output += "<td>" + result[i].flightAirline + "</td>";
-                    output += "<td>" + result[i].flightNumber + "</td>";
-                    output += "<td>" + result[i].flightFare + "</td>";
-                    output += "</tr>";
+                    output += "<input class='list-group-item-check' onclick='changePrice(" + result[i].flightFare + "); getFlightId(" + result[i].id + ")' type='radio' name='flightId' id='" + result[i].id + "'>" +
+                        "<label class='list-group-item py-3' for='" + result[i].id + "'>";
+                    output += moment(result[i].departureDate).format("HH:mm")
+                        + "&nbsp;->&nbsp;" + moment(result[i].arrivalDate).format("HH:mm");
+                    output += "<span class='d-block small opacity-50'>" + result[i].flightAirline + "&nbsp;&nbsp;" + result[i].flightNumber + "&nbsp;&nbsp;" + result[i].flightFare + "</span>" +
+                        "</label>";
                 }
-                output += "</table>";
+                output += "</div>";
                 document.getElementById("list-twoDaysLater").innerHTML = output;
             },
             error: function () {
@@ -463,21 +427,16 @@
             dataType: "json",
             success: function (result) {
                 console.log(result);
-                let output = "<table class='table'>";
-                output += "<tr><th>운항시간</th>";
-                output += "<th>항공사</th>";
-                output += "<th>편명</th>";
-                output += "<th>가격</th>";
+                let output = "<div class='list-group list-group-checkable'>";
                 for (let i in result) {
-                    output += "<tr>";
-                    output += "<td>" + moment(result[i].departureDate).format("HH:mm")
-                        + "&nbsp;->&nbsp;" + moment(result[i].arrivalDate).format("HH:mm") + "</td>";
-                    output += "<td>" + result[i].flightAirline + "</td>";
-                    output += "<td>" + result[i].flightNumber + "</td>";
-                    output += "<td>" + result[i].flightFare + "</td>";
-                    output += "</tr>";
+                    output += "<input class='list-group-item-check' onclick='changePrice(" + result[i].flightFare + "); getFlightId(" + result[i].id + ")' type='radio' name='flightId' id='" + result[i].id + "'>" +
+                        "<label class='list-group-item py-3' for='" + result[i].id + "'>";
+                    output += moment(result[i].departureDate).format("HH:mm")
+                        + "&nbsp;->&nbsp;" + moment(result[i].arrivalDate).format("HH:mm");
+                    output += "<span class='d-block small opacity-50'>" + result[i].flightAirline + "&nbsp;&nbsp;" + result[i].flightNumber + "&nbsp;&nbsp;" + result[i].flightFare + "</span>" +
+                        "</label>";
                 }
-                output += "</table>";
+                output += "</div>";
                 document.getElementById("list-threeDaysLater").innerHTML = output;
             },
             error: function () {
