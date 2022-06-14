@@ -15,7 +15,7 @@
 <body>
 <jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
 <div class="container">
-    <h2>가는 편</h2>
+    <h2><b>가는 편</b> ${departureAirport} -> ${arrivalAirport}</h2>
     <div class="row">
         <div class="col-12">
             <ul class="list-group list-group-horizontal">
@@ -41,7 +41,6 @@
              aria-labelledby="list-threeDaysAgo-list">
         </div>
         <div class="tab-pane fade" id="list-twoDaysAgo" role="tabpanel" aria-labelledby="list-twoDaysAgo-list">
-            aDayAgo
         </div>
         <div class="tab-pane fade" id="list-aDayAgo" role="tabpanel" aria-labelledby="list-aDayAgo-list">
         </div>
@@ -76,6 +75,7 @@
     document.getElementById("twoDaysLater").innerHTML = twoDaysLater;
     document.getElementById("threeDaysLater").innerHTML = threeDaysLater;
 
+    // list-today
     $().ready(function () {
         const departureDate = moment(new Date('${departureDate}')).format('YYYY-MM-DD HH:mm:ss');
         const departureAirport = "${departureAirport}";
@@ -99,14 +99,14 @@
                 for (let i in result) {
                     output += "<tr>";
                     output += "<td>" + moment(result[i].departureDate).format("HH:mm")
-                        + "~" + moment(result[i].arrivalDate).format("HH:mm") + "</td>";
+                        + "&nbsp;->&nbsp;" + moment(result[i].arrivalDate).format("HH:mm") + "</td>";
                     output += "<td>" + result[i].flightAirline + "</td>";
                     output += "<td>" + result[i].flightNumber + "</td>";
                     output += "<td>" + result[i].flightFare + "</td>";
                     output += "</tr>";
                 }
                 output += "</table>";
-                document.getElementById('list-today').innerHTML = output;
+                document.getElementById("list-today").innerHTML = output;
             },
             error: function () {
                 alert("어디가 틀렸을까");
@@ -114,6 +114,44 @@
         })
     });
 
+    // list-aDayAgo
+    $("#list-aDayAgo-list").click(function () {
+        const departureDate = moment(new Date('${departureDate}')).subtract("1", "d").format('YYYY-MM-DD HH:mm:ss');
+        const departureAirport = "${departureAirport}";
+        const arrivalAirport = "${arrivalAirport}";
+        $.ajax({
+            type: "get",
+            url: "/book/findByDate",
+            data: {
+                "departureDate": departureDate,
+                "departureAirport": departureAirport,
+                "arrivalAirport": arrivalAirport,
+            },
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                let output = "<table class='table'>";
+                output += "<tr><th>운항시간</th>";
+                output += "<th>항공사</th>";
+                output += "<th>편명</th>";
+                output += "<th>가격</th>";
+                for (let i in result) {
+                    output += "<tr>";
+                    output += "<td>" + moment(result[i].departureDate).format("HH:mm")
+                        + "&nbsp;->&nbsp;" + moment(result[i].arrivalDate).format("HH:mm") + "</td>";
+                    output += "<td>" + result[i].flightAirline + "</td>";
+                    output += "<td>" + result[i].flightNumber + "</td>";
+                    output += "<td>" + result[i].flightFare + "</td>";
+                    output += "</tr>";
+                }
+                output += "</table>";
+                document.getElementById("list-aDayAgo").innerHTML = output;
+            },
+            error: function () {
+                alert("어디가 틀렸을까");
+            }
+        })
+    });
 </script>
 </html>
 

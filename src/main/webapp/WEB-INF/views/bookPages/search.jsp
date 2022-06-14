@@ -163,11 +163,11 @@
                             <div class="tab-pane fade show active" id="list-home2" role="tabpanel"
                                  aria-labelledby="list-home-list">
                                 <div class="list-group">
-                                    <button type="button" class="list-group-item list-group-item-action" id="gmp"
+                                    <button type="button" class="list-group-item list-group-item-action" id="gmp2"
                                             value="GMP(서울/김포)" onclick="selectDeparture(this.id)"
                                             data-bs-dismiss="modal">ICN(서울/김포)
                                     </button>
-                                    <button type="button" class="list-group-item list-group-item-action" id="icn"
+                                    <button type="button" class="list-group-item list-group-item-action" id="icn2"
                                             value="ICN(서울/인천)" onclick="selectDeparture(this.id)"
                                             data-bs-dismiss="modal">GMP(서울/인천)
                                     </button>

@@ -33,7 +33,7 @@
             <div class="text-center mb-2">
                 <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
                         data-bs-target="#departureModal">
-                    <span id="departureAirport">ICN(서울/인천)</span>
+                    <span id="departureAirport">GMP(서울/김포)</span>
                 </button>
                 ---------------
                 <a href="#"><img src="../../../resources/img/booking__swap.svg" onclick="changeDestination()"></a>
@@ -56,8 +56,8 @@
                 <button class="btn btn-outline-secondary" data-bs-toggle="modal"
                         data-bs-target="#passengerModal">
                     성인: <span id="passengerAdult">1</span>
-                    소아: <span id="passengerChild"></span>
-                    유아: <span id="passengerInfant"></span>
+                    소아: <span id="passengerChild">0</span>
+                    유아: <span id="passengerInfant">0</span>
                 </button>
             </div>
             <label style="font-size: 15px; color: gray">좌석 등급</label>
@@ -102,13 +102,13 @@
                                 <div class="tab-pane fade show active" id="list-home" role="tabpanel"
                                      aria-labelledby="list-home-list">
                                     <div class="list-group">
-                                        <button type="button" class="list-group-item list-group-item-action" id="icn"
-                                                value="ICN(서울/인천)" onclick="selectDeparture(this.id)"
-                                                data-bs-dismiss="modal">ICN(서울/인천)
-                                        </button>
                                         <button type="button" class="list-group-item list-group-item-action" id="gmp"
                                                 value="GMP(서울/김포)" onclick="selectDeparture(this.id)"
-                                                data-bs-dismiss="modal">GMP(서울/김포)
+                                                data-bs-dismiss="modal">ICN(서울/김포)
+                                        </button>
+                                        <button type="button" class="list-group-item list-group-item-action" id="icn"
+                                                value="ICN(서울/인천)" onclick="selectDeparture(this.id)"
+                                                data-bs-dismiss="modal">GMP(서울/인천)
                                         </button>
                                         <button type="button" class="list-group-item list-group-item-action" id="pus"
                                                 value="PUS(부산/김해)" onclick="selectDeparture(this.id)"
@@ -163,13 +163,13 @@
                             <div class="tab-pane fade show active" id="list-home2" role="tabpanel"
                                  aria-labelledby="list-home-list">
                                 <div class="list-group">
-                                    <button type="button" class="list-group-item list-group-item-action" id="icn2"
-                                            value="ICN(서울/인천)" onclick="selectArrival(this.id)"
-                                            data-bs-dismiss="modal">ICN(서울/인천)
-                                    </button>
                                     <button type="button" class="list-group-item list-group-item-action" id="gmp2"
-                                            value="GMP(서울/김포)" onclick="selectArrival(this.id)"
-                                            data-bs-dismiss="modal">GMP(서울/김포)
+                                            value="GMP(서울/김포)" onclick="selectDeparture(this.id)"
+                                            data-bs-dismiss="modal">ICN(서울/김포)
+                                    </button>
+                                    <button type="button" class="list-group-item list-group-item-action" id="icn2"
+                                            value="ICN(서울/인천)" onclick="selectDeparture(this.id)"
+                                            data-bs-dismiss="modal">GMP(서울/인천)
                                     </button>
                                     <button type="button" class="list-group-item list-group-item-action" id="pus2"
                                             value="PUS(부산/김해)" onclick="selectArrival(this.id)"
@@ -206,15 +206,15 @@
                 <div class="row">
                     <div class="col">
                         <span>성인</span>
-                        <input type="text" id="adultNumber">
+                        <input type="text" id="adultNumber" value="1">
                     </div>
                     <div class="col">
                         <span>소아</span>
-                        <input type="text" id="childNumber">
+                        <input type="text" id="childNumber" value="0">
                     </div>
                     <div class="col">
                         <span>유아</span>
-                        <input type="text" id="infantNumber">
+                        <input type="text" id="infantNumber" value="0">
                     </div>
                 </div>
                 <div class="row m-5">
@@ -264,12 +264,12 @@
 </div>
 </div>
 <form action="/book/search" method="post" name="submitForm" hidden>
-    <input name="departureAirport" id="inputDepartureAirport" value="ICN(서울/인천)">
+    <input name="departureAirport" id="inputDepartureAirport" value="GMP(서울/김포)">
     <input name="arrivalAirport" id="inputArrivalAirport" value="PUS(부산/김해)">
     <input name="departureDate" id="inputDepartureDate">
     <input name="passengerAdult" id="inputPassengerAdult" value="1">
-    <input name="passengerChild" id="inputPassengerChild">
-    <input name="passengerInfant" id="inputPassengerInfant">
+    <input name="passengerChild" id="inputPassengerChild" value="0">
+    <input name="passengerInfant" id="inputPassengerInfant" value="0">
     <input name="returnDate" id="inputReturnDate">
     <input name="cabinClass" id="inputCabinClass" value="일반석">
 </form>
