@@ -69,6 +69,16 @@ public class BookController {
     public String payment(@RequestParam("bookId") Long bookId, @RequestParam("flightId") Long flightId) {
         System.out.println("BookController.payment");
         System.out.println("bookId = " + bookId + ", flightId = " + flightId);
-        return "/bookPages/payment";
+        BookDTO bookDTO = bookService.findById(bookId);
+        System.out.println("bookDTO = " + bookDTO);
+        System.out.println(bookDTO.getReturnDate());
+        if (bookDTO.getReturnDate().equals("1991-09-24 00:00:00")) {
+            System.out.println("편도");
+            return "/bookPages/payment";
+        } else {
+            System.out.println("왕복");
+            return "/bookPages/return";
+        }
+
     }
 }

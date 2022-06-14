@@ -24,4 +24,8 @@ public class BookService {
     public Long save(BookDTO bookDTO) {
         return bookRepository.save(bookDTO);
     }
+
+    public BookDTO findById(Long bookId) {
+        return bookRepository.findById(bookId);
+    }
 }

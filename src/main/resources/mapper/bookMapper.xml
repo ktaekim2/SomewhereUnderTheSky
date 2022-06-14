@@ -12,6 +12,12 @@
             SELECT LAST_INSERT_ID()
         </selectKey>
     </insert>
+
+    <select id="findById" parameterType="Long" resultType="book">
+        select *
+        from book_table
+        where id = #{bookId}
+    </select>
 </mapper>
 
 

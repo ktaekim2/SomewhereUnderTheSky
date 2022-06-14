@@ -26,4 +26,8 @@ public class BookRepository {
         Long bookId = bookDTO.getId();
         return bookId;
     }
+
+    public BookDTO findById(Long bookId) {
+        return sql.selectOne("Book.findById", bookId);
+    }
 }
