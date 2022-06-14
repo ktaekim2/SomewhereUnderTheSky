@@ -15,8 +15,8 @@
     <%--    momentjs--%>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.3/moment.min.js"></script>
 
-    <%--    bootstrap-listgroup--%>
     <style>
+        <%--       bootstrap-listgroup, 항공권 선택 css --%>
         .bd-placeholder-img {
             font-size: 1.125rem;
             text-anchor: middle;
@@ -31,6 +31,7 @@
             }
         }
 
+        /**/
         #price {
             font-size: larger;
             color: #00256C;
@@ -41,6 +42,7 @@
     <link href="../../../resources/css/list-groups.css" rel="stylesheet">
 
 <body>
+<%--    bootstrap-listgroup,  항공권 선택 css--%>
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="bootstrap" viewBox="0 0 118 94">
         <title>Bootstrap</title>
@@ -157,6 +159,11 @@
         </div>
     </c:otherwise>
 </c:choose>
+<%--submit용 form태그--%>
+<form action="/book/payment" method="get" name="submitForm" hidden>
+    <input name="bookId" id="inputBookId" value="${bookId}">
+    <input name="flightId" id="inputFlightId">
+</form>
 </body>
 <script>
     // 상단 날짜 리스트
@@ -183,24 +190,25 @@
 
     // 다음 페이지 가는 함수
     function payment() {
-        // formSubmit.submit();
-        let flightId = document.getElementById("nxtBtn").value;
-        if (flightId = null) {
-            flightId = document.getElementById("nonMemNxtBtn").value;
-        }
-        console.log(flightId);
-        location.href = "/book/payment?bookId=${bookId}&flightId=" + flightId;
+        submitForm.submit();
+        // let flightId = document.getElementById("nxtBtn").value;
+        //     let flightId = document.getElementById("nonMemNxtBtn").value;
+        // console.log(flightId);
+        <%--location.href = "/book/payment?bookId=${bookId}&flightId=" + flightId;--%>
     }
 
-    // ??
+    // 항공권 온클릭시 발생
     function getFlightId(flightId) {
-        console.log(flightId);
-        const nxtBtn = document.getElementById("nxtBtn");
-        const nonMemNxtBtn = document.getElementById("nonMemNxtBtn");
-        console.log(nxtBtn);
-        console.log(nonMemNxtBtn);
-        document.getElementById("nxtBtn").setAttribute("value", flightId);
-        document.getElementById("nonMemNxtBtn").setAttribute("value", flightId);
+        document.getElementById("inputFlightId").value = flightId;
+
+
+        // console.log(flightId);
+        // const nxtBtn = document.getElementById("nxtBtn");
+        // const nonMemNxtBtn = document.getElementById("nonMemNxtBtn");
+        // console.log(nxtBtn);
+        // console.log(nonMemNxtBtn);
+        // document.getElementById("nxtBtn").setAttribute("value", flightId);
+        // document.getElementById("nonMemNxtBtn").setAttribute("value", flightId);
     }
 
     // list-threeDaysAgo
