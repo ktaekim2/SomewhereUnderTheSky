@@ -23,6 +23,8 @@ public class BookController {
 
     @PostMapping("/search")
     public String search(@ModelAttribute FlightDTO flightDTO, BookDTO bookDTO, Model model) {
+        System.out.println("BookController.search");
+        System.out.println("flightDTO = " + flightDTO + ", bookDTO = " + bookDTO + ", model = " + model);
 
         String departureDate = flightDTO.getDepartureDate();
         model.addAttribute("departureDate", departureDate);
@@ -32,6 +34,7 @@ public class BookController {
         model.addAttribute("arrivalAirport", arrivalAirport);
         String returnDate = bookDTO.getReturnDate();
         model.addAttribute("returnDate", returnDate);
+        System.out.println("returnDate = " + returnDate);
 
         List<FlightDTO> flightDTOList = bookService.findByDate(flightDTO);
         model.addAttribute("departFlight", flightDTOList);

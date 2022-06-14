@@ -270,7 +270,7 @@
     <input name="passengerAdult" id="inputPassengerAdult" value="1">
     <input name="passengerChild" id="inputPassengerChild" value="0">
     <input name="passengerInfant" id="inputPassengerInfant" value="0">
-    <input name="returnDate" id="inputReturnDate">
+    <input name="returnDate" id="inputReturnDate" value="null">
     <input name="cabinClass" id="inputCabinClass" value="일반석">
 </form>
 <img src="../../../resources/img/booking-visual--pc.jpg">
@@ -346,7 +346,7 @@
             document.getElementById("wave").innerHTML = "";
             document.getElementById("returnDate").innerHTML = null;
             document.getElementById("inputDepartureDate").value = datepicker;
-            document.getElementById("inputReturnDate").value = null;
+            document.getElementById("inputReturnDate").value = "null";
         }
     }
 
