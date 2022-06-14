@@ -66,9 +66,9 @@ public class BookController {
     }
     
     @GetMapping("/payment")
-    public String payment(@RequestParam("bookId") Long bookId, @RequestParam("FlightId") Long FlightId) {
+    public String payment(@RequestParam("bookId") Long bookId, @RequestParam("flightId") Long flightId) {
         System.out.println("BookController.payment");
-        System.out.println("bookId = " + bookId + ", FlightId = " + FlightId);
+        System.out.println("bookId = " + bookId + ", flightId = " + flightId);
         return "/bookPages/payment";
     }
 }

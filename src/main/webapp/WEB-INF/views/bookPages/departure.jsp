@@ -124,9 +124,9 @@
                     <div class="col">
                         <div class="btn-group btn-group-lg" role="group" aria-label="...">
                             <button type="button" class="btn btn-outline-primary" style="color: #00256C"
-                                    onclick="payment(this.name)" id="NonMember-nextButton" name="">비회원으로 진행
+                                    onclick="payment()" id="nonMemNxtBtn">비회원으로 진행
                             </button>
-                            <button type="button" class="btn btn-primary" style="background-color: #00256C" name="">회원으로
+                            <button type="button" class="btn btn-primary" style="background-color: #00256C">회원으로
                                 진행
                             </button>
                         </div>
@@ -148,7 +148,7 @@
                     <div class="col">
                         <div class="btn-group btn-group-lg col-12 mx-auto" role="group" aria-label="...">
                             <button type="button" class="btn btn-primary" style="background-color: #00256C"
-                                    onclick="payment(this.name)" id="nextButton">다음
+                                    onclick="payment()" id="nxtBtn">다음
                             </button>
                         </div>
                     </div>
@@ -182,17 +182,25 @@
     }
 
     // 다음 페이지 가는 함수
-    function payment(FlightId) {
-        console.log(FlightId);
-        formSubmit.submit();
-        <%--location.href = "/book/payment?bookId=${bookId}&FlightId=" + FlightId;--%>
+    function payment() {
+        // formSubmit.submit();
+        let flightId = document.getElementById("nxtBtn").value;
+        if (flightId = null) {
+            flightId = document.getElementById("nonMemNxtBtn").value;
+        }
+        console.log(flightId);
+        location.href = "/book/payment?bookId=${bookId}&flightId=" + flightId;
     }
 
     // ??
     function getFlightId(flightId) {
         console.log(flightId);
-        document.getElementById("nextButton").setAttribute("onclick", payment(flightId));
-        document.getElementById("NonMember-nextButton").setAttribute("onclick", payment(flightId));
+        const nxtBtn = document.getElementById("nxtBtn");
+        const nonMemNxtBtn = document.getElementById("nonMemNxtBtn");
+        console.log(nxtBtn);
+        console.log(nonMemNxtBtn);
+        document.getElementById("nxtBtn").setAttribute("value", flightId);
+        document.getElementById("nonMemNxtBtn").setAttribute("value", flightId);
     }
 
     // list-threeDaysAgo
@@ -331,7 +339,7 @@
             success: function (result) {
                 console.log(result);
                 let output = "<div class='list-group list-group-checkable'>";
-                output += "<form action='/book/payment?bookId=${bookId}' method='get' name='formSubmit'>";
+                <%--output += "<form action='/book/payment?bookId=${bookId}' method='get' name='formSubmit'>";--%>
                 for (let i in result) {
                     output += "<input class='list-group-item-check' onclick='changePrice(" + result[i].flightFare + "); getFlightId(" + result[i].id + ")' type='radio' name='flightId' id='" + result[i].id + "' value='" + result[i].id + "'>" +
                         "<label class='list-group-item py-3' for='" + result[i].id + "'>";
@@ -340,7 +348,7 @@
                     output += "<span class='d-block small opacity-50'>" + result[i].flightAirline + result[i].flightNumber + result[i].flightFare + "</span>" +
                         "</label>";
                 }
-                output += "</form>";
+                // output += "</form>";
                 output += "</div>";
                 document.getElementById("list-today").innerHTML = output;
             },
