@@ -36,6 +36,10 @@ public class BookController {
         model.addAttribute("returnDate", returnDate);
         System.out.println("returnDate = " + returnDate);
 
+        Long bookId = bookService.save(bookDTO);
+        System.out.println("bookId = " + bookId);
+        model.addAttribute("bookId", bookId);
+
         List<FlightDTO> flightDTOList = bookService.findByDate(flightDTO);
         model.addAttribute("departFlight", flightDTOList);
         
@@ -59,5 +63,12 @@ public class BookController {
             System.out.println(b);
         }
         return flightDTOList;
+    }
+    
+    @GetMapping("/payment")
+    public String payment(@RequestParam("bookId") Long bookId, @RequestParam("FlightId") Long FlightId) {
+        System.out.println("BookController.payment");
+        System.out.println("bookId = " + bookId + ", FlightId = " + FlightId);
+        return "/bookPages/payment";
     }
 }

@@ -1,5 +1,6 @@
 package com.its.somewhereUnderTheSky.repository;
 
+import com.its.somewhereUnderTheSky.dto.BookDTO;
 import com.its.somewhereUnderTheSky.dto.FlightDTO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,11 @@ public class BookRepository {
 
     public List<FlightDTO> findByDate(FlightDTO flightDTO) {
         return sql.selectList("Flight.findByDate", flightDTO);
+    }
+
+    public Long save(BookDTO bookDTO) {
+        sql.insert("Book.save", bookDTO);
+        Long bookId = bookDTO.getId();
+        return bookId;
     }
 }

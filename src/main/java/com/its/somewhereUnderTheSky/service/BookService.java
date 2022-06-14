@@ -1,5 +1,6 @@
 package com.its.somewhereUnderTheSky.service;
 
+import com.its.somewhereUnderTheSky.dto.BookDTO;
 import com.its.somewhereUnderTheSky.dto.FlightDTO;
 import com.its.somewhereUnderTheSky.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,9 @@ public class BookService {
 
     public List<FlightDTO> findByDate(FlightDTO flightDTO) {
         return bookRepository.findByDate(flightDTO);
+    }
+
+    public Long save(BookDTO bookDTO) {
+        return bookRepository.save(bookDTO);
     }
 }
