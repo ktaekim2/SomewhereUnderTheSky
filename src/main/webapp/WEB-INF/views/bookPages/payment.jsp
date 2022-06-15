@@ -29,7 +29,7 @@
     <div class="row">
         <div class="row"><h4 style="color: #00256C"><b>여정 정보</b></h4></div>
         <div class="col-sm-9">
-            <div class="list-group">
+            <div class="list-group list-group-checkable">
                 <div class="row" style="border: solid 1px lightgrey; margin: 10px 5px; padding: 30px 20px">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1"><b>가는 편 ${departureFlight.departureAirport}
@@ -79,7 +79,7 @@
                                 <div>
                                     <p style="background-color: whitesmoke; margin: 0px 0px 40px;padding: 16px 32px; color: #555555">
                                         예약 후 성명 변경은 <span style="color: #0064DE">불가</span>하오니 실제 탑승하실 분의 <span
-                                            style="color: #0064DE">신분증상 성명</span>으로 입력하시기 바랍니다.
+                                            style="color: #0064DE">여권상 성명</span>으로 입력하시기 바랍니다.
                                     </p>
                                 </div>
                                 <div class="row">
@@ -91,26 +91,26 @@
                                                        aria-label="Sizing example input"
                                                        aria-describedby="inputGroup-sizing-default">
                                             </div>
-                                            <p style="color: #0064DE; font-size: small">* 공항에서 제시할 신분증 상 언어와 반드시 일치해야
+                                            <p style="color: #0064DE; font-size: small">* 여권상 영문 성과 반드시 일치해야
                                                 합니다.</p>
                                         </div>
                                         <div>
                                             <label style="font-size: small;color: #767676;display: block">성별</label>
                                             <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="d-grid gap-2">
-                                                    <input type="radio" class="btn-check" name="options" id="male"
-                                                           autocomplete="off">
-                                                    <label class="btn btn-outline-dark" for="male">남자</label>
+                                                <div class="col-sm-6">
+                                                    <div class="d-grid gap-2">
+                                                        <input type="radio" class="btn-check" name="options" id="male"
+                                                               autocomplete="off">
+                                                        <label class="btn btn-outline-secondary" for="male">남자</label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="d-grid gap-2">
-                                                    <input type="radio" class="btn-check" name="options" id="female"
-                                                           autocomplete="off">
-                                                    <label class="btn btn-outline-dark" for="female">여자</label>
+                                                <div class="col-sm-6">
+                                                    <div class="d-grid gap-2">
+                                                        <input type="radio" class="btn-check" name="options" id="female"
+                                                               autocomplete="off">
+                                                        <label class="btn btn-outline-secondary" for="female">여자</label>
+                                                    </div>
                                                 </div>
-                                            </div>
                                             </div>
                                         </div>
                                     </div>
@@ -122,8 +122,19 @@
                                                        aria-label="Sizing example input"
                                                        aria-describedby="inputGroup-sizing-default">
                                             </div>
-                                            <p style="color: #0064DE; font-size: small">* 공항에서 제시할 신분증 상 언어와 반드시 일치해야
+                                            <p style="color: #0064DE; font-size: small">* 여권상 영문 이름과 반드시 일치해야
                                                 합니다.</p>
+                                        </div>
+                                        <div>
+                                            <label style="font-size: small;color: #767676;display: block">생년월일 (YYYY.MM.DD.)</label>
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control"
+                                                       aria-label="Sizing example input"
+                                                       aria-describedby="inputGroup-sizing-default">
+                                            </div>
+                                            <div class="d-grid gap-2 col-4 mx-auto" style="float: right">
+                                                <button type="button" class="btn btn-primary btn-lg">확인</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -135,7 +146,7 @@
         </div>
 
         <div class="col-sm-3">
-            <div class="followquick">
+            <div class="position-fixed">
                 <div style="border-top: solid 1px lightgrey; border-bottom:solid 1px lightgrey; margin: 10px 5px; padding: 30px 0px 20px">
                     <div>
                         <b>항공 운송료</b>
@@ -164,7 +175,7 @@
     </div>
 </div>
 <%--sticky bottom--%>
-<div class="sticky-bottom" style="background-color: white; border-top:1px solid lightgrey">
+<div class="fixed-bottom" style="background-color: white; border-top:1px solid lightgrey">
     <div class="container">
         <div class="row">
             <div class="col-6 mt-2">
@@ -172,13 +183,13 @@
             </div>
             <div class="col-2 mt-2">
                 <span id="price"
-                      style="font-size: larger; color: #00256C; font-weight: bold">${departureFlight.flightFare + returnFlight.flightFare} 원</span>
+                      style="font-size: x-large; color: #00256C; font-weight: bold; float: right">${departureFlight.flightFare + returnFlight.flightFare} 원</span>
             </div>
             <div class="col">
-                <div class="btn-group btn-group-lg col-12 mx-auto" role="group" aria-label="...">
-                    <button type="button" class="btn btn-outline-primary" style="color: #00256C"
-                            onclick="payment()" id="nonMemNxtBtn">결제하기
-                    </button>
+                <div class="d-grid gap-2 col-7 mx-auto" style="float: right">
+                    <button type="button" class="btn btn-primary btn-lg"
+                            onclick="payment()">결제하기</button>
+                </div>
                 </div>
             </div>
         </div>
@@ -186,14 +197,5 @@
 </div>
 </body>
 <script>
-    //follow quick menu
-    $(window).scroll(function () {
-        var scrollTop = $(document).scrollTop();
-        if (scrollTop < 180) {
-            scrollTop = 180;
-        }
-        $("#followquick").stop();
-        $("#followquick").animate({"top": scrollTop});
-    });
 </script>
 </html>

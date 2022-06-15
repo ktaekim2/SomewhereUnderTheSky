@@ -114,21 +114,28 @@
 <%--sticky bottom--%>
 <c:choose>
     <c:when test="${sessionScope.loginMemberId eq null}">
-        <div class="sticky-xxl-bottom" style="background-color: white; border-top:1px solid gray; box-shadow: 0px 5px 30px 5px">
+        <div class="fixed-bottom" style="background-color: white; border-top:1px solid lightgrey">
             <div class="container">
                 <div class="row">
-                    <div class="col-6 mt-2">
+                    <div class="col-4 mt-3">
                         <span style="font-size: larger"><b>예상 결제 금액:</b></span>
                     </div>
-                    <div class="col-2 mt-2">
-                        <span id="price">0 원</span>
+                    <div class="col-3 mt-2">
+                        <span id="price"
+                              style="font-size: x-large; color: #00256C; font-weight: bold; float: right">0 원</span>
                     </div>
                     <div class="col">
-                        <div class="btn-group btn-group-lg" role="group" aria-label="...">
-                            <button type="button" class="btn btn-outline-primary" style="color: #00256C"
-                                    onclick="payment()" id="nonMemNxtBtn">비회원으로 진행
+                        <div class="d-grid col-6 mx-auto" style="float: left">
+                            <button type="button"
+                                    style="background-color: #00256C; font-size: large;font-weight: bold; padding: 15px"
+                                    class="btn btn-primary btn-lg"
+                                    onclick="payment()">비회원으로 진행
                             </button>
-                            <button type="button" class="btn btn-primary" style="background-color: #00256C">회원으로
+                        </div>
+                        <div class="d-grid col-6 mx-auto" role="group" style="float: right">
+                            <button type="button" class="btn btn-primary btn-lg"
+                                    style="background-color: #00256C; font-size: large;font-weight: bold; padding: 15px"
+                                    onclick="payment()">회원으로
                                 진행
                             </button>
                         </div>
@@ -138,19 +145,22 @@
         </div>
     </c:when>
     <c:otherwise>
-        <div class="sticky-xxl-bottom" style="background-color: white; border-top:1px solid lightgrey">
+        <div class="fixed-bottom" style="background-color: white; border-top:1px solid lightgrey">
             <div class="container">
                 <div class="row">
-                    <div class="col-8 mt-2">
+                    <div class="col-4 mt-3">
                         <span style="font-size: larger"><b>예상 결제 금액:</b></span>
                     </div>
-                    <div class="col-2 mt-2">
-                        <span style="font-size: larger"><b style="color: blue">0 원</b></span>
+                    <div class="col-3 mt-2">
+                        <span id="price2"
+                              style="font-size: x-large; color: #00256C; font-weight: bold; float: right">0 원</span>
                     </div>
                     <div class="col">
-                        <div class="btn-group btn-group-lg col-12 mx-auto" role="group" aria-label="...">
-                            <button type="button" class="btn btn-primary" style="background-color: #00256C"
-                                    onclick="payment()" id="nxtBtn">다음
+                        <div class="d-grid col-6 mx-auto" style="float: right">
+                            <button type="button"
+                                    style="background-color: #00256C; font-size: large;font-weight: bold; padding: 15px"
+                                    class="btn btn-primary btn-lg"
+                                    onclick="payment()">다음
                             </button>
                         </div>
                     </div>
@@ -186,7 +196,9 @@
     // 가격 바꾸는 함수
     function changePrice(price) {
         console.log(price);
-        document.getElementById("price").innerHTML = price + " 원";
+        const price1 = String(price);
+        document.getElementById("price").innerHTML = price1 + " 원";
+        document.getElementById("price2").innerHTML = price1 + " 원";
     }
 
     // 다음 버튼 온클릭  form태그 실행 함수
