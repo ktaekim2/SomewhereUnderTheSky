@@ -114,7 +114,7 @@
 <%--sticky bottom--%>
 <c:choose>
     <c:when test="${sessionScope.loginMemberId eq null}">
-        <div class="sticky-xxl-bottom" style="background-color: white; border-top:1px solid gray; box-shadow: 0px 5px 30px 5px">
+        <div class="sticky-xxl-bottom" style="background-color: white; border-top:1px solid lightgrey">
             <div class="container">
                 <div class="row">
                     <div class="col-6 mt-2">
