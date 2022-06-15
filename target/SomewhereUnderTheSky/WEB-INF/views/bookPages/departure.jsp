@@ -138,7 +138,7 @@
         </div>
     </c:when>
     <c:otherwise>
-        <div class="sticky-xxl-bottom" style="background-color: white">
+        <div class="sticky-xxl-bottom" style="background-color: white; border-top:1px solid gray; box-shadow: 0px 5px 30px 5px">
             <div class="container">
                 <div class="row">
                     <div class="col-8 mt-2">

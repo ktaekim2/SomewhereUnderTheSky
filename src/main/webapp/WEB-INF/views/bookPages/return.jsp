@@ -162,7 +162,7 @@
 <%--submit용 form태그--%>
 <form action="/book/returnPayment" method="get" name="submitForm" hidden>
     <input name="bookId" id="inputBookId" value="${bookId}">
-    <input name="flightId" id="inputFlightId" value="null">
+    <input name="returnFlightId" id="inputFlightId" value="null">
     <input name="departureFlightId" id="inputDepartureFlightId" value="${departureFlightId}">
 </form>
 </body>

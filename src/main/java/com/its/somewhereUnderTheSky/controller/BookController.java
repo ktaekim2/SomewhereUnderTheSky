@@ -126,7 +126,7 @@ public class BookController {
     }
 
     @GetMapping("/returnPayment")
-    public String returnPayment(@RequestParam("bookId") Long bookId, @RequestParam("flightId") Long returnFlightId, @RequestParam("departureFlightId") Long departureFlightId, Model model) {
+    public String returnPayment(@RequestParam("bookId") Long bookId, @RequestParam("departureFlightId") Long departureFlightId, @RequestParam("returnFlightId") Long returnFlightId, Model model) {
         System.out.println("BookController.returnPayment");
         System.out.println("bookId = " + bookId + ", returnFlightId = " + returnFlightId + ", departureFlightId = " + departureFlightId + ", model = " + model);
 
@@ -135,15 +135,15 @@ public class BookController {
         System.out.println("bookDTO = " + bookDTO);
         model.addAttribute("book", bookDTO);
 
-        // returnFlightDTO
-        FlightDTO returnFlightDTO = flightService.findById(returnFlightId);
-        System.out.println("returnFlightDTO = " + returnFlightDTO);
-        model.addAttribute("returnFlight", returnFlightDTO);
-
         // departureFlightDTO
         FlightDTO departureFlightDTO = flightService.findById(departureFlightId);
         System.out.println("departureFlightDTO = " + departureFlightDTO);
         model.addAttribute("departureFlight", departureFlightDTO);
+
+        // returnFlightDTO
+        FlightDTO returnFlightDTO = flightService.findById(returnFlightId);
+        System.out.println("returnFlightDTO = " + returnFlightDTO);
+        model.addAttribute("returnFlight", returnFlightDTO);
 
         return "/bookPages/payment";
     }
