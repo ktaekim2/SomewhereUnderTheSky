@@ -1,8 +1,6 @@
 package com.its.somewhereUnderTheSky.controller;
 
-import com.its.somewhereUnderTheSky.dto.BookDTO;
-import com.its.somewhereUnderTheSky.dto.FlightDTO;
-import com.its.somewhereUnderTheSky.dto.MemberDTO;
+import com.its.somewhereUnderTheSky.dto.*;
 import com.its.somewhereUnderTheSky.service.BookService;
 import com.its.somewhereUnderTheSky.service.FlightService;
 import com.its.somewhereUnderTheSky.service.MemberService;
@@ -165,5 +163,20 @@ public class BookController {
         System.out.println("memberDTO = " + memberDTO);
 
         return "/bookPages/payment";
+    }
+
+    @PostMapping("/passengerSave")
+    @ResponseBody
+    public String passengerSave(@ModelAttribute PassengerArrayDTO passengerArrayDTO) {
+        System.out.println("BookController.passengerSave");
+        System.out.println("passengerArrayDTO = " + passengerArrayDTO);
+        String asd = "asd";
+        for (int i = 0; i < passengerArrayDTO.getPassengers().size(); i++) {
+            System.out.println("passengerSave for문 실행");
+            PassengerDTO passengerDTO = passengerArrayDTO.getPassengers().get(i);
+            System.out.println("passengerDTO = " + passengerDTO);
+            bookService.passengerSave(passengerDTO);
+        }
+        return asd;
     }
 }

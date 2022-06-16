@@ -9,5 +9,6 @@
         <typeAlias type="com.its.somewhereUnderTheSky.dto.AirplaneDTO" alias="airplane"></typeAlias>
         <typeAlias type="com.its.somewhereUnderTheSky.dto.FlightDTO" alias="flight"></typeAlias>
         <typeAlias type="com.its.somewhereUnderTheSky.dto.BookDTO" alias="book"></typeAlias>
+        <typeAlias type="com.its.somewhereUnderTheSky.dto.PassengerDTO" alias="passenger"></typeAlias>
     </typeAliases>
 </configuration>

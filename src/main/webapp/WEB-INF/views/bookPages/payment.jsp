@@ -66,13 +66,13 @@
             <div class="row">
                 <h4 style="color: #00256C"><b>승객 정보</b></h4>
             </div>
-            <div class="accordion" id="adultAccordion">
+            <div class="accordion">
                 <c:forEach begin="0" end="${book.passengerAdult - 1}" var="i" step="1">
-                    <div class="accordion-item">
+                    <div class="accordion-item" id="adultAccordion${i}">
                         <h2 class="accordion-header" id="adultHeading${i}">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#adultCollapse${i}" aria-expanded="true"
-                                    aria-controls="adultCollapse${i}">
+                                    aria-controls="adultCollapse${i}" id="adultAccordionButton${i}">
                                 성인 ${i + 1}
                             </button>
                         </h2>
@@ -142,11 +142,10 @@
                                                        aria-label="Sizing example input"
                                                        aria-describedby="inputGroup-sizing-default" id="birthDate${i}">
                                             </div>
-                                            <div class="d-grid gap-2 col-4 mx-auto" style="float: right">
-                                                <button type="button" class="btn btn-primary btn-lg"
-                                                        onclick="save(${i})">확인
-                                                </button>
-                                            </div>
+                                                <%--                                            <div class="d-grid gap-2 col-4 mx-auto" style="float: right">--%>
+                                                <%--                                                <button type="button" class="btn btn-primary btn-lg">확인--%>
+                                                <%--                                                </button>--%>
+                                                <%--                                            </div>--%>
                                         </div>
                                     </div>
                                 </div>
@@ -320,6 +319,7 @@
         $('input:text[id="birthDate0"]').prop('disabled', true);
     })
 
+    // 승객 모두를 list에 저장해서 ajax로 java로 보내기
     function savePassenger() {
         console.log("savePassenger함수호출");
         const passengerList = {};
@@ -330,16 +330,27 @@
         passengerList[`passengers[${i}].passengerFirstName`] = document.getElementById("firstName${i}").value;
         passengerList[`passengers[${i}].passengerGender`] = $("input[name='gender${i}']:checked").val();
         passengerList[`passengers[${i}].passengerBirthdate`] = document.getElementById("birthDate${i}").value;
+        passengerList[`passengers[${i}].bookId`] = ${book.id};
         </c:forEach>
         console.log(passengerList);
 
-        // $.ajax({
-        //     url: "/book/passengerSave",
-        //     type: "POST",
-        //     data: passengerList,
-        //     dataType: 'json',
-        //     contentType: "application/x-www-form-urlencoded; charset=UTF-8;"
-        // });
+        $.ajax({
+            url: "/book/passengerSave",
+            type: "POST",
+            data: passengerList,
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8;",
+            dataType: 'json',
+            success: function (result) {
+                alert(result);
+            },
+            error: function () {
+                location.href = "../";
+            },
+            Complete: function () {
+                alert("Complete");
+            }
+        });
     }
+
 </script>
 </html>

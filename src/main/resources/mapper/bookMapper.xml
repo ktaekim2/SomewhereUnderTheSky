@@ -18,6 +18,12 @@
         from book_table
         where id = #{bookId}
     </select>
+
+    <insert id="passengerSave" parameterType="passenger">
+        insert into passenger_table(passengerLastName, passengerFirstName, passengerGender, passengerBirthdate, bookId)
+        values (#{passengerLastName}, #{passengerFirstName}, #{passengerGender},
+        #{passengerBirthdate}, #{bookId})
+    </insert>
 </mapper>
 
 

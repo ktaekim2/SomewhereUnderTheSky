@@ -2,6 +2,7 @@ package com.its.somewhereUnderTheSky.repository;
 
 import com.its.somewhereUnderTheSky.dto.BookDTO;
 import com.its.somewhereUnderTheSky.dto.FlightDTO;
+import com.its.somewhereUnderTheSky.dto.PassengerDTO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -29,5 +30,9 @@ public class BookRepository {
 
     public BookDTO findById(Long bookId) {
         return sql.selectOne("Book.findById", bookId);
+    }
+
+    public void passengerSave(PassengerDTO passengerDTO) {
+        sql.insert("Book.passengerSave", passengerDTO);
     }
 }

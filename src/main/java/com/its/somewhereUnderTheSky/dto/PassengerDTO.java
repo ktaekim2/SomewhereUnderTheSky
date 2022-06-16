@@ -9,4 +9,5 @@ public class PassengerDTO {
     private String passengerFirstName;
     private String passengerGender;
     private String passengerBirthdate;
+    private Long bookId;
 }
