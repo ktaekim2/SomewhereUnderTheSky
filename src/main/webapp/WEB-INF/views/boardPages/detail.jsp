@@ -56,7 +56,10 @@
                 <th>작성자</th>
                 <th>내용</th>
                 <th>작성시간</th>
+                <th>좋아요</th>
+                <th>싫어요</th>
                 <c:if test="${sessionScope.loginMemberId eq board.boardWriter}">
+                    <th>수정</th>
                     <th>삭제</th>
                 </c:if>
             </tr>
@@ -67,7 +70,20 @@
                     <td>${comment.commentContents}</td>
                     <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss"
                                         value="${comment.commentCreatedDate}"></fmt:formatDate></td>
+                    <td>
+                        <button class="btn-group"><img src="../../../resources/img/hand-thumbs-up.svg"
+                                                       onclick="updateLikes(${comment.id})">
+                        </button>
+                        <span>${comment.commentLikes}</span>
+                    </td>
+                    <td>
+                        <button class="btn-group"><img
+                                src="../../../resources/img/hand-thumbs-down.svg"
+                                onclick="updateDislikes(${comment.id})">
+                        </button>
+                        <span>${comment.commentDislikes}</span></td>
                     <c:if test="${sessionScope.loginMemberId eq comment.commentWriter}">
+                        <td><a href="/comment/update?id=${comment.id}&BoardId=${board.id}&page=${page}">수정</a></td>
                         <td><a href="/comment/delete?id=${comment.id}&BoardId=${board.id}&page=${page}">삭제</a></td>
                     </c:if>
                 </tr>
@@ -100,6 +116,9 @@
                 output += "<th>작성자</th>";
                 output += "<th>내용</th>";
                 output += "<th>작성시간</th>";
+                output += "<th>좋아요</th>";
+                output += "<th>싫어요</th>";
+                output += "<th>수정</th>";
                 output += "<th>삭제</th></tr>";
                 for (let i in result) {
                     output += "<tr>";
@@ -107,7 +126,12 @@
                     output += "<td>" + result[i].commentWriter + "</td>";
                     output += "<td>" + result[i].commentContents + "</td>";
                     output += "<td>" + moment(result[i].commentCreatedDate).format("YYYY-MM-DD HH:mm:ss") + "</td>";
-                    output += "<td>" + "<a href='/comment/delete?id=${comment.id}&BoardId=${board.id}'>" + "삭제" + "</a>" + "</td>";
+                    output += "<td>" + "<button class='btn-group'>" + "<img src='../../../resources/img/hand-thumbs-up.svg' onclick='updateLikes(" + result[i].id + ")'>" + "</button>" +
+                        "<span>" + result[i].commentLikes + "</span>" + "</td>";
+                    output += "<td>" + "<button class='btn-group'>" + "<img src='../../../resources/img/hand-thumbs-down.svg' onclick='updateDislikes(" + result[i].id + ")'>" + "</button>" +
+                        "<span>" + result[i].commentDislikes + "</span>" + "</td>";
+                    output += "<td>" + "<a href='/comment/update?id=" + result[i].id + "&BoardId=" + result[i].boardId + "'>" + "수정" + "</a>" + "</td>";
+                    output += "<td>" + "<a href='/comment/delete?id=" + result[i].id + "&BoardId=" + result[i].boardId + "'>" + "삭제" + "</a>" + "</td>";
                     output += "</tr>";
                 }
                 output += "</table>";
@@ -131,5 +155,97 @@
     const paging = () => {
         location.href = '/board/paging?page=${page}';
     }
+
+    // 좋아요 ajax
+    function updateLikes(id) {
+        const boardId = '${board.id}';
+        $.ajax({
+            type: "post",
+            url: "/comment/updateLikes",
+            data: {
+                "boardId": boardId,
+                "id": id
+            },
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                let output = "<table class='table'>";
+                output += "<tr><th>댓글번호</th>";
+                output += "<th>작성자</th>";
+                output += "<th>내용</th>";
+                output += "<th>작성시간</th>";
+                output += "<th>좋아요</th>";
+                output += "<th>싫어요</th>";
+                output += "<th>수정</th>";
+                output += "<th>삭제</th></tr>";
+                for (let i in result) {
+                    output += "<tr>";
+                    output += "<td>" + result[i].id + "</td>";
+                    output += "<td>" + result[i].commentWriter + "</td>";
+                    output += "<td>" + result[i].commentContents + "</td>";
+                    output += "<td>" + moment(result[i].commentCreatedDate).format("YYYY-MM-DD HH:mm:ss") + "</td>";
+                    output += "<td>" + "<button class='btn-group'>" + "<img src='../../../resources/img/hand-thumbs-up.svg' onclick='updateLikes(" + result[i].id + ")'>" + "</button>" +
+                        "<span>" + result[i].commentLikes + "</span>" + "</td>";
+                    output += "<td>" + "<button class='btn-group'>" + "<img src='../../../resources/img/hand-thumbs-down.svg' onclick='updateDislikes(" + result[i].id + ")'>" + "</button>" +
+                        "<span>" + result[i].commentDislikes + "</span>" + "</td>";
+                    output += "<td>" + "<a href='/comment/update?id=" + result[i].id + "&BoardId=" + result[i].boardId + "'>" + "수정" + "</a>" + "</td>";
+                    output += "<td>" + "<a href='/comment/delete?id=" + result[i].id + "&BoardId=" + result[i].boardId + "'>" + "삭제" + "</a>" + "</td>";
+                    output += "</tr>";
+                }
+                output += "</table>";
+                document.getElementById('comment-list').innerHTML = output;
+                document.getElementById('commentContents').value = '';
+            },
+            error: function () {
+                alert("어디가 틀렸을까");
+            }
+        })
+    };
+
+    // 싫어요 ajax
+    function updateDislikes(id) {
+        const boardId = '${board.id}';
+        $.ajax({
+            type: "post",
+            url: "/comment/updateDislikes",
+            data: {
+                "boardId": boardId,
+                "id": id
+            },
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                let output = "<table class='table'>";
+                output += "<tr><th>댓글번호</th>";
+                output += "<th>작성자</th>";
+                output += "<th>내용</th>";
+                output += "<th>작성시간</th>";
+                output += "<th>좋아요</th>";
+                output += "<th>싫어요</th>";
+                output += "<th>수정</th>";
+                output += "<th>삭제</th></tr>";
+                for (let i in result) {
+                    output += "<tr>";
+                    output += "<td>" + result[i].id + "</td>";
+                    output += "<td>" + result[i].commentWriter + "</td>";
+                    output += "<td>" + result[i].commentContents + "</td>";
+                    output += "<td>" + moment(result[i].commentCreatedDate).format("YYYY-MM-DD HH:mm:ss") + "</td>";
+                    output += "<td>" + "<button class='btn-group'>" + "<img src='../../../resources/img/hand-thumbs-up.svg' onclick='updateLikes(" + result[i].id + ")'>" + "</button>" +
+                        "<span>" + result[i].commentLikes + "</span>" + "</td>";
+                    output += "<td>" + "<button class='btn-group'>" + "<img src='../../../resources/img/hand-thumbs-down.svg' onclick='updateDislikes(" + result[i].id + ")'>" + "</button>" +
+                        "<span>" + result[i].commentDislikes + "</span>" + "</td>";
+                    output += "<td>" + "<a href='/comment/update?id=" + result[i].id + "&BoardId=" + result[i].boardId + "'>" + "수정" + "</a>" + "</td>";
+                    output += "<td>" + "<a href='/comment/delete?id=" + result[i].id + "&BoardId=" + result[i].boardId + "'>" + "삭제" + "</a>" + "</td>";
+                    output += "</tr>";
+                }
+                output += "</table>";
+                document.getElementById('comment-list').innerHTML = output;
+                document.getElementById('commentContents').value = '';
+            },
+            error: function () {
+                alert("어디가 틀렸을까");
+            }
+        })
+    };
 </script>
 </html>

@@ -20,4 +20,28 @@
         from comment_table
         where id = #{id}
     </delete>
+
+    <select id="findById" parameterType="Long" resultType="comment">
+        select *
+        from comment_table
+        where id = #{id}
+    </select>
+
+    <update id="update" parameterType="comment">
+        update comment_table
+        set commentContents = #{commentContents}
+        where id = #{id}
+    </update>
+
+    <update id="updateLikes" parameterType="Long">
+        update comment_table
+        set commentLikes = commentLikes + 1
+        where id = #{id};
+    </update>
+
+    <update id="updateDislikes" parameterType="Long">
+        update comment_table
+        set commentDislikes = commentDislikes + 1
+        where id = #{id};
+    </update>
 </mapper>

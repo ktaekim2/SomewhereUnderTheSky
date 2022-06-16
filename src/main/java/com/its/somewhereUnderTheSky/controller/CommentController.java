@@ -1,5 +1,6 @@
 package com.its.somewhereUnderTheSky.controller;
 
+import com.its.somewhereUnderTheSky.dto.BoardDTO;
 import com.its.somewhereUnderTheSky.dto.CommentDTO;
 import com.its.somewhereUnderTheSky.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,39 @@ public class CommentController {
     }
 
     @GetMapping("/delete")
-    public String delete(@ModelAttribute CommentDTO commentDTO, @RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model) {
+    public String delete(@ModelAttribute CommentDTO commentDTO) {
         Long id = commentDTO.getId();
         commentService.delete(id);
-        model.addAttribute("page", page);
         return "redirect:/board/detail?id=" + commentDTO.getBoardId();
+    }
+
+    @GetMapping("/update")
+    public String updateForm(@ModelAttribute CommentDTO commentDTO, Model model) {
+        Long id = commentDTO.getId();
+        CommentDTO commentDTO1 = commentService.findById(id);
+        model.addAttribute("comment", commentDTO1);
+        return "/commentPages/update";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute CommentDTO commentDTO) {
+        commentService.update(commentDTO);
+        return "redirect:/board/detail?id=" + commentDTO.getBoardId();
+    }
+
+    @PostMapping("/updateLikes")
+    public @ResponseBody List<CommentDTO> updateLikes(@ModelAttribute CommentDTO commentDTO) {
+        Long id = commentDTO.getId();
+        commentService.updateLikes(id);
+        List<CommentDTO> commentDTOList = commentService.findAll(commentDTO.getBoardId());
+        return commentDTOList;
+    }
+
+    @PostMapping("/updateDislikes")
+    public @ResponseBody List<CommentDTO> updateDislikes(@ModelAttribute CommentDTO commentDTO) {
+        Long id = commentDTO.getId();
+        commentService.updateDislikes(id);
+        List<CommentDTO> commentDTOList = commentService.findAll(commentDTO.getBoardId());
+        return commentDTOList;
     }
 }

@@ -24,4 +24,20 @@ public class CommentService {
     public void delete(Long id) {
         commentRepository.delete(id);
     }
+
+    public CommentDTO findById(Long id) {
+        return commentRepository.findById(id);
+    }
+
+    public void update(CommentDTO commentDTO) {
+        commentRepository.update(commentDTO);
+    }
+
+    public void updateLikes(Long id) {
+        commentRepository.updateLikes(id);
+    }
+
+    public void updateDislikes(Long id) {
+        commentRepository.updateDislikes(id);
+    }
 }
