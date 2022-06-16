@@ -113,7 +113,7 @@
 
 <%--sticky bottom--%>
 
-<div class="fixed-bottom" style="background-color: white; border-top:1px solid lightgrey">
+<div class="sticky-bottom" style="background-color: white; border-top:1px solid lightgrey">
     <div class="container">
         <div class="row">
             <div class="col-4 mt-3">

@@ -67,13 +67,13 @@
                 <h4 style="color: #00256C"><b>승객 정보</b></h4>
             </div>
             <div class="accordion" id="adultAccordion">
-                <c:forEach begin="1" end="${book.passengerAdult}" var="i" step="1">
+                <c:forEach begin="0" end="${book.passengerAdult - 1}" var="i" step="1">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="adultHeading${i}">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#adultCollapse${i}" aria-expanded="true"
                                     aria-controls="adultCollapse${i}">
-                                성인 ${i}
+                                성인 ${i + 1}
                             </button>
                         </h2>
                         <div id="adultCollapse${i}" class="accordion-collapse collapse"
@@ -92,7 +92,8 @@
                                             <div class="input-group mb-3">
                                                 <input type="text" class="form-control"
                                                        aria-label="Sizing example input"
-                                                       aria-describedby="inputGroup-sizing-default" id="lastName${i}" style="text-transform: uppercase">
+                                                       aria-describedby="inputGroup-sizing-default" id="lastName${i}"
+                                                       style="text-transform: uppercase">
                                             </div>
                                             <p style="color: #0064DE; font-size: small">* 여권상 영문 성과 반드시 일치해야
                                                 합니다.</p>
@@ -102,18 +103,18 @@
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="d-grid gap-2">
-                                                        <input type="radio" class="btn-check" name="options"
+                                                        <input type="radio" class="btn-check" name="gender${i}"
                                                                id="male${i}"
-                                                               autocomplete="off">
+                                                               autocomplete="off" value="male">
                                                         <label class="btn btn-outline-secondary"
                                                                for="male${i}">남자</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="d-grid gap-2">
-                                                        <input type="radio" class="btn-check" name="options"
+                                                        <input type="radio" class="btn-check" name="gender${i}"
                                                                id="female${i}"
-                                                               autocomplete="off">
+                                                               autocomplete="off" value="female">
                                                         <label class="btn btn-outline-secondary"
                                                                for="female${i}">여자</label>
                                                     </div>
@@ -127,7 +128,8 @@
                                             <div class="input-group mb-3">
                                                 <input type="text" class="form-control"
                                                        aria-label="Sizing example input"
-                                                       aria-describedby="inputGroup-sizing-default" id="firstName${i}" style="text-transform: uppercase">
+                                                       aria-describedby="inputGroup-sizing-default" id="firstName${i}"
+                                                       style="text-transform: uppercase">
                                             </div>
                                             <p style="color: #0064DE; font-size: small">* 여권상 영문 이름과 반드시 일치해야
                                                 합니다.</p>
@@ -141,7 +143,9 @@
                                                        aria-describedby="inputGroup-sizing-default" id="birthDate${i}">
                                             </div>
                                             <div class="d-grid gap-2 col-4 mx-auto" style="float: right">
-                                                <button type="button" class="btn btn-primary btn-lg" onclick="save(${i})">확인</button>
+                                                <button type="button" class="btn btn-primary btn-lg"
+                                                        onclick="save(${i})">확인
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -175,7 +179,7 @@
                                         </select>
                                     </div>
                                     <div class="col-sm-4">
-                                        <label style="font-size: small;color: #767676;display: block">국가 번호</label>
+                                        <label style="font-size: small;color: #767676;display: block">국가번호</label>
                                         <div class="row">
                                             <div class="col-sm-4">
                                                 <div class="d-grid gap-2">
@@ -192,7 +196,25 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
-
+                                        <label style="font-size: small;color: #767676;display: block">전화번호</label>
+                                        <div class="row">
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control"
+                                                       aria-label="Sizing example input"
+                                                       aria-describedby="inputGroup-sizing-default">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label style="font-size: small;color: #767676;display: block">이메일</label>
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control"
+                                                   aria-label="Sizing example input"
+                                                   aria-describedby="inputGroup-sizing-default"
+                                                   value="email${member.memberEmail}">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -210,7 +232,13 @@
                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
                          data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-
+                            <ul style="font-size: small;color: #767676; font-weight: bold">
+                                <li>예약 후 성명 변경은 <span style="color: #0064DE">불가</span>하오니 실제 탑승하실 분의 <span
+                                        style="color: #0064DE">여권상 성명</span>으로 입력하시기 바랍니다.
+                                </li>
+                                <li>입력하신 회원번호로 탑승 마일리지가 적립되며, 마일리지 적립율은 선택하신 항공사에 따라 상이할 수 있습니다.</li>
+                                <li>스카이패스 마일리지 적립을 원하시는 경우, 탑승 전까지 회원가입을 하시기 바랍니다.</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -250,7 +278,7 @@
 </div>
 
 <%--sticky bottom--%>
-<div class="fixed-bottom" style="background-color: white; border-top:1px solid lightgrey">
+<div class="sticky-bottom" style="background-color: white; border-top:1px solid lightgrey">
     <div class="container">
         <div class="row">
             <div class="col-4 mt-3">
@@ -264,7 +292,7 @@
                 <div class="d-grid col-6 mx-auto" style="float: right">
                     <button type="button" class="btn btn-primary btn-lg"
                             style="background-color: #00256C; font-size: large;font-weight: bold; padding: 15px"
-                            onclick="payment()">결제하기
+                            onclick="savePassenger()">결제하기
                     </button>
                 </div>
             </div>
@@ -277,24 +305,41 @@
     // 페이지 로딩이 끝나면 로그인 멤버 정보를 자동 기입
     $().ready(function () {
         console.log("레디펑션")
-        document.getElementById("lastName1").value = "${member.memberLastName}";
-        $('input:text[id="lastName1"]').prop('disabled', true);
-        document.getElementById("firstName1").value = "${member.memberFirstName}";
-        $('input:text[id="firstName1"]').prop('disabled', true);
+        document.getElementById("lastName0").value = "${member.memberLastName}";
+        $('input:text[id="lastName0"]').prop('disabled', true);
+        document.getElementById("firstName0").value = "${member.memberFirstName}";
+        $('input:text[id="firstName0"]').prop('disabled', true);
         if (${member.memberGender == "남"}) {
-            $('input:radio[id="male1"]').prop('checked', true);
-            $('input:radio[id="female1"]').prop('disabled', true);
+            $('input:radio[id="male0"]').prop('checked', true);
+            $('input:radio[id="female0"]').prop('disabled', true);
         } else {
-            $('input:radio[id="female1"]').prop('checked', true);
-            $('input:radio[id="male1"]').prop('disabled', true);
+            $('input:radio[id="female0"]').prop('checked', true);
+            $('input:radio[id="male0"]').prop('disabled', true);
         }
-        document.getElementById("birthDate1").value = "${member.memberBirthdate}";
-        $('input:text[id="birthDate1"]').prop('disabled', true);
+        document.getElementById("birthDate0").value = "${member.memberBirthdate}";
+        $('input:text[id="birthDate0"]').prop('disabled', true);
     })
 
-    // 승객 정보 저장
-    function save(a) {
-        const
+    function savePassenger() {
+        console.log("savePassenger함수호출");
+        const passengerList = {};
+
+        <c:forEach begin="0" end="${book.passengerAdult + book.passengerChild + book.passengerInfant - 1}" var="i" step="1">
+        console.log("i: " + ${i});
+        passengerList[`passengers[${i}].passengerLastName`] = document.getElementById("lastName${i}").value;
+        passengerList[`passengers[${i}].passengerFirstName`] = document.getElementById("firstName${i}").value;
+        passengerList[`passengers[${i}].passengerGender`] = $("input[name='gender${i}']:checked").val();
+        passengerList[`passengers[${i}].passengerBirthdate`] = document.getElementById("birthDate${i}").value;
+        </c:forEach>
+        console.log(passengerList);
+
+        // $.ajax({
+        //     url: "/book/passengerSave",
+        //     type: "POST",
+        //     data: passengerList,
+        //     dataType: 'json',
+        //     contentType: "application/x-www-form-urlencoded; charset=UTF-8;"
+        // });
     }
 </script>
 </html>
