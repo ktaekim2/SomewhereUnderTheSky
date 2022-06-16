@@ -25,21 +25,21 @@
     <div class="row mb-5 mt-5">
         <h1>항공권 예매</h1>
     </div>
-    <div class="row">
-        <img src="../../../resources/img/booking--edge.svg" height="4">
+    <div class="row" style="border-bottom: lightgrey; border-left: lightgrey; border-right: lightgrey">
+        <img src="../../../resources/img/booking--edge.svg" height="4" style="float: top">
     </div>
     <div class="row m-5">
         <div class="col-sm-8">
             <div class="text-center mb-2">
-                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
-                        data-bs-target="#departureModal">
+                <button type="button" class="btn btn-outline" data-bs-toggle="modal"
+                        data-bs-target="#departureModal" style="font-weight: bold; font-size: xx-large; color: black">
                     <span id="departureAirport">GMP(서울/김포)</span>
                 </button>
-                ---------------
+                <span style="color:dodgerblue">---------------</span>
                 <a href="#"><img src="../../../resources/img/booking__swap.svg" onclick="changeDestination()"></a>
-                ---------------
-                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
-                        data-bs-target="#arrivalModal">
+                <span style="color:dodgerblue">---------------</span>
+                <button type="button" class="btn btn-outline" data-bs-toggle="modal"
+                        data-bs-target="#arrivalModal" style="font-weight: bold; font-size: xx-large; color: black">
                     <span id="arrivalAirport">PUS(부산/김해)</span>
                 </button>
             </div>
@@ -358,7 +358,11 @@
 
     // 항공편 검색
     function searchFlight() {
-        submitForm.submit(); // 노란줄 있지만 잘됨
+        if (document.getElementById("inputDepartureDate").value != "") {
+            submitForm.submit(); // 노란줄 있지만 잘됨
+        } else {
+            alert("탑승일을 선택하세요.")
+        }
     }
 
     // datepicker

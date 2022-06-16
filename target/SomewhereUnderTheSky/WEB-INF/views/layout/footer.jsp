@@ -63,7 +63,7 @@
 <div class="container">
     <footer class="py-5">
         <div class="row">
-            <div class="col-2">
+            <div class="col-2" style="font-size: small; font-weight: bold">
                 <h5>회사 소개</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">한국항공에 대하여</a></li>
@@ -74,7 +74,7 @@
                 </ul>
             </div>
 
-            <div class="col-2">
+            <div class="col-2" style="font-size: small; font-weight: bold">
                 <h5>고객 지원</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">공지사항</a></li>
@@ -86,7 +86,7 @@
                 </ul>
             </div>
 
-            <div class="col-2">
+            <div class="col-2" style="font-size: small; font-weight: bold">
                 <h5>약관 및 규정</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">개인정보 처리방침</a></li>
@@ -97,7 +97,7 @@
                 </ul>
             </div>
 
-            <div class="col-2">
+            <div class="col-2" style="font-size: small; font-weight: bold">
                 <h5>기타 안내</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">초등학생 견학 신청</a></li>
