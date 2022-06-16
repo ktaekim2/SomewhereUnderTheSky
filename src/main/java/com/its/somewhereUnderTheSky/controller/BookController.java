@@ -2,13 +2,16 @@ package com.its.somewhereUnderTheSky.controller;
 
 import com.its.somewhereUnderTheSky.dto.BookDTO;
 import com.its.somewhereUnderTheSky.dto.FlightDTO;
+import com.its.somewhereUnderTheSky.dto.MemberDTO;
 import com.its.somewhereUnderTheSky.service.BookService;
 import com.its.somewhereUnderTheSky.service.FlightService;
+import com.its.somewhereUnderTheSky.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -18,6 +21,8 @@ public class BookController {
     private BookService bookService;
     @Autowired
     private FlightService flightService;
+    @Autowired
+    private MemberService memberService;
 
     @GetMapping("/search")
     public String search() {
@@ -65,7 +70,7 @@ public class BookController {
     }
 
     @GetMapping("/payment")
-    public String payment(@RequestParam("bookId") Long bookId, @RequestParam("flightId") Long flightId, Model model) {
+    public String payment(@RequestParam("bookId") Long bookId, @RequestParam("flightId") Long flightId, Model model, HttpSession session) {
         System.out.println("BookController.payment");
         System.out.println("bookId = " + bookId + ", flightId = " + flightId);
 
@@ -91,6 +96,13 @@ public class BookController {
 
             // bookDTO
             model.addAttribute("book", bookDTO);
+
+            // 로그인 멤버 memberDTO 뽑아오기
+            Long loginId = (Long) session.getAttribute("loginId");
+            System.out.println("loginId = " + loginId);
+            MemberDTO memberDTO = memberService.findById(loginId);
+            model.addAttribute("member", memberDTO);
+            System.out.println("memberDTO = " + memberDTO);
 
             return "/bookPages/payment";
         } else {
@@ -126,7 +138,7 @@ public class BookController {
     }
 
     @GetMapping("/returnPayment")
-    public String returnPayment(@RequestParam("bookId") Long bookId, @RequestParam("departureFlightId") Long departureFlightId, @RequestParam("returnFlightId") Long returnFlightId, Model model) {
+    public String returnPayment(@RequestParam("bookId") Long bookId, @RequestParam("departureFlightId") Long departureFlightId, @RequestParam("returnFlightId") Long returnFlightId, Model model, HttpSession session) {
         System.out.println("BookController.returnPayment");
         System.out.println("bookId = " + bookId + ", returnFlightId = " + returnFlightId + ", departureFlightId = " + departureFlightId + ", model = " + model);
 
@@ -144,6 +156,13 @@ public class BookController {
         FlightDTO returnFlightDTO = flightService.findById(returnFlightId);
         System.out.println("returnFlightDTO = " + returnFlightDTO);
         model.addAttribute("returnFlight", returnFlightDTO);
+
+        // 로그인 멤버 memberDTO 뽑아오기
+        Long loginId = (Long) session.getAttribute("loginId");
+        System.out.println("loginId = " + loginId);
+        MemberDTO memberDTO = memberService.findById(loginId);
+        model.addAttribute("member", memberDTO);
+        System.out.println("memberDTO = " + memberDTO);
 
         return "/bookPages/payment";
     }

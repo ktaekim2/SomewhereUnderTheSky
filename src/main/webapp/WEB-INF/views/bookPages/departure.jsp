@@ -112,18 +112,19 @@
 <jsp:include page="../layout/footer.jsp" flush="false"></jsp:include>
 
 <%--sticky bottom--%>
-<c:choose>
-    <c:when test="${sessionScope.loginMemberId eq null}">
-        <div class="fixed-bottom" style="background-color: white; border-top:1px solid lightgrey">
-            <div class="container">
-                <div class="row">
-                    <div class="col-4 mt-3">
-                        <span style="font-size: larger"><b>예상 결제 금액:</b></span>
-                    </div>
-                    <div class="col-3 mt-2">
+
+<div class="fixed-bottom" style="background-color: white; border-top:1px solid lightgrey">
+    <div class="container">
+        <div class="row">
+            <div class="col-4 mt-3">
+                <span style="font-size: larger"><b>예상 결제 금액:</b></span>
+            </div>
+            <div class="col-3 mt-2">
                         <span id="price"
                               style="font-size: x-large; color: #00256C; font-weight: bold; float: right">0 원</span>
-                    </div>
+            </div>
+            <c:choose>
+                <c:when test="${sessionScope.loginMemberId eq null}">
                     <div class="col">
                         <div class="d-grid col-6 mx-auto" style="float: left">
                             <button type="button"
@@ -140,21 +141,8 @@
                             </button>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </c:when>
-    <c:otherwise>
-        <div class="fixed-bottom" style="background-color: white; border-top:1px solid lightgrey">
-            <div class="container">
-                <div class="row">
-                    <div class="col-4 mt-3">
-                        <span style="font-size: larger"><b>예상 결제 금액:</b></span>
-                    </div>
-                    <div class="col-3 mt-2">
-                        <span id="price2"
-                              style="font-size: x-large; color: #00256C; font-weight: bold; float: right">0 원</span>
-                    </div>
+                </c:when>
+                <c:otherwise>
                     <div class="col">
                         <div class="d-grid col-6 mx-auto" style="float: right">
                             <button type="button"
@@ -164,11 +152,12 @@
                             </button>
                         </div>
                     </div>
-                </div>
-            </div>
+                </c:otherwise>
+            </c:choose>
         </div>
-    </c:otherwise>
-</c:choose>
+    </div>
+</div>
+
 <%--submit용 form태그--%>
 <form action="/book/payment" method="get" name="submitForm" hidden>
     <input name="bookId" id="inputBookId" value="${bookId}">
@@ -197,7 +186,6 @@
         console.log(price);
         const price1 = String(price);
         document.getElementById("price").innerHTML = price1 + " 원";
-        document.getElementById("price2").innerHTML = price1 + " 원";
     }
 
     // 다음 버튼 온클릭  form태그 실행 함수

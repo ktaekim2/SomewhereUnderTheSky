@@ -60,10 +60,13 @@
                     </div>
                 </c:if>
             </div>
+
+            <%--            승객 정보--%>
+            <%--            성인--%>
             <div class="row">
                 <h4 style="color: #00256C"><b>승객 정보</b></h4>
             </div>
-            <div class="accordion" id="accordionExample">
+            <div class="accordion" id="adultAccordion">
                 <c:forEach begin="1" end="${book.passengerAdult}" var="i" step="1">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="adultHeading${i}">
@@ -73,7 +76,7 @@
                                 성인 ${i}
                             </button>
                         </h2>
-                        <div id="adultCollapse${i}" class="accordion-collapse collapse show"
+                        <div id="adultCollapse${i}" class="accordion-collapse collapse"
                              aria-labelledby="adultHeading${i}" data-bs-parent="#accordionExample">
                             <div class="accordion-body" style="padding: 32px 40px">
                                 <div>
@@ -89,7 +92,7 @@
                                             <div class="input-group mb-3">
                                                 <input type="text" class="form-control"
                                                        aria-label="Sizing example input"
-                                                       aria-describedby="inputGroup-sizing-default">
+                                                       aria-describedby="inputGroup-sizing-default" id="lastName${i}" style="text-transform: uppercase">
                                             </div>
                                             <p style="color: #0064DE; font-size: small">* 여권상 영문 성과 반드시 일치해야
                                                 합니다.</p>
@@ -99,16 +102,20 @@
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="d-grid gap-2">
-                                                        <input type="radio" class="btn-check" name="options" id="male"
+                                                        <input type="radio" class="btn-check" name="options"
+                                                               id="male${i}"
                                                                autocomplete="off">
-                                                        <label class="btn btn-outline-secondary" for="male">남자</label>
+                                                        <label class="btn btn-outline-secondary"
+                                                               for="male${i}">남자</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="d-grid gap-2">
-                                                        <input type="radio" class="btn-check" name="options" id="female"
+                                                        <input type="radio" class="btn-check" name="options"
+                                                               id="female${i}"
                                                                autocomplete="off">
-                                                        <label class="btn btn-outline-secondary" for="female">여자</label>
+                                                        <label class="btn btn-outline-secondary"
+                                                               for="female${i}">여자</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -120,20 +127,21 @@
                                             <div class="input-group mb-3">
                                                 <input type="text" class="form-control"
                                                        aria-label="Sizing example input"
-                                                       aria-describedby="inputGroup-sizing-default">
+                                                       aria-describedby="inputGroup-sizing-default" id="firstName${i}" style="text-transform: uppercase">
                                             </div>
                                             <p style="color: #0064DE; font-size: small">* 여권상 영문 이름과 반드시 일치해야
                                                 합니다.</p>
                                         </div>
                                         <div>
-                                            <label style="font-size: small;color: #767676;display: block">생년월일 (YYYY.MM.DD.)</label>
+                                            <label style="font-size: small;color: #767676;display: block">생년월일
+                                                (YYYY-MM-DD)</label>
                                             <div class="input-group mb-3">
                                                 <input type="text" class="form-control"
                                                        aria-label="Sizing example input"
-                                                       aria-describedby="inputGroup-sizing-default">
+                                                       aria-describedby="inputGroup-sizing-default" id="birthDate${i}">
                                             </div>
                                             <div class="d-grid gap-2 col-4 mx-auto" style="float: right">
-                                                <button type="button" class="btn btn-primary btn-lg">확인</button>
+                                                <button type="button" class="btn btn-primary btn-lg" onclick="save(${i})">확인</button>
                                             </div>
                                         </div>
                                     </div>
@@ -142,9 +150,73 @@
                         </div>
                     </div>
                 </c:forEach>
+
+
+                <%--            연락처 정보--%>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="contactHeading">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#contactCollapse" aria-expanded="true" aria-controls="contactCollapse">
+                            연락처 정보
+                        </button>
+                    </h2>
+                    <div id="contactCollapse" class="accordion-collapse collapse" aria-labelledby="contactHeading"
+                         data-bs-parent="#contactAccordion">
+                        <div class="accordion-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label style="font-size: small;color: #767676;display: block">연락처</label>
+                                        <select class="form-select"
+                                                aria-label="Default select example">
+                                            <option value="1" selected>휴대폰</option>
+                                            <option value="2">집</option>
+                                            <option value="3">회사</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label style="font-size: small;color: #767676;display: block">국가 번호</label>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="d-grid gap-2">
+                                                    <input type="button" class="btn btn-outline-secondary" value="국가번호">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control"
+                                                           aria-label="Sizing example input"
+                                                           aria-describedby="inputGroup-sizing-default" value="82">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%--            유의사항--%>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            유의사항
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                         data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
+        <%--우측 퀵메뉴--%>
         <div class="col-sm-3">
             <div class="position-fixed">
                 <div style="border-top: solid 1px lightgrey; border-bottom:solid 1px lightgrey; margin: 10px 5px; padding: 30px 0px 20px">
@@ -166,36 +238,63 @@
                         </ul>
                     </div>
                 </div>
-                <div style="border-bottom:solid 1px lightgrey; margin: 10px 5px; padding: 30px 0px 20px">
-                    <span style="font-weight: bold">총액</span>
-                    <button><span>${departureFlight.flightFare + returnFlight.flightFare} 원</span></button>
+                <div style="border-bottom:solid 1px lightgrey; padding: 32px 0px">
+                    <span style="font-weight: bold; float: left; vertical-align: middle">총액</span>
+                    <button type="button" class="btn btn-link"><span
+                            style="color:#0064DE; font-weight: bold;font-size: x-large; float: right">${departureFlight.flightFare + returnFlight.flightFare} 원</span>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <%--sticky bottom--%>
 <div class="fixed-bottom" style="background-color: white; border-top:1px solid lightgrey">
     <div class="container">
         <div class="row">
-            <div class="col-6 mt-2">
+            <div class="col-4 mt-3">
                 <span style="font-size: larger"><b>최종 결제 금액:</b></span>
             </div>
-            <div class="col-2 mt-2">
+            <div class="col-3 mt-2">
                 <span id="price"
                       style="font-size: x-large; color: #00256C; font-weight: bold; float: right">${departureFlight.flightFare + returnFlight.flightFare} 원</span>
             </div>
             <div class="col">
-                <div class="d-grid gap-2 col-7 mx-auto" style="float: right">
+                <div class="d-grid col-6 mx-auto" style="float: right">
                     <button type="button" class="btn btn-primary btn-lg"
-                            onclick="payment()">결제하기</button>
-                </div>
+                            style="background-color: #00256C; font-size: large;font-weight: bold; padding: 15px"
+                            onclick="payment()">결제하기
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+</div>
 </body>
 <script>
+    // 페이지 로딩이 끝나면 로그인 멤버 정보를 자동 기입
+    $().ready(function () {
+        console.log("레디펑션")
+        document.getElementById("lastName1").value = "${member.memberLastName}";
+        $('input:text[id="lastName1"]').prop('disabled', true);
+        document.getElementById("firstName1").value = "${member.memberFirstName}";
+        $('input:text[id="firstName1"]').prop('disabled', true);
+        if (${member.memberGender == "남"}) {
+            $('input:radio[id="male1"]').prop('checked', true);
+            $('input:radio[id="female1"]').prop('disabled', true);
+        } else {
+            $('input:radio[id="female1"]').prop('checked', true);
+            $('input:radio[id="male1"]').prop('disabled', true);
+        }
+        document.getElementById("birthDate1").value = "${member.memberBirthdate}";
+        $('input:text[id="birthDate1"]').prop('disabled', true);
+    })
+
+    // 승객 정보 저장
+    function save(a) {
+        const
+    }
 </script>
 </html>
