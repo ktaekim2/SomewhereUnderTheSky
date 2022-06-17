@@ -270,7 +270,7 @@
                 </div>
                 <div class="row" style="border-bottom:solid 1px lightgrey; padding: 32px 0px">
                     <div class="col-sm-4">
-                    <p style="font-weight: bold; float: left; margin: auto">총액</p>
+                    <span style="font-weight: bold; float: left">총액</span>
                     </div>
                     <div class="col-sm-8">
                     <button type="button" class="btn btn-link"><span
