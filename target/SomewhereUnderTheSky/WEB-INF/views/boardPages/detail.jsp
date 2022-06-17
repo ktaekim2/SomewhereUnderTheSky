@@ -58,10 +58,9 @@
                 <th>작성시간</th>
                 <th>좋아요</th>
                 <th>싫어요</th>
-                <c:if test="${sessionScope.loginMemberId eq board.boardWriter}">
-                    <th>수정</th>
-                    <th>삭제</th>
-                </c:if>
+                <th>수정</th>
+                <th>삭제</th>
+
             </tr>
             <c:forEach items="${commentList}" var="comment">
                 <tr>
@@ -82,10 +81,8 @@
                                 onclick="updateDislikes(${comment.id})">
                         </button>
                         <span>${comment.commentDislikes}</span></td>
-                    <c:if test="${sessionScope.loginMemberId eq comment.commentWriter}">
-                        <td><a href="/comment/update?id=${comment.id}&BoardId=${board.id}&page=${page}">수정</a></td>
-                        <td><a href="/comment/delete?id=${comment.id}&BoardId=${board.id}&page=${page}">삭제</a></td>
-                    </c:if>
+                    <td><button type="button" class="btn-outline" onclick="commentUpdate('${comment.commentWriter}', '${comment.id}')">수정</button></td>
+                    <td><button type="button" class="btn-outline" onclick="commentDelete('${comment.commentWriter}', '${comment.id}')">삭제</button></td>
                 </tr>
             </c:forEach>
         </table>
@@ -130,8 +127,8 @@
                         "<span>" + result[i].commentLikes + "</span>" + "</td>";
                     output += "<td>" + "<button class='btn-group'>" + "<img src='../../../resources/img/hand-thumbs-down.svg' onclick='updateDislikes(" + result[i].id + ")'>" + "</button>" +
                         "<span>" + result[i].commentDislikes + "</span>" + "</td>";
-                    output += "<td>" + "<a href='/comment/update?id=" + result[i].id + "&BoardId=" + result[i].boardId + "'>" + "수정" + "</a>" + "</td>";
-                    output += "<td>" + "<a href='/comment/delete?id=" + result[i].id + "&BoardId=" + result[i].boardId + "'>" + "삭제" + "</a>" + "</td>";
+                    output += "<td>" + "<button type='button' class='btn-outline' onclick=\"commentUpdate('" + result[i].commentWriter + "', '" + result[i].id + "')\">" + "수정" + "</button>" + "</td>";
+                    output += "<td>" + "<button type='button' class='btn-outline' onclick=\"commentDelete('" + result[i].commentWriter + "', '" + result[i].id + "')\">" + "삭제" + "</button>" + "</td>";
                     output += "</tr>";
                 }
                 output += "</table>";
@@ -188,8 +185,8 @@
                         "<span>" + result[i].commentLikes + "</span>" + "</td>";
                     output += "<td>" + "<button class='btn-group'>" + "<img src='../../../resources/img/hand-thumbs-down.svg' onclick='updateDislikes(" + result[i].id + ")'>" + "</button>" +
                         "<span>" + result[i].commentDislikes + "</span>" + "</td>";
-                    output += "<td>" + "<a href='/comment/update?id=" + result[i].id + "&BoardId=" + result[i].boardId + "'>" + "수정" + "</a>" + "</td>";
-                    output += "<td>" + "<a href='/comment/delete?id=" + result[i].id + "&BoardId=" + result[i].boardId + "'>" + "삭제" + "</a>" + "</td>";
+                    output += "<td>" + "<button type='button' class='btn-outline' onclick=\"commentUpdate('" + result[i].commentWriter + "', '" + result[i].id + "')\">" + "수정" + "</button>" + "</td>";
+                    output += "<td>" + "<button type='button' class='btn-outline' onclick=\"commentDelete('" + result[i].commentWriter + "', '" + result[i].id + "')\">" + "삭제" + "</button>" + "</td>";
                     output += "</tr>";
                 }
                 output += "</table>";
@@ -234,8 +231,8 @@
                         "<span>" + result[i].commentLikes + "</span>" + "</td>";
                     output += "<td>" + "<button class='btn-group'>" + "<img src='../../../resources/img/hand-thumbs-down.svg' onclick='updateDislikes(" + result[i].id + ")'>" + "</button>" +
                         "<span>" + result[i].commentDislikes + "</span>" + "</td>";
-                    output += "<td>" + "<a href='/comment/update?id=" + result[i].id + "&BoardId=" + result[i].boardId + "'>" + "수정" + "</a>" + "</td>";
-                    output += "<td>" + "<a href='/comment/delete?id=" + result[i].id + "&BoardId=" + result[i].boardId + "'>" + "삭제" + "</a>" + "</td>";
+                    output += "<td>" + "<button type='button' class='btn-outline' onclick=\"commentUpdate('" + result[i].commentWriter + "', '" + result[i].id + "')\">" + "수정" + "</button>" + "</td>";
+                    output += "<td>" + "<button type='button' class='btn-outline' onclick=\"commentDelete('" + result[i].commentWriter + "', '" + result[i].id + "')\">" + "삭제" + "</button>" + "</td>";
                     output += "</tr>";
                 }
                 output += "</table>";
@@ -247,5 +244,33 @@
             }
         })
     };
+
+    // 댓글 수정
+    function commentUpdate(commentWriter, id) {
+        console.log("함수호출");
+        console.log(commentWriter);
+        console.log(id);
+        console.log('${sessionScope.loginMemberId}');
+        const loginMemberId = '${sessionScope.loginMemberId}';
+        if (loginMemberId === commentWriter) {
+            location.href = '/comment/update?boardId=${board.id}&id=' + id;
+        } else {
+            alert("댓글 작성자가 아닙니다.")
+        }
+    }
+
+    // 댓글 삭제
+    function commentDelete(commentWriter, id) {
+        console.log("함수호출");
+        console.log(commentWriter);
+        console.log(id);
+        console.log('${sessionScope.loginMemberId}');
+        const loginMemberId = '${sessionScope.loginMemberId}';
+        if (loginMemberId === commentWriter) {
+            location.href = '/comment/delete?boardId=${board.id}&id=' + id;
+        } else {
+            alert("댓글 작성자가 아닙니다.")
+        }
+    }
 </script>
 </html>
