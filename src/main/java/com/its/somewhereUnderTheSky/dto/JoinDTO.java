@@ -4,7 +4,7 @@ import lombok.Data;
 
 
 @Data
-public class BookDTO {
+public class JoinDTO {
     private Long id;
     private Long memberId;
     private Long departureFlightId;
@@ -16,4 +16,14 @@ public class BookDTO {
     private String seatNumber;
     private String returnDate;
     private Long paymentId;
+
+    private String flightNumber;
+    private String flightAirline;
+    private Long airplaneId;
+    private String departureAirport;
+    private String arrivalAirport;
+    private String departureDate;
+    private String arrivalDate;
+    private int gateNumber;
+    private Long flightFare;
 }

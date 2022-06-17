@@ -7,7 +7,7 @@
     <insert id="save" parameterType="book">
         insert into book_table(passengerAdult, passengerChild, passengerInfant, cabinClass, returnDate)
         values (#{passengerAdult}, #{passengerChild}, #{passengerInfant},
-                #{cabinClass}, #{returnDate})
+        #{cabinClass}, #{returnDate})
         <selectKey resultType="Long" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -22,8 +22,36 @@
     <insert id="passengerSave" parameterType="passenger">
         insert into passenger_table(passengerLastName, passengerFirstName, passengerGender, passengerBirthdate, bookId)
         values (#{passengerLastName}, #{passengerFirstName}, #{passengerGender},
-        #{passengerBirthdate}, #{bookId})
+                #{passengerBirthdate}, #{bookId})
     </insert>
+
+    <select id="findAll" resultType="book">
+        select *
+        from book_table
+    </select>
+
+    <update id="reservation" parameterType="book">
+        update book_table
+        set memberId          = #{memberId},
+            departureFlightId = #{departureFlightId},
+            returnFlightId    = #{returnFlightId},
+            seatNumber        = #{seatNumber}
+        where id = #{id}
+    </update>
+
+<!--    <select id="memberId" parameterType="book" resultType="book">-->
+<!--        select *-->
+<!--        from book_table-->
+<!--        where memberId = #{memberId}-->
+<!--    </select>-->
+
+    <select id="findAllByMemberId" parameterType="Long" resultType="join">
+        select *
+        from book_table b,
+             flight_table f
+        where b.departureFlightId = f.id
+          and b.memberId = #{memberId}
+    </select>
 </mapper>
 
 

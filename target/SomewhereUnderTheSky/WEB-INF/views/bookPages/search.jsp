@@ -25,49 +25,50 @@
     <div class="row mb-5 mt-5">
         <h1>항공권 예매</h1>
     </div>
-    <div class="row" style="border-bottom: lightgrey; border-left: lightgrey; border-right: lightgrey">
-        <img src="../../../resources/img/booking--edge.svg" height="4" style="float: top">
-    </div>
-    <div class="row m-5">
-        <div class="col-sm-8">
-            <div class="text-center mb-2">
-                <button type="button" class="btn btn-outline" data-bs-toggle="modal"
-                        data-bs-target="#departureModal" style="font-weight: bold; font-size: xx-large; color: black">
-                    <span id="departureAirport">GMP(서울/김포)</span>
-                </button>
-                <span style="color:dodgerblue">---------------</span>
-                <a href="#"><img src="../../../resources/img/booking__swap.svg" onclick="changeDestination()"></a>
-                <span style="color:dodgerblue">---------------</span>
-                <button type="button" class="btn btn-outline" data-bs-toggle="modal"
-                        data-bs-target="#arrivalModal" style="font-weight: bold; font-size: xx-large; color: black">
-                    <span id="arrivalAirport">PUS(부산/김해)</span>
-                </button>
+    <div class="row" style="border-bottom: 1px solid lightgrey; border-left: 1px solid lightgrey; border-right: 1px solid lightgrey">
+        <img src="../../../resources/img/booking--edge.svg" height="4" style="float: top; object-fit: cover">
+        <div class="row m-5">
+            <div class="col-sm-8">
+                <div class="text-center mb-2">
+                    <button type="button" class="btn btn-outline" data-bs-toggle="modal"
+                            data-bs-target="#departureModal" style="font-weight: bold; font-size: x-large; color: black">
+                        <span id="departureAirport">GMP(서울/김포)</span>
+                    </button>
+                    <span style="color:dodgerblue">---------------</span>
+                    <a href="#"><img src="../../../resources/img/booking__swap.svg" onclick="changeDestination()"></a>
+                    <span style="color:dodgerblue">---------------</span>
+                    <button type="button" class="btn btn-outline" data-bs-toggle="modal"
+                            data-bs-target="#arrivalModal" style="font-weight: bold; font-size: x-large; color: black">
+                        <span id="arrivalAirport">PUS(부산/김해)</span>
+                    </button>
+                </div>
+                <div class="d-grid gap-2 m-2">
+                    <button class="btn btn-outline" type="button" data-bs-toggle="modal"
+                            data-bs-target="#dateModal" style="background-color: white"><span style="font-weight: bold" id="departureDate">탑승일</span>
+                        <span style="font-weight: bold" id="wave"></span>
+                        <span style="font-weight: bold" id="returnDate">선택</span>
+                    </button>
+                </div>
             </div>
-            <div class="d-grid gap-2 m-2">
-                <button class="btn btn-light" type="button" data-bs-toggle="modal"
-                        data-bs-target="#dateModal"><span style="font-weight: bold" id="departureDate">탑승일</span>
-                    <span style="font-weight: bold" id="wave"></span>
-                    <span style="font-weight: bold" id="returnDate">선택</span>
-                </button>
+            <div class="col-sm-auto">
+                <div class="d-grid gap-2">
+                    <button class="btn btn-outline-secondary" data-bs-toggle="modal"
+                            data-bs-target="#passengerModal">
+                        성인: <span id="passengerAdult">1</span>
+                        소아: <span id="passengerChild">0</span>
+                        유아: <span id="passengerInfant">0</span>
+                    </button>
+                </div>
+                <label style="font-size: 15px; color: gray">좌석 등급</label>
+                <select class="form-select" aria-label="Default select example" id="cabinClass" onclick="cabinClass()">
+                    <option selected value="일반석">일반석</option>
+                    <option value="프레스티지석">프레스티지석</option>
+                    <option value="일등석">일등석</option>
+                </select>
             </div>
         </div>
-        <div class="col-sm-auto">
-            <div class="d-grid gap-2">
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal"
-                        data-bs-target="#passengerModal">
-                    성인: <span id="passengerAdult">1</span>
-                    소아: <span id="passengerChild">0</span>
-                    유아: <span id="passengerInfant">0</span>
-                </button>
-            </div>
-            <label style="font-size: 15px; color: gray">좌석 등급</label>
-            <select class="form-select" aria-label="Default select example" id="cabinClass" onclick="cabinClass()">
-                <option selected value="일반석">일반석</option>
-                <option value="프레스티지석">프레스티지석</option>
-                <option value="일등석">일등석</option>
-            </select>
-        </div>
     </div>
+
     <div class="row m-5">
         <div class="d-grid gap-2 col-3 mx-auto">
             <button class="btn btn-primary btn-lg" type="button" onclick="searchFlight()" id="searchButton">항공편 검색

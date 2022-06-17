@@ -89,3 +89,277 @@
     - 기내 서비스(기내식, 기내면세품 사전 구입)
 - 예약 달력 만들기
 - 아이디찾기, 비밀번호 찾기 휴대폰 인증 api
+
+# console
+<details>
+<summary>
+<b>console</b>
+</summary>
+drop table comment_table;
+drop table  board_table;
+drop table book_table;
+drop table passenger_table;
+drop table member_table;
+create table member_table
+(
+id                   bigint auto_increment,
+memberAccount        varchar(20) not null,
+memberPassword       varchar(20) not null,
+memberLastName       varchar(10) not null,
+memberFirstName      varchar(10) not null,
+memberPassportNumber varchar(20),
+memberBirthdate      varchar(10),
+memberGender         varchar(5),
+memberEmail          varchar(30),
+memberNation         varchar(20),
+memberPhone          varchar(20),
+constraint pk_member primary key (id),
+constraint unique (memberAccount),
+constraint unique (memberPassportNumber)
+);
+select *
+from member_table;
+
+insert into member_table(memberAccount, memberPassword, memberLastName, memberFirstName)
+values ('admin', '1234', 'a', 'dmin');
+
+insert into member_table(memberAccount, memberPassword, memberLastName, memberFirstName, memberGender, memberEmail, memberPhone)
+values ('a', '1234', 'Hong', 'Gildong', 'male', 'kill@gmail.com', '010-2323-2211');
+
+drop table board_table;
+create table board_table
+(
+id               bigint auto_increment,
+boardWriter      varchar(20) not null,
+boardTitle       varchar(50) not null,
+boardContents    varchar(500),
+boardHits        int default 0,
+boardCreatedDate datetime,
+boardFileName    varchar(50),
+constraint pk_board primary key (id),
+constraint foreign key (boardWriter) references member_table (memberAccount) on delete cascade
+);
+select *
+from board_table;
+
+drop table comment_table;
+create table comment_table
+(
+id                 bigint auto_increment,
+commentWriter      varchar(20)  not null,
+commentContents    varchar(200) not null,
+commentCreatedDate datetime,
+boardId            bigint,
+commentLikes       bigint default 0,
+commentDislikes    bigint default 0,
+constraint pk_comment primary key (id),
+constraint foreign key (commentWriter) references member_table (memberAccount) on delete cascade,
+constraint foreign key (boardId) references board_table (id) on delete cascade
+);
+select *
+from comment_table;
+
+drop table airplane_table;
+create table airplane_table
+(
+id               bigint auto_increment,
+airplaneModel    varchar(20) not null,
+airplaneMaxSeats int         not null,
+airplaneStatus   varchar(20) not null,
+airplaneFileName varchar(50),
+constraint pk_airplane primary key (id)
+);
+
+insert into airplane_table(airplaneModel, airplaneMaxSeats, airplaneStatus)
+values ('Airbus A220-300', 140, '운용중');
+
+select *
+from airplane_table;
+
+drop table book_table;
+drop table flight_table;
+create table flight_table
+(
+id               bigint auto_increment,
+flightNumber     varchar(10) not null,
+flightAirline    varchar(20) not null,
+airplaneId       bigint      not null,
+departureAirport varchar(20) not null,
+arrivalAirport   varchar(20) not null,
+departureDate    datetime    not null,
+arrivalDate      datetime    not null,
+gateNumber       int         not null,
+flightFare       bigint      not null,
+constraint pk_flight primary key (id),
+constraint foreign key (airplaneId) references airplane_table (id) on delete cascade
+);
+select *
+from flight_table;
+
+# 서울/김포 -> 부산/김해
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1101', '대한항공', 3,
+'GMP(서울/김포)', 'PUS(부산/김해)', '2022-06-13 07:00:00', '2022-06-13 08:05:00', 4, 97600);
+
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1103', '대한항공', 3,
+'GMP(서울/김포)', 'PUS(부산/김해)', '2022-06-13 08:05:00', '2022-06-13 09:10:00', 4, 97600);
+
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1101', '대한항공', 3,
+'GMP(서울/김포)', 'PUS(부산/김해)', '2022-06-14 07:00:00', '2022-06-14 08:05:00', 4, 97600);
+
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1103', '대한항공', 3,
+'GMP(서울/김포)', 'PUS(부산/김해)', '2022-06-14 08:05:00', '2022-06-14 09:10:00', 4, 97600);
+
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1101', '대한항공', 3,
+'GMP(서울/김포)', 'PUS(부산/김해)', '2022-06-15 07:00:00', '2022-06-15 08:05:00', 4, 97600);
+
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1103', '대한항공', 3,
+'GMP(서울/김포)', 'PUS(부산/김해)', '2022-06-15 08:05:00', '2022-06-15 09:10:00', 4, 97600);
+
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1101', '대한항공', 3,
+'GMP(서울/김포)', 'PUS(부산/김해)', '2022-06-16 07:00:00', '2022-06-16 08:05:00', 4, 97600);
+
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1103', '대한항공', 3,
+'GMP(서울/김포)', 'PUS(부산/김해)', '2022-06-16 08:05:00', '2022-06-16 09:10:00', 4, 97600);
+
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1101', '대한항공', 3,
+'GMP(서울/김포)', 'PUS(부산/김해)', '2022-06-17 07:00:00', '2022-06-17 08:05:00', 4, 97600);
+
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1103', '대한항공', 3,
+'GMP(서울/김포)', 'PUS(부산/김해)', '2022-06-17 08:05:00', '2022-06-17 09:10:00', 4, 97600);
+
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1101', '대한항공', 3,
+'GMP(서울/김포)', 'PUS(부산/김해)', '2022-06-18 07:00:00', '2022-06-18 08:05:00', 4, 97600);
+
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1103', '대한항공', 3,
+'GMP(서울/김포)', 'PUS(부산/김해)', '2022-06-18 08:05:00', '2022-06-18 09:10:00', 4, 97600);
+
+
+# 부산/김해 -> 서울/김포
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1102', '대한항공', 3,
+'PUS(부산/김해)', 'GMP(서울/김포)', '2022-06-13 08:45:00', '2022-06-13 09:45:00', 4, 97600);
+
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1106', '대한항공', 3,
+'PUS(부산/김해)', 'GMP(서울/김포)', '2022-06-13 10:45:00', '2022-06-13 11:45:00', 4, 97600);
+
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1102', '대한항공', 3,
+'PUS(부산/김해)', 'GMP(서울/김포)', '2022-06-14 08:45:00', '2022-06-14 09:45:00', 4, 97600);
+
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1106', '대한항공', 3,
+'PUS(부산/김해)', 'GMP(서울/김포)', '2022-06-14 10:45:00', '2022-06-14 11:45:00', 4, 97600);
+
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1102', '대한항공', 3,
+'PUS(부산/김해)', 'GMP(서울/김포)', '2022-06-15 08:45:00', '2022-06-15 09:45:00', 4, 97600);
+
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1106', '대한항공', 3,
+'PUS(부산/김해)', 'GMP(서울/김포)', '2022-06-15 10:45:00', '2022-06-15 11:45:00', 4, 97600);
+
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1102', '대한항공', 3,
+'PUS(부산/김해)', 'GMP(서울/김포)', '2022-06-16 08:45:00', '2022-06-16 09:45:00', 4, 97600);
+
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1106', '대한항공', 3,
+'PUS(부산/김해)', 'GMP(서울/김포)', '2022-06-16 10:45:00', '2022-06-16 11:45:00', 4, 97600);
+
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1102', '대한항공', 3,
+'PUS(부산/김해)', 'GMP(서울/김포)', '2022-06-17 08:45:00', '2022-06-17 09:45:00', 4, 97600);
+
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1106', '대한항공', 3,
+'PUS(부산/김해)', 'GMP(서울/김포)', '2022-06-17 10:45:00', '2022-06-17 11:45:00', 4, 97600);
+
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1102', '대한항공', 3,
+'PUS(부산/김해)', 'GMP(서울/김포)', '2022-06-18 08:45:00', '2022-06-18 09:45:00', 4, 97600);
+
+insert into flight_table(flightNumber, flightAirline, airplaneId, departureAirport, arrivalAirport,
+departureDate, arrivalDate, gateNumber, flightFare)
+values ('KE1106', '대한항공', 3,
+'PUS(부산/김해)', 'GMP(서울/김포)', '2022-06-18 10:45:00', '2022-06-18 11:45:00', 4, 97600);
+
+drop table passenger_table;
+drop table book_table;
+create table book_table
+(
+id                bigint auto_increment,
+memberId          bigint,
+departureFlightId bigint,
+returnFlightId    bigint,
+passengerAdult    int,
+passengerChild    int,
+passengerInfant   int,
+cabinClass        varchar(10) not null,
+seatNumber        varchar(10),
+returnDate        datetime,
+constraint pk_book primary key (id),
+constraint foreign key (memberId) references member_table (id) on delete cascade,
+constraint foreign key (departureFlightId) references flight_table (id) on delete cascade,
+constraint foreign key (returnFlightId) references flight_table (id) on delete cascade
+);
+select *
+from book_table;
+
+drop table passenger_table;
+create table passenger_table
+(
+id                 bigint auto_increment,
+passengerLastName  varchar(20) not null,
+passengerFirstName varchar(20) not null,
+passengerGender    varchar(10) not null,
+passengerBirthdate varchar(10) not null,
+bookId             bigint      not null,
+constraint pk_passenger primary key (id),
+constraint foreign key (bookId) references book_table (id) on delete cascade
+);
+select *
+from passenger_table;
+<div markdown="1">
+</div>
+</details>
+
+
+
+
+

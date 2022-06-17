@@ -12,6 +12,9 @@
     <%--    jquery--%>
     <script src="/resources/js/jquery.js"></script>
 
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-{SDK-최신버전}.js"></script>
+
     <%--    momentjs--%>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.3/moment.min.js"></script>
     <style>
@@ -265,11 +268,15 @@
                         </ul>
                     </div>
                 </div>
-                <div style="border-bottom:solid 1px lightgrey; padding: 32px 0px">
-                    <span style="font-weight: bold; float: left; vertical-align: middle">총액</span>
+                <div class="row" style="border-bottom:solid 1px lightgrey; padding: 32px 0px">
+                    <div class="col-sm-4">
+                    <span style="font-weight: bold; float: left">총액</span>
+                    </div>
+                    <div class="col-sm-8">
                     <button type="button" class="btn btn-link"><span
                             style="color:#0064DE; font-weight: bold;font-size: x-large; float: right">${departureFlight.flightFare + returnFlight.flightFare} 원</span>
                     </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -301,6 +308,10 @@
 </div>
 </body>
 <script>
+    // // 아임포트
+    // var IMP = window.IMP; // 생략 가능
+    // IMP.init("{imp66752664}"); // 예: imp00000000
+
     // 페이지 로딩이 끝나면 로그인 멤버 정보를 자동 기입
     $().ready(function () {
         console.log("레디펑션")
@@ -344,13 +355,60 @@
                 alert(result);
             },
             error: function () {
+                const departureFlightId = '${departureFlight.id}';
+                const returnFlightId = '${returnFlight.id}';
+                const bookId = '${book.id}'
+                $.ajax({
+                    url: "/book/reservation",
+                    type: "POST",
+                    data: {
+                        "departureFlightId": departureFlightId,
+                        "returnFlightId": returnFlightId,
+                        "id": bookId
+                    },
+                    dataType: 'json',
+                    success: function (result) {
+                        alert("예약 성공");
+                    },
+                    error: function () {
+                        alert("예약 실패");
+                    }
+                })
                 location.href = "../";
             },
             Complete: function () {
-                alert("Complete");
+                <%--// IMP.request_pay(param, callback) 결제창 호출--%>
+                <%--IMP.request_pay({ // param--%>
+                <%--    pg: "html5_inicis",--%>
+                <%--    pay_method: "card",--%>
+                <%--    merchant_uid: ${book.paymentId},--%>
+                <%--    name: "항공권 결제",--%>
+                <%--    amount: "${departureFlight.flightFare + returnFlight.flightFare}",--%>
+                <%--    buyer_email: "${member.memberEmail}",--%>
+                <%--    buyer_name: "${member.memberLastName + member.memberFirstName}",--%>
+                <%--    buyer_tel: "${member.memberPhone}",--%>
+                <%--    buyer_addr: "서울특별시 강남구 신사동",--%>
+                <%--    buyer_postcode: "01181"--%>
+                <%--}, function (rsp) { // callback--%>
+                <%--    if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우--%>
+                <%--        // jQuery로 HTTP 요청--%>
+                <%--        jQuery.ajax({--%>
+                <%--            url: "{/book/paymentCompleted}", // 예: https://www.myservice.com/payments/complete--%>
+                <%--            method: "POST",--%>
+                <%--            headers: { "Content-Type": "application/json" },--%>
+                <%--            data: {--%>
+                <%--                imp_uid: rsp.imp_uid,--%>
+                <%--                merchant_uid: rsp.merchant_uid--%>
+                <%--            }--%>
+                <%--        }).done(function (data) {--%>
+                <%--            // 가맹점 서버 결제 API 성공시 로직--%>
+                <%--        })--%>
+                <%--    } else {--%>
+                <%--        alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);--%>
+                <%--    }--%>
+                <%--});--%>
             }
         });
     }
-
 </script>
 </html>

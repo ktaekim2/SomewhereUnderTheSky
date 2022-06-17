@@ -2,6 +2,7 @@ package com.its.somewhereUnderTheSky.repository;
 
 import com.its.somewhereUnderTheSky.dto.BookDTO;
 import com.its.somewhereUnderTheSky.dto.FlightDTO;
+import com.its.somewhereUnderTheSky.dto.JoinDTO;
 import com.its.somewhereUnderTheSky.dto.PassengerDTO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,17 @@ public class BookRepository {
 
     public void passengerSave(PassengerDTO passengerDTO) {
         sql.insert("Book.passengerSave", passengerDTO);
+    }
+
+    public List<BookDTO> findAll() {
+        return sql.selectList("Book.findAll");
+    }
+
+    public void reservation(BookDTO bookDTO) {
+        sql.update("Book.reservation", bookDTO);
+    }
+
+    public List<JoinDTO> findAllByMemberId(Long memberId) {
+        return sql.selectList("Book.findAllByMemberId", memberId);
     }
 }

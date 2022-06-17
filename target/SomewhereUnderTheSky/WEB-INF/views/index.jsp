@@ -56,7 +56,7 @@
 <div class="container">
     <div class="row" style="padding: 100px">
         <div class="col-sm-4">
-            <span href="/book/search"style="font-weight: bold; font-size: x-large"><img src="../../resources/css/mfnb__booking.svg">예약 조회</span>
+            <a href="/book/findAll"><span style="font-weight: bold; font-size: x-large"><img src="../../resources/css/mfnb__booking.svg">예약 조회</span></a>
         </div>
         <div class="col-sm-4">
             <span href="#"style="font-weight: bold; font-size: x-large"><img src="../../resources/css/mfnb__checkin.svg">체크인</span>

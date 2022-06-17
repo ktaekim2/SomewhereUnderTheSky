@@ -42,6 +42,7 @@
                 <input type="radio" name="memberGender" class="ratio-1x1" value="남">남<br>
                 <input type="radio" name="memberGender" class="ratio-1x1" value="여">여<br>
                 이메일<input type="text" name="memberEmail">
+                전화번호<input type="text" name="memberPhone">
                 거주 국가<br><select name="memberNation">
                 <option value="South Korea">South Korea</option>
                 <option value="Japan">Japan</option>

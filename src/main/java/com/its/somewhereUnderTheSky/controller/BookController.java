@@ -156,9 +156,9 @@ public class BookController {
         model.addAttribute("returnFlight", returnFlightDTO);
 
         // 로그인 멤버 memberDTO 뽑아오기
-        Long loginId = (Long) session.getAttribute("loginId");
-        System.out.println("loginId = " + loginId);
-        MemberDTO memberDTO = memberService.findById(loginId);
+        Long memberId = (Long) session.getAttribute("loginId");
+        System.out.println("memberId = " + memberId);
+        MemberDTO memberDTO = memberService.findById(memberId);
         model.addAttribute("member", memberDTO);
         System.out.println("memberDTO = " + memberDTO);
 
@@ -178,5 +178,33 @@ public class BookController {
             bookService.passengerSave(passengerDTO);
         }
         return asd;
+    }
+
+    @PostMapping("/reservation")
+    public @ResponseBody BookDTO reservation(@ModelAttribute BookDTO bookDTO, HttpSession session) {
+        System.out.println("BookController.book");
+
+        Long memberId = (Long) session.getAttribute("loginId");
+        bookDTO.setMemberId(memberId);
+        System.out.println("memberId = " + memberId);
+        System.out.println("bookDTO = " + bookDTO);
+        Long id = bookDTO.getId();
+        bookService.reservation(bookDTO);
+        BookDTO bookDTO1 = bookService.findById(id);
+        System.out.println("bookDTO1 = " + bookDTO1);
+        return bookDTO1;
+    }
+
+    @GetMapping("/findAll")
+    public String findAll(Model model, HttpSession session) {
+        Long memberId = (Long) session.getAttribute("loginId");
+        List<JoinDTO> joinDTOList = bookService.findAllByMemberId(memberId);
+        for (JoinDTO j : joinDTOList) {
+            System.out.println("for문 동작");
+            System.out.println(j);
+        }
+        model.addAttribute("joinList", joinDTOList);
+//        return null;
+        return "/bookPages/bookList";
     }
 }

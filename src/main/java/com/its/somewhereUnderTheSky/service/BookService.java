@@ -2,6 +2,7 @@ package com.its.somewhereUnderTheSky.service;
 
 import com.its.somewhereUnderTheSky.dto.BookDTO;
 import com.its.somewhereUnderTheSky.dto.FlightDTO;
+import com.its.somewhereUnderTheSky.dto.JoinDTO;
 import com.its.somewhereUnderTheSky.dto.PassengerDTO;
 import com.its.somewhereUnderTheSky.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,17 @@ public class BookService {
 
     public void passengerSave(PassengerDTO passengerDTO) {
         bookRepository.passengerSave(passengerDTO);
+    }
+
+    public List<BookDTO> findAll() {
+        return bookRepository.findAll();
+    }
+
+    public void reservation(BookDTO bookDTO) {
+        bookRepository.reservation(bookDTO);
+    }
+
+    public List<JoinDTO> findAllByMemberId(Long memberId) {
+        return bookRepository.findAllByMemberId(memberId);
     }
 }
