@@ -64,7 +64,7 @@
                 </div>
                 <div class="row">
                     <span style="color: #555555;display: block; font-weight: bold; text-align: center">다음 계정으로 로그인</span>
-                    <a href="#" style="padding: 0px 16px 0px 44px">네이버</a>
+                    <a href="#" style="padding: 0px 16px 0px 44px; border: ">네이버</a>
                     <button>네이버</button>
                     <button>카카오</button>
                     <br>
