@@ -182,8 +182,7 @@ public class BookController {
 
     @PostMapping("/reservation")
     public @ResponseBody BookDTO reservation(@ModelAttribute BookDTO bookDTO, HttpSession session) {
-        System.out.println("BookController.book");
-
+        System.out.println("BookController.reservation");
         Long memberId = (Long) session.getAttribute("loginId");
         bookDTO.setMemberId(memberId);
         System.out.println("memberId = " + memberId);
@@ -197,6 +196,7 @@ public class BookController {
 
     @GetMapping("/findAll")
     public String findAll(Model model, HttpSession session) {
+        System.out.println("BookController.findAll");
         Long memberId = (Long) session.getAttribute("loginId");
         List<JoinDTO> joinDTOList = bookService.findAllByMemberId(memberId);
         for (JoinDTO j : joinDTOList) {
@@ -204,7 +204,6 @@ public class BookController {
             System.out.println(j);
         }
         model.addAttribute("joinList", joinDTOList);
-//        return null;
         return "/bookPages/bookList";
     }
 }

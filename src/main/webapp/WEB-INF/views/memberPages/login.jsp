@@ -62,16 +62,8 @@
                         <a href="#" style="color: #0064DE; text-decoration: none">비밀번호 찾기 ></a>
                     </div>
                 </div>
-                <div class="row">
-                    <span style="color: #555555;display: block; font-weight: bold; text-align: center">다음 계정으로 로그인</span>
-                    <a href="#" style="padding: 0px 16px 0px 44px; border: ">네이버</a>
-                    <button>네이버</button>
-                    <button>카카오</button>
-                    <br>
-                    <button>구글</button>
-                    <button>페이스북</button>
-                    <br>
-                    <a href="/member/save">회원가입</a>
+                <div class="d-grid gap-2">
+                    <button class="btn" type="button" onclick="save()" style="background-color: #E8F0FE; font-size: large; color: #0a53be; font-weight: bold">회원가입</button>
                 </div>
             </div>
         </div>
@@ -80,4 +72,9 @@
 </div>
 <jsp:include page="../layout/footer.jsp" flush="false"></jsp:include>
 </body>
+<script>
+    function save() {
+        location.href = "/member/save";
+    }
+</script>
 </html>

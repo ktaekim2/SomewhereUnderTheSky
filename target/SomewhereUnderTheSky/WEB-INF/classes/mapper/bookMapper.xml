@@ -49,7 +49,7 @@
         select *
         from book_table b,
              flight_table f
-        where b.departureFlightId = f.id
+        where b.flightId = f.id
           and b.memberId = #{memberId}
     </select>
 </mapper>
