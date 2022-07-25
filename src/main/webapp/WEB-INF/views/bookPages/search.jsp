@@ -25,13 +25,15 @@
     <div class="row mb-5 mt-5">
         <h1>항공권 예매</h1>
     </div>
-    <div class="row" style="border-bottom: 1px solid lightgrey; border-left: 1px solid lightgrey; border-right: 1px solid lightgrey">
+    <div class="row"
+         style="border-bottom: 1px solid lightgrey; border-left: 1px solid lightgrey; border-right: 1px solid lightgrey">
         <img src="../../../resources/img/booking--edge.svg" height="4" style="float: top; object-fit: cover">
         <div class="row m-5">
             <div class="col-sm-8">
                 <div class="text-center mb-2">
                     <button type="button" class="btn btn-outline" data-bs-toggle="modal"
-                            data-bs-target="#departureModal" style="font-weight: bold; font-size: x-large; color: black">
+                            data-bs-target="#departureModal"
+                            style="font-weight: bold; font-size: x-large; color: black">
                         <span id="departureAirport">GMP(서울/김포)</span>
                     </button>
                     <span style="color:dodgerblue">---------------</span>
@@ -44,7 +46,8 @@
                 </div>
                 <div class="d-grid gap-2 m-2">
                     <button class="btn btn-outline" type="button" data-bs-toggle="modal"
-                            data-bs-target="#dateModal" style="background-color: white"><span style="font-weight: bold" id="departureDate">탑승일</span>
+                            data-bs-target="#dateModal" style="background-color: white"><span style="font-weight: bold"
+                                                                                              id="departureDate">탑승일</span>
                         <span style="font-weight: bold" id="wave"></span>
                         <span style="font-weight: bold" id="returnDate">선택</span>
                     </button>
